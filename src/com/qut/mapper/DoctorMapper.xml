@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qut.mapper.DoctorMapper">
+	<insert id="doctorSave" parameterType="com.qut.pojo.Doctor">
+		insert into
+		doctor(gender,doctor_department,name,doctor_title,working_time)
+		values
+		(#{gender},#{department},#{name},#{title},#{workTime})
+	</insert>
+	<select id="doctorQuery" parameterType="com.qut.pojo.DoctorCode"
+		resultType="com.qut.pojo.Doctor">
+		select
+		doctorId as "id",
+		gender as "gender",
+		doctor_department as "department",
+		name as "name",
+		doctor_title as
+		"title",
+		working_time as "workTime",
+		state as "state"
+		from
+		doctor
+		where
+		1=1
+		and
+		if(#{id} is null,0=0,doctorId=#{id})
+		and
+		if(#{name} is null,0=0,name
+		like CONCAT('%',#{name},'%'))
+		and
+		if(#{title} is
+		null,0=0,doctor_title=#{title})
+		and
+		if(#{department} is
+		null,0=0,doctor_department=#{department})
+		and
+		if(#{startTime} is
+		null,0=0,working_time &gt;= #{startTime})
+		and
+		if(#{endTime} is
+		null,0=0,working_time &lt;= #{endTime})
+		and
+		if(#{state} is
+		null,0=0,state = #{state})
+		order by doctorId,working_time
+	</select>
+	<update id="doctorDelete" parameterType="Integer">
+		update
+		doctor
+		set
+		state = 1
+		where
+		doctorId = #{id}
+	</update>
+	<update id="updateDoctorMessage" parameterType="com.qut.pojo.Doctor">
+		update
+		doctor
+		set
+		gender = #{gender},
+		doctor_department = #{department},
+		name = #{name},
+		doctor_title = #{title}
+		where
+		doctorId = #{id}
+	</update>
+	<select id="doctorById" parameterType="Integer" resultType="com.qut.pojo.Doctor">
+		select
+		doctorId as "id",
+		gender as "gender",
+		doctor_department as "department",
+		name as "name",
+		doctor_title as "title",
+		working_time as "workTime",
+		state as "state"
+		from
+		doctor 
+		where 
+		doctorId = #{id}
+	</select>
+</mapper>

@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qut.mapper.DrugsMapper">
+	<insert id="drugsSave" parameterType="com.qut.pojo.Drugs">
+		insert into
+		drug(drugId,drugname,manufaturer,price,createTime,
+		validityYear,validityMouth,validityDay,supply,
+		addNum,productionTime,validityTime)
+		values
+		(#{drugsid},#{name},#{manufacturer},#{price},#{createTime},
+		#{validityYear},#{validityMouth},#{validityDay},#{supply},
+		#{addNum},#{production_time},#{vilidityTime})
+	</insert>
+	<update id="DrugsUpdate" parameterType="com.qut.pojo.Drugs">
+		update
+		drug
+		set
+		drugId=#{id}
+		drugname=#{name},
+		manufaturer=#{manufacturer},
+		price=#{price},
+		validityYear=#{validityYear},
+		validityMouth=#{validityMouth},
+		validityDay=#{validityDay},
+		supply=#{supply},
+		createTime=#{createTime},
+		addNum=#{addNum},
+		productionTime=#{production_time},
+		validityTime=#{vilidityTime}
+		where
+		drugId = #{id}
+
+	</update>
+	<select id="drugsFindById" parameterType="String"
+		resultType="com.qut.pojo.Drugs">
+		select
+		drugId as "id",
+		drugname as "name",
+		manufaturer as
+		"manufacturer",
+		price as "price",
+		createTime as "createTime",
+		validityYear as "validityYear",
+		validityMouth as "validityMouth",
+		validityDay as "validityDay",
+		supply as "supply",
+		addNum as "addNum",
+		productionTime as "production_time",
+		validityTime as "vilidityTime"
+		from
+		drug
+		where
+		1=1
+		and
+		if(#{id} is null,0=0,drugId=#{id})
+	</select>
+	<select id="drugsFind" parameterType="com.qut.pojo.DrugsCode"
+		resultType="com.qut.pojo.Drugs">
+		select
+		id as "id",
+		drugId as "drugsid",
+		drugname as "name",
+		manufaturer as "manufacturer",
+		price as "price",
+		createTime as
+		"createTime",
+		validityYear as "validityYear",
+		validityMouth as
+		"validityMouth",
+		validityDay as "validityDay",
+		supply as "supply",
+		addNum as "addNum",
+		productionTime as "production_time",
+		validityTime as
+		"vilidityTime"
+		from
+		drug
+		where
+		1=1
+		and
+		if(#{id} is null,0=0,drugId=#{id})
+		and
+		if(#{name} is null,0=0,drugname like CONCAT('%',#{name},'%'))
+		and
+		if(#{rkStart} is null,0=0,createTime &gt;= #{rkStart})
+		and
+		if(#{rkEnd}
+		is null,0=0,createTime &lt;= #{rkEnd})
+		and
+		if(#{bzStart} is
+		null,0=0,validityTime &gt;= #{bzStart})
+		and
+		if(#{bzEnd} is
+		null,0=0,validityTime &lt;= #{bzEnd})
+		order by
+		id,createTime
+	</select>
+	<select id="drugsStockQueryById" parameterType="String"
+		resultType="Integer">
+		select
+		count(*)
+		from
+		stock
+		where
+		drugId = #{drugId}
+	</select>
+	<!-- 更新库存 -->
+	<update id="drugsStockAdd" parameterType="com.qut.pojo.Drugs">
+		update
+		stock
+		set
+		count =
+		count + #{addNum},
+		price= #{price}
+		where
+		drugId = #{drugsid}
+	</update>
+	<!-- 插入库存 -->
+	<insert id="drugsStockSave" parameterType="com.qut.pojo.Drugs">
+		insert into
+		stock(drugId,drugName,count,price)
+		values(#{drugsid},#{name},#{addNum},#{price})
+	</insert>
+	<!-- 库存查询 -->
+	<select id="stockQuery" parameterType="com.qut.pojo.DrugsCode"
+		resultType="com.qut.pojo.Stock">
+		select
+		id as "id",
+		drugId as "drugsId",
+		drugName as
+		"drugsName",
+		price as "price",
+		count as "account"
+		from
+		stock
+		where
+		1=1
+		and
+		if(#{id} is null,0=0,drugId= #{id})
+		and
+		if(#{name} is null,0=0,drugName
+		like CONCAT('%',#{name},'%'))
+	</select>
+	<!-- 药品发放 -->
+	<insert id="grantAdd" parameterType="com.qut.pojo.Grant">
+		insert into
+		grantDrug(drugId,drugName,drugPrice,drugCount,patientName,patientId,
+		grantUserId,grantUserName,grantTime)
+		values(#{drugId},#{drugName},#{drugPrice},#{drugCount},#{patientName},
+		#{patientId},#{grantUserId},#{grantUserName},NOW())
+	</insert>
+	<!-- 更新库存 -->
+	<update id="stockUpdate" parameterType="com.qut.pojo.Grant">
+		update
+		stock
+		set
+		count =
+		count - #{drugCount}
+		where
+		drugId = #{drugId}
+	</update>
+	<!-- 药品发放查询 -->
+	<select id="grantQuery" parameterType="String" resultType="com.qut.pojo.Stock">
+		select
+		id as "id",
+		drugId as "drugsId",
+		drugName as "drugsName",
+		price as
+		"price",
+		count as "count"
+		from stock
+		where
+		drugId in (select drugId from
+		grantdrug where patientId = #{patientId}
+		group by drugId)
+	</select>
+	<!-- 退药 -->
+	<insert id="DrugWithdrawal" parameterType="com.qut.pojo.WithdrawalDrug">
+		insert into
+		withdrawal(patientId,patientName,count,userName,userId,drugsId,entiyTime,reason)
+		values(#{patientId},#{patientName},#{count},#{userName},#{userId},#{drugsId},CURDATE(),#{reason})
+	</insert>
+
+</mapper>

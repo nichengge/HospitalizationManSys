@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+                        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd  
+                        http://www.springframework.org/schema/context  
+                        http://www.springframework.org/schema/context/spring-context-4.2.xsd  
+                        http://www.springframework.org/schema/mvc  
+                        http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+                        http://www.springframework.org/schema/task
+                        http://www.springframework.org/schema/task/spring-task-4.2.xsd
+                        http://www.springframework.org/schema/tx 
+                        http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+	
+	
+	<!-- 整合mybatis -->
+	<!-- 加载db.properties包含数据库的连接信息 -->
+	<context:property-placeholder location="classpath:db.properties"/>
+	
+	
+    <!-- 配置数据源 -->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+    	destroy-method="close">
+    	<property name="driverClassName" value="${jdbc.driver}" />
+    	<property name="url" value="${jdbc.url}" />
+    	<property name="username" value="${jdbc.username}"></property>
+    	<property name="password" value="${jdbc.password}"></property>
+    	<!-- 连接池的最大数 -->
+    	<property name="maxActive" value="20"></property>
+    	<!-- 连接池最大空闲 -->
+    	<property name="maxIdle" value="20"></property>
+    </bean>
+    
+    
+    
+    <!-- 配置SqlSessionFactory -->
+	<bean id="sqlSessionFactory" 
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<!-- 指定要扫描的mapper.xml文件的位置 -->
+		<property name="mapperLocations" 
+		   value="classpath:com/qut/mapper/*.xml"></property>
+	</bean>
+	
+	
+	
+    <!-- mapper扫描，扫描mapper接口类 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+    	<property name="basePackage" value="com.qut.mapper"></property>
+    	<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+    </bean>
+
+
+
+    <!-- 启动包的扫描功能，@controller等注解 -->
+    <context:component-scan base-package="com.qut"></context:component-scan>
+  
+  
+  
+    <!-- 模型视图的解析，请求逻辑视图名，添加前后缀 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/"></property>
+        <property name="suffix" value=".jsp"></property>
+    </bean>
+  
+  
+  
+  
+    <!-- 事务管理 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
+	
+	
+	<!-- 支持@Transactional注解 -->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	<mvc:annotation-driven />
+	
+	
+</beans>

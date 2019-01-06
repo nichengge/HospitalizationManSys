@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qut.mapper.BedMapper">
+	<select id="bedQuery" parameterType="com.qut.pojo.Bed"
+		resultType="com.qut.pojo.Bed">
+		select bedId as "id",ward as "wardNo",bedNo as "bedNo",state as "state" from
+		bed
+		where 1=1
+		and
+		if(#{id} is null,0=0,bedId=#{id})
+		and
+		if(#{wardNo} is null,0=0,ward=#{wardNo})
+		and
+		if(#{state} is null,0=0,state=#{state})
+	</select>
+	<update id="bedUpdate" parameterType="com.qut.pojo.Bed">
+		update bed set state = #{state} where bedNo = #{bedNo}
+	</update>
+	<select id="bedStateQuery" parameterType="com.qut.pojo.Bed" resultType="Integer">
+		select sum(A.state) from bed A where A.ward=#{wardNo}
+	</select>
+</mapper>

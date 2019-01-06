@@ -1,0 +1,85 @@
+
+.ui-dialog-panel{z-index:10000;position:absolute;left:50%;top:50%;/*padding:4px;*/border-radius:5px;}
+.ui-dialog{padding-top:40px;/*border:1px solid #BBBBBB;*/border-radius:1px;background:#fff;}
+/***** �������� *****/
+.ui-dialog-hd{position:absolute;left:0;top:0;right:0;height:41px;color:#FFFFFF;font-size:16px; background:url(../images/topcenter.png);}
+.ui-dialog-hd .ui-dialog-close{position:absolute;top:10px;right:0;color:#fff;font-size:16px;}
+
+.ui-dialog-hd .ui-dialog-close i{float:left;width:20px;height:20px; background:url(../images/close3.png);}
+.ui-dialog-hd .ui-dialog-close:hover i{background:url(../images/close4.png);}
+
+/*** ������������ ***/
+.ui-dialog-hd h6{height:40px;left:0;right:35px;text-indent:18px;line-height:40px;*line-height:40px;color:#fff;font-size:14px;}
+/***** ������ť  *****/
+.ui-dialog-ft{position:absolute;bottom:5px;left:5px;right:5px;height:39px;text-align:right;border-top:1px solid #F0F0F0;background:#F9F9F9;}
+.ui-dialog-ft button{margin:6px 15px 0 -10px;}
+
+/***** ������Ϣ������ *****/
+.ui-dialog-icon{float:left;width:78px;height:78px;margin:25px 20px 25px 38px; background-image:url(../images/dico.png);}
+/*.ui-dialog-confirm .ui-dialog-icon{background-position:0 0;}
+.ui-dialog-warning .ui-dialog-icon{background-position:-48px 0;}
+.ui-dialog-success .ui-dialog-icon{background-position:-96px 0;}
+.ui-dialog-error .ui-dialog-icon{background-position:-144px 0;}*/
+
+/*** ������Ϣ��ʾ ***/
+.ui-dialog-text{float:left;display:table-cell;vertical-align:middle;width:250px;height:100px;}
+.ui-dialog-text .dialog-text,.ui-dialog-text .patch{display:inline-block;vertical-align:middle;font-size:16px;color:#4d4d4d;font-weight:bold;}
+.ui-dialog-text .dialog-content{margin:40px 0 10px 0;font-size:18px;}
+.ui-dialog-text .tips{color:#8f8f8f;font-size:13px;}
+.ui-dialog-text .patch{width:0;height:100%;}
+
+/***** �������б� *****/
+.ui-dialog-panel .formDialog{padding:20px 15px;}
+
+.ui-dialog-panel .formDialog p {
+	margin-top: 10px;
+	padding-left: 31px;
+	line-height: 30px;
+}
+
+.ui-dialog-panel .formDialog input[type=text]{
+	width: 200px;
+	height: 28px;
+	line-height: 28px\0;
+	*line-height: 28px;
+	padding: 0 10px;
+	border: 1px solid #c5d6e0;
+	outline: none;
+	background: url(../images/inputbg.png) repeat-x;
+}
+.ui-dialog-panel .formDialog select{
+	width: 223px;
+	height: 28px;
+	line-height: 28px\0;
+	*line-height: 28px;
+	padding: 0 10px;
+	border: 1px solid #c5d6e0;
+	outline: none;
+	background: url(../images/inputbg.png) repeat-x;
+}
+
+.ui-dialog-panel .formDialog input[type=password]{
+	width: 200px;
+	height: 28px;
+	line-height: 28px\0;
+	*line-height: 28px;
+	padding: 0 10px;
+	border: 1px solid #c5d6e0;
+	outline: none;
+	background: url(../images/inputbg.png) repeat-x;
+}
+/***** �������������б� *****/
+
+.dialog-hd-lc{position:absolute;width:15px;height:41px; background:url(../images/lefttop.png);left:-15px;top:0;}
+.dialog-hd-rc{position:absolute;width:15px;height:41px; background:url(../images/righttop.png);right:-15px;top:0;}
+
+.ui-dialog-leftYY{position:absolute;width:15px;top:41px;bottom:15px; left:-15px; background:url(../images/centerleft.png);}
+.ui-dialog-rightYY{position:absolute;width:15px;top:41px;bottom:15px; right:-15px; background:url(../images/centerright.png);}
+.ui-dialog-bottomCenter{position:absolute;height:19px;bottom:-13px;left:-11px;right:-11px;background:url(../images/downcenter.png);}
+.ui-dialog-bottomLeft{position:absolute;width:15px;height:19px;bottom:-4px;left:-15px;background:url(../images/centerleft.png);}
+.ui-dialog-bottomRight{position:absolute;width:15px;height:19px;bottom:-4px;right:-15px;background:url(../images/centerright.png);}
+
+
+#drugQuery{
+	position:absolute;left:355px;z-index: 100;top: 48px;
+}

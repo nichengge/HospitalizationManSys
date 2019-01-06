@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qut.mapper.SignMapper">
+	<!-- 保存病人体征信息 -->
+	<insert id="signSave" parameterType="com.qut.pojo.Sign">
+		insert into
+		sign(patientId,measureTime,userId,temperature,bloodPressure,pulse,remarks,userName,createTime,breathing,bloodSugar,vein)
+		values(#{patientId},#{measureTime},#{userId},#{temperature},#{bloodPressure},#{pulse},#{remarks},#{userName},NOW(),#{breathing},#{bloodSugar},#{vein})
+	</insert>
+	<!-- 查询病人体征信息 -->
+	<select id="signQuery" parameterType="com.qut.pojo.PatientCode"
+		resultType="map">
+		select
+		a.patientId as "patientId",
+		b.roomNo as "roomNo",
+		b.bedNo as "bedNo",
+		b.patientName as "patientName",
+		a.temperature as
+		"temperature",
+		a.bloodPressure as "bloodPressure",
+		a.pulse as "pulse",
+		a.breathing as
+		"breathing",
+		a.bloodSugar as "bloodSugar",
+		a.vein as
+		"vein",
+		a.measureTime as "measureTime",
+		c.user_id as "userId",
+		c.user_name as
+		"userName"
+		from
+		sign a
+		LEFT JOIN patient b on a.patientId =
+		b.patientId
+		LEFT JOIN user c
+		on a.userId = c.user_id
+		where
+		1=1
+		and
+		if(#{patientId} is null,0=0,a.patientId=#{patientId})
+		and
+		if(#{name} is
+		null,0=0, b.patientName like CONCAT('%',#{name},'%'))
+		and
+		if(#{start} is
+		null,0=0,a.measureTime &gt;= #{start})
+		and
+		if(#{end} is
+		null,0=0,a.measureTime &lt;= #{end})
+		and
+		if(#{wardNo} is
+		null,0=0,b.roomNo=#{wardNo})
+		and
+		if(#{bedNo} is
+		null,0=0,b.bedNo=#{bedNo})
+		order by
+		a.patientId,a.measureTime
+	</select>
+
+</mapper>

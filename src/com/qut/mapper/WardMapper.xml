@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qut.mapper.WardMapper">
+	<insert id="wardSave" parameterType="com.qut.pojo.Ward">
+		insert into
+		ward(wardNo,departmentNo,type,state,createTime)
+		values
+		(#{wardNo},#{departmentNo},#{type},#{state},#{createTime})
+	</insert>
+	<insert id="bedSave" parameterType="com.qut.pojo.Bed">
+		insert into
+		bed(ward,bedNo,state)
+		values
+		(#{wardNo},#{bedNo},#{state})
+	</insert>
+	<select id="wardQuery" parameterType="com.qut.pojo.Ward"
+		resultType="com.qut.pojo.Ward">
+		select
+		id as "id",
+		wardNo as "wardNo",
+		departmentNo as
+		"departmentNo",
+		type as "type",
+		state as "state",
+		createTime as
+		"createTime"
+		from
+		ward
+		where
+		1=1
+		and
+		if(#{id} is null,0=0,id=#{id})
+		and
+		if(#{departmentNo} is null,0=0,departmentNo=#{departmentNo})
+		and
+		if(#{type} is null,0=0,type=#{type})
+		and
+		if(#{state} is
+		null,0=0,state=#{state})
+	</select>
+	<update id="wardUpdate" parameterType="com.qut.pojo.Ward">
+		update
+		ward
+		set
+		state =
+		#{state}
+		where
+		wardNo = #{wardNo}
+	</update>
+	<select id="wardQueryById" parameterType="java.lang.Integer"
+		resultType="com.qut.pojo.Ward">
+		select
+		id as "id",
+		wardNo as "wardNo",
+		departmentNo as
+		"departmentNo",
+		type as "type",
+		state as "state",
+		createTime as
+		"createTime"
+		from
+		ward
+		where
+		id = #{wardId}
+	</select>
+	<insert id="logWard" parameterType="com.qut.pojo.Patient">
+		insert into
+		wardUpdate(patientId,roomType,updateTime)
+		values(#{patientId},#{roomType},curdate())
+	</insert>
+	<select id="departQuery" parameterType="Integer" resultType="map">
+		select
+		d.parameter_id as "parameter_id",
+		f.parameter_values as
+		"parameter_values",
+		f.parameter_name as "parameter_name"
+		from
+		parameter d
+		LEFT JOIN paracode f ON d.`code` = f.`code`
+		WHERE
+		d.`name` = "科室"
+		and
+		if(#{departNo} is null,0=0,f.parameter_values=#{departNo})
+	</select>
+	<select id="bedTotal" parameterType="Integer" resultType="map">
+		select
+		b.departmentNo as "departmentNo",
+		sum(d.nums) as "total"
+		from ward b
+		LEFT JOIN (
+		select
+		a.wardNo as "wardNo",
+		COUNT(bedNo) as "nums"
+		from
+		ward a
+		left JOIN bed b ON a.wardNo = b.ward
+		LEFT JOIN category c ON a.type =
+		c.type
+		group by
+		a.wardNo) d ON b.wardNo = d.wardNo
+		where
+		1=1 and
+		if(#{departNo} is null,0=0,b.departmentNo=#{departNo})
+		GROUP BY
+		b.departmentNo
+	</select>
+	<select id="bedWy" parameterType="Integer" resultType="map">
+		select
+		b.departmentNo as "departmentNo",
+		sum(d.nums) as "total"
+		from ward b
+		LEFT JOIN (
+		select
+		a.wardNo as "wardNo",
+		COUNT(bedNo) as "nums"
+		from
+		ward a
+		left JOIN bed b ON a.wardNo = b.ward
+		LEFT JOIN category c ON a.type =
+		c.type
+		where
+		b.state = 0
+		group by
+		a.wardNo) d ON b.wardNo = d.wardNo
+		GROUP
+		BY
+		b.departmentNo
+	</select>
+</mapper>

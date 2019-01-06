@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qut.mapper.PatientMapper">
+	<insert id="patientAdd" parameterType="com.qut.pojo.Patient">
+		insert into
+		patient
+		(patientId,patientName,gender,nation,birth,department,certificateNo,workUnit,maritalStatus,doctorId,admissionTime,homeAddress,homePhone,contacts,contactsPhone,admissionStatus,roomType,roomNo,bedNo,state)
+		values
+		(#{patientId},#{name},#{gender},#{nation},#{birth},#{department},#{cerificateNo},#{workUnit},#{maritalStatus},#{doctorId},NOW(),#{homeAddress},#{homePhone},#{contacts},#{contactsPhone},#{admissionStatus},#{roomType},#{roomNo},#{bedNo},#{state})
+	</insert>
+	<select id="patientQuery" parameterType="com.qut.pojo.PatientCode"
+		resultType="map">
+		select
+		a.id as "id",
+		a.patientId as "patientId",
+		a.patientName as "name",
+		a.gender as "gender",
+		a.nation as "nation",
+		a.birth as "birth",
+		a.department as "department",
+		g.`name` as
+		"departmentName",
+		a.certificateNo as "cerificateNo",
+		a.workUnit as
+		"workUnit",
+		a.doctorId as "doctorId",
+		b.`name` as "doctorName",
+		a.admissionTime as "admissionTime",
+		a.homeAddress as "homeAddress",
+		a.homePhone as "homePhone",
+		a.contacts as "contacts",
+		a.contactsPhone as
+		"contactsPhone",
+		a.admissionStatus as "admissionStatus",
+		a.roomType as
+		"roomType",
+		c.`name` as "roomTypeName",
+		a.roomNo as "roomNo",
+		a.bedNo as
+		"bedNo",
+		a.state as "state",
+		a.settlementState as "settlementState",
+		a.leaveTime as "leaveTime"
+		from
+		patient a LEFT JOIN doctor b ON
+		a.doctorId = b.doctorId
+		LEFT JOIN category c ON a.roomType = c.type
+		LEFT JOIN (
+		SELECT e.parameter_values "value",e.parameter_name "name"
+		from
+		parameter d LEFT JOIN paracode e ON d.`code` = e.`code`
+		where
+		d.name="科室"
+		) g ON a.department = g.`value`
+		where
+		1=1
+		and
+		if(#{patientId}
+		is null,0=0,patientId=#{patientId})
+		and
+		if(#{name} is null,0=0,
+		patientName like CONCAT('%',#{name},'%'))
+		and
+		if(#{departmentNo} is
+		null,0=0,department=#{departmentNo})
+		and
+		if(#{start} is null,0=0,admissionTime &gt;= #{start})
+		and
+		if(#{end} is null,0=0,admissionTime &lt;= #{end})
+		and
+		if(#{wardNo} is null,0=0,roomNo=#{wardNo})
+		and
+		if(#{bedNo} is null,0=0,bedNo=#{bedNo})
+		and
+		if(#{outStart} is null,0=0,leaveTime &gt;= #{outStart})
+		and
+		if(#{outEnd} is null,0=0, leaveTime &lt;= #{outEnd})
+		and
+		if(#{outStatus} is null,0=0,leaveState = #{outStatus})
+		order by
+		id,admissionTime
+	</select>
+	<update id="patientUpdate" parameterType="com.qut.pojo.Patient">
+		update
+		patient
+		set
+		department = #{department},
+		doctorId = #{doctorId},
+		roomType =
+		#{roomType},
+		roomNo = #{roomNo},
+		bedNo = #{bedNo}
+		where
+		patientId =
+		#{patientId}
+	</update>
+	<update id="jiesun" parameterType="java.lang.String">
+		update
+		patient
+		set
+		settlementState= 1
+		where
+		patientId = #{patientId}
+	</update>
+	<update id="patientLeave" parameterType="java.lang.String">
+		update
+		patient
+		set
+		leaveState = 1,
+		leaveTime = NOW()
+		where
+		patientId = #{patientId}
+	</update>
+	<sql id="depart">
+		select
+		b.parameter_id as "parameter_id",
+		c.parameter_values
+		as "parameter_values",
+		c.parameter_name as "parameter_name"
+		from
+		parameter b left JOIN paracode c ON b.`code` = c.`code`
+		where
+		b.`name`="科室"
+	</sql>
+	<!--科室查询 -->
+	<select id="departmentQuery" parameterType="map" resultType="map">
+		select
+		b.parameter_id as "parameter_id",
+		c.parameter_values as
+		"parameter_values",
+		c.parameter_name as "parameter_name"
+		from
+		parameter b
+		left JOIN paracode c ON b.`code` = c.`code`
+		where
+		b.`name`="科室"
+
+	</select>
+	<!-- 查询入院情况 -->
+	<select id="inHospital" parameterType="map" resultType="map">
+		select
+		e.departmentId as "departmentId",
+		f.parameter_name as
+		"parameter_name",
+		e.number as "number",
+		e.total as "total",
+		format(e.number/e.total,4) as "percentage"
+		from
+		(select
+		d.parameter_values as "departmentId",
+		count(d.parameter_values) as
+		"number",
+		(
+		select
+		count(*)
+		from
+		patient
+		where
+		1=1
+		and
+		if(#{startTime} is
+		null,0=0,admissionTime &gt;= #{startTime})
+		and
+		if(#{endTime} is
+		null,0=0,admissionTime &lt;= #{endTime})
+		) as "total"
+		from
+		patient a left
+		JOIN (
+		<include refid="depart" />
+		) d ON a.department = d.parameter_values
+		where
+		1=1
+		and
+		if(#{startTime} is
+		null,0=0,a.admissionTime &gt;= #{startTime})
+		and
+		if(#{endTime} is
+		null,0=0,a.admissionTime &lt;= #{endTime})
+		group by
+		d.parameter_values)
+		e
+		left JOIN (
+		<include refid="depart" />
+		) f on e.departmentId = f.parameter_values
+	</select>
+	<!-- 查询出院情况 -->
+	<select id="outHospital" parameterType="map" resultType="map">
+		select
+		e.departmentId as "departmentId",
+		f.parameter_name as
+		"parameter_name",
+		e.number as "number",
+		e.total as "total",
+		format(e.number/e.total,4) as "percentage"
+		from
+		(select
+		d.parameter_values as "departmentId",
+		count(d.parameter_values) as
+		"number",
+		(
+		select count(*)
+		from patient
+		where
+		leaveState = 1
+		and
+		if(#{startTime} is null,0=0,leaveTime &gt;= #{startTime})
+		and
+		if(#{endTime} is null,0=0,leaveTime &lt;= #{endTime})
+		) as "total"
+		from
+		patient a left JOIN (
+		<include refid="depart" />
+		) d ON a.department = d.parameter_values
+		where
+		a.leaveState =1
+		and
+		if(#{startTime} is null,0=0,a.leaveTime &gt;= #{startTime})
+		and
+		if(#{endTime} is null,0=0,a.leaveTime &lt;= #{endTime})
+		group by
+		d.parameter_values) e
+		left JOIN (
+		<include refid="depart" />
+		) f on e.departmentId = f.parameter_values
+	</select>
+</mapper>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qut.mapper.CostMapper">
+	<insert id="costAdd" parameterType="com.qut.pojo.Cost">
+		insert into
+		cost(id,patientId,account,type,userId,costTime)
+		values(#{id},#{patientId},#{account},#{type},#{userId},NOW());
+	</insert>
+	<select id="costQuery" parameterType="map" resultType="map">
+		select
+		a.id as "id",
+		a.patientId as "patientId",
+		b.patientName as
+		"patientName",
+		a.account as "account",
+		a.type as "type",
+		a.userId as
+		"userId",
+		c.user_name as "userName",
+		a.costTime as "costTime"
+		from
+		cost a
+		LEFT JOIN patient b ON a.patientId = b.patientId
+		LEFT JOIN `user` c ON
+		c.user_id = a.userId
+		where
+		1=1 and
+		if(#{patientId} is null,0=0,a.patientId = #{patientId}) and
+		if(#{patientName} is null,0=0,b.patientName like CONCAT('%',#{patientName},'%')) and
+		if(#{startTime} is null,0=0,a.costTime &gt;= #{startTime})
+		and
+		if(#{endTime} is null,0=0,a.costTime &lt;= #{endTime})
+		order by
+		a.patientId,a.costTime
+	</select>
+	<select id="drugsCostQuery" parameterType="map" resultType="map">
+		select patientId as "patientId",
+		(select
+		sum(drugPrice*drugCount)
+		from
+		grantdrug
+		where
+		patientId = #{patientId}) as "account"
+		from
+		grantdrug
+		where
+		patientId=#{patientId}
+		GROUP BY patientId
+	</select>
+	<select id="drugWithdrawal" parameterType="map" resultType="map">
+		select patientId as "patientId",
+		(select
+		sum(a.count * b.drugPrice)
+		from
+		withdrawal a LEFT JOIN grantdrug b on a.drugsId = b.drugId
+		where
+		a.patientId = #{patientId}) as "account"
+		from
+		withdrawal c
+		where
+		c.patientId = #{patientId}
+		group by
+		c.patientId
+	</select>
+	<select id="costQueryTotal" parameterType="map" resultType="map">
+		select
+		patientId as "patientId",
+		(select
+		sum(account)
+		from
+		cost
+		where
+		patientId = #{patientId}) as "account"
+		from
+		cost
+		where patientId =
+		#{patientId}
+		group by
+		patientId
+	</select>
+	<select id="bedCodeQuery" parameterType="map" resultType="map">
+		select
+		a.updateTime as "updateTime",
+		b.price as "price"
+		from
+		wardUpdate a LEFT
+		JOIN category b ON a.roomType = b.type
+		where
+		a.patientId = #{patientId}
+		order by
+		a.updateTime
+	</select>
+	<select id="drugscountQuery" parameterType="String" resultType="Integer">
+		select
+		sum(drugCount)
+		from
+		grantdrug where patientId=#{patientId} and
+		drugId=#{drugId}
+	</select>
+</mapper>	

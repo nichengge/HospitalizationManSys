@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qut.mapper.UserMapper">
+	<select id="findUser" parameterType="com.qut.pojo.User"
+		resultType="com.qut.pojo.User">
+		select
+		*
+		from
+		(
+		select
+		user_id as "id",
+		user_name as "name",
+		user_password as "password",
+		user_phone as "phone",
+		user_describe as
+		"describe",
+		create_time as "createtime"
+		from
+		user
+		where
+		user_describe=#{describe}) A
+		where
+		1=1
+		and
+		if(#{id} is
+		null,0=0,A.id=#{id})
+	</select>
+	<insert id="saveUser" parameterType="com.qut.pojo.User">
+		insert into
+		user(user_id,user_name,user_password,user_phone,user_describe,create_time)
+		values
+		(#{id},#{name},#{password},#{phone},#{describe},curdate())
+	</insert>
+	<select id="findUserById" parameterType="String"
+		resultType="com.qut.pojo.User">
+		select
+		user_id as "id",
+		user_name as "name",
+		user_password as
+		"password",
+		user_phone as "phone",
+		user_describe as "describe",
+		create_time as "createtime"
+		from
+		user
+		where
+		1=1
+		and
+		if(#{id} is
+		null,0=0,user_id=#{id})
+	</select>
+	<select id="userQuery" parameterType="com.qut.pojo.UserCode"
+		resultType="com.qut.pojo.User">
+		select
+		user_id as "id",
+		user_name as "name",
+		user_password as
+		"password",
+		user_phone as "phone",
+		user_describe as "describe",
+		create_time as "createtime"
+		from
+		user
+		where
+		1 = 1
+		and
+		if(#{id} is
+		null,0=0,user_id=#{id})
+		and
+		if(#{name} is null,0=0,user_name like
+		CONCAT('%',#{name},'%'))
+		and
+		if(#{describe} is
+		null,0=0,user_describe=#{describe})
+		and
+		if(#{startTime} is
+		null,0=0,create_time &gt;= #{startTime})
+		and
+		if(#{endTime} is
+		null,0=0,create_time &lt;= #{endTime})
+		order by user_id,create_time
+	</select>
+	<delete id="userDelete" parameterType="String">
+		delete from user where
+		user_id = #{id}
+	</delete>
+	<update id="updateUser" parameterType="com.qut.pojo.User">
+		update
+		user
+		set
+		user_password=#{password}
+		where
+		user_id = #{id}
+	</update>
+	<update id="updateUserMessage" parameterType="com.qut.pojo.User">
+		update
+		user
+		set
+		user_name = #{name},
+		user_phone = #{phone},
+		user_describe = #{describe}
+		where
+		user_id = #{id}
+	</update>
+</mapper>
