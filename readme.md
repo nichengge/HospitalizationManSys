@@ -9,7 +9,7 @@
     患者服务大厅账户/密码：service/service
     医生账户/密码：doctor/doctor
     患者账户/密码：patient/patient
-![image]()
-![image]()
-![image]()
-![image]()
+![image](https://raw.githubusercontent.com/yzqyfly/HospitalizationManSys/master/img/1.png)
+![image](https://raw.githubusercontent.com/yzqyfly/HospitalizationManSys/master/img/2.png)
+![image](https://raw.githubusercontent.com/yzqyfly/HospitalizationManSys/master/img/3.png)
+![image](https://raw.githubusercontent.com/yzqyfly/HospitalizationManSys/master/img/4.png)
