@@ -53,10 +53,12 @@
 		</table>
 	</div>
 	<div class="pagination ue-clear"></div>
-	<div id="zhanweifu1" style="height: 100px; width: 1123px;display:inline-block" ></div>
-	<div id="zhanweifu2" style="height: 100px; width: 350px;display:inline-block" ></div>
-	<div id="myPieDiv" style="height: 300px; width: 430px;display:inline-block" ></div>
+	<div id="zhanweifu1" style="height: 50px; width: 1123px;display:inline-block" ></div>
+	<div id="zhanweifu2" style="height: 500px; width: 200px;display:inline-block" ></div>
+	<div id="zftxtdiv" style="height: 500px; width: 630px;display:inline-block" ></div>
 </body>
+<script type="text/javascript" src="js/echarts.js"></script>
+<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/common.js"></script>
 <script type="text/javascript" src="js/core.js"></script>
@@ -73,5 +75,75 @@ $("#depart").on("click","li",function(){
 	$("#department").find("span").text(txt);
 	$("#departmentNo").val(label);
 });
+</script>
+
+<!-- 正负条形图数据可视化 -->
+<script type="text/javascript">
+var myChart = echarts.init(document.getElementById('zftxtdiv'));
+option = {
+	    tooltip : {
+	        trigger: 'axis',
+	        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+	            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+	        }
+	    },
+	    legend: {
+	        data:['未使用', '已使用', '总床位']
+	    },
+	    grid: {
+	        left: '3%',
+	        right: '4%',
+	        bottom: '3%',
+	        containLabel: true
+	    },
+	    xAxis : [
+	        {
+	            type : 'value'
+	        }
+	    ],
+	    yAxis : [
+	        {
+	            type : 'category',
+	            axisTick : {show: false},
+	        }
+	    ],
+	    series : [
+	        {
+	            name:'未使用',
+	            type:'bar',
+	            label: {
+	                normal: {
+	                    show: true,
+	                    position: 'inside'
+	                }
+	            },
+	        },
+	        {
+	            name:'总床位',
+	            type:'bar',
+	            stack: '总量',
+	            label: {
+	                normal: {
+	                    show: true
+	                }
+	            },
+	        },
+	        {
+	            name:'已使用',
+	            type:'bar',
+	            stack: '总量',
+	            label: {
+	                normal: {
+	                    show: true,
+	                    position: 'left'
+	                }
+	            },
+	        }
+	    ]
+	};
+	//加载数据到option
+		loadDataBar(option);
+	//设置option
+		myChart.setOption(option);
 </script>
 </html>
