@@ -110,3 +110,53 @@ function clear(){
 	$("#typeNo").val("");
 	$("#departmentNo").val("");
 }
+
+
+
+//正负柱状图数据可视化装载数据
+function loadDataBar(option) {
+	$.ajax({
+		url:"ward/wardStatistics.do",
+		async : false,  //同步执行
+		type:"post",
+		data:{},
+		dataType:"JSON",
+		success:function(result){
+			if(result.state==0){
+				
+	//-------配置柱状图
+				//alert("post请求成功");
+				var lists = result.data;
+              //初始化yAxis[0]的data
+              option.yAxis[0].data = [];
+              //生成纵横坐标科室标题
+              for (var i=0; i<lists.length; i++) {
+                  option.yAxis[0].data.push(lists[i].parameter_name);
+              }
+              
+              
+              //初始化series[0]-未使用的data
+              option.series[0].data = [];
+              for (var i=0; i<lists.length; i++) {
+                  option.series[0].data.push(lists[i].wy);
+              }
+              
+            //初始化series[1]-床位总数的data
+              option.series[1].data = [];
+              for (var i=0; i<lists.length; i++) {
+                  option.series[1].data.push(lists[i].total);
+              }
+              
+            //初始化series[2]-已使用的data
+              option.series[2].data = [];
+              for (var i=0; i<lists.length; i++) {
+            	  var fushu=-(lists[i].total-lists[i].wy);//全部床位-未使用床位=已使用床位，已使用床位取负数，便于echarts显示
+                  option.series[2].data.push(fushu);
+              }
+          }
+      },
+      error : function(errorMsg) {
+          alert("加载数据失败");
+      }
+  });//AJAX
+}//loadData()
