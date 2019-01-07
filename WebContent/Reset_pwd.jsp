@@ -28,7 +28,7 @@
            
              <div class="form-group">
                 <label for="exampleInputEmail1">原密码</label>
-                <input type="email" class="form-control" name="password" id="password" aria-describedby="emailHelp" placeholder="请输入原密码">
+                <input type="text" class="form-control" name="password" id="password" aria-describedby="emailHelp" placeholder="请输入原密码">
                 <label style="color:red;" class="passwordError"></label>
 			</div>
 			
