@@ -7,12 +7,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -79,6 +77,7 @@ public class UserController {
 		return json.toString();
 	}
 
+	// 检查用户是否存在
 	@RequestMapping(value = "/check.do", produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public String check(@Param("id") String id) {

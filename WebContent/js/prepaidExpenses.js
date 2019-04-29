@@ -1,5 +1,6 @@
 $(function(){
-	//读取cookie的值,为收款人和收款人编号赋值‘
+	//读取cookie的值,为收款人和收款人编号赋值
+	//cookie内容：{user:用户ID#用户姓名#用户类型描述} 
 	var cookie = getCookie('user');
 	var id = cookie.split("#")[0].substring(0);
 	$("#userId").val(id);

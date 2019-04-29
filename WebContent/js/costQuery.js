@@ -1,9 +1,44 @@
 var $tbody = $("#show");
 var start = 0;
-var end = 7;
+var end = 15;
 $(function(){
+	$("#patientId").click(selectPatient);
 	$(".confirm").click(query);
 	$(".clear").click(clear);
+});
+
+
+$(function(){
+	/*读取cookie值，判断是什么类型的用户。
+	*如果是患者，则把姓名、住院号设置为只读，
+	*并把数据回显出来
+	**/
+	//cookie内容：{user:用户ID#用户姓名#用户类型描述} 
+	var cookie = getCookie('user');
+	var userid = cookie.split("#")[0].substring(0);
+	var usertype = cookie.split("#")[2].substring(0);
+	//alert(usertype);
+	if(usertype == 0){//是患者类型的用户
+		document.getElementById("patientId").setAttribute("type","hidden");
+		document.getElementById("patientNum").setAttribute("style","display:none;");
+		document.getElementById("patientName").setAttribute("readOnly", false);
+		$.ajax({//通过身份证查询patient表的患者信息
+			url:"patient/patientQueryBycerificateNo.do",
+			data:{"cerificateNo":userid},
+			type:"post",
+			dataType:"JSON",
+			success:function(result){
+				if(result.state == 0){
+					var list = result.data;
+					var lastNameNum = list.length;//只显示最近一次住院记录
+					var patientID = list[lastNameNum-1].patientId;
+					var patientName = list[lastNameNum-1].name;
+					$("#patientId").val(patientID);
+					$("#patientName").val(patientName);
+				}
+			}
+		});
+	}
 });
 
 //重置
@@ -69,11 +104,28 @@ function showList(lists,start,end){
 					"<td class='node'>"+cost.account+"</td>"+
 					"<td class='node'>"+cost.type+"</td>"+
 					"<td class='time'>"+costTime+"</td>"+
-					"<td class='node'>"+cost.userId+"</td>"+
 					"<td class='node'>"+cost.userName+"</td>"+
 					"</tr>";
 			$tbody.append($tr);
 		}
 	}
+}
+
+
+//病人的查询弹窗
+function selectPatient() {
+	$('.showDialog').Dialog("open");
+	count=0;
+}
+
+$('.showDialog').Dialog({
+	title : '选择病人',
+	autoOpen : false,
+	width : 1000,
+	height : 400
+});
+
+function close() {
+	$('.showDialog').Dialog('close');
 }
 

@@ -19,6 +19,12 @@ public interface PatientService {
 	 */
 	List<Map<String, Object>> patientQuery(PatientCode patientCode);
 	/**
+	 * 病人列表查询--通过身份证
+	 * @param patientCode
+	 * @return
+	 */
+	List<Map<String, Object>> patientQueryBycerificateNo(String BycerificateNo);
+	/**
 	 * 更新病人信息
 	 * @param patient
 	 */

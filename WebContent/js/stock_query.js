@@ -1,5 +1,5 @@
 var start = 0;
-var end = 7;
+var end = 15;
 var $tbody = $("#show");
 
 $(function(){
@@ -52,7 +52,12 @@ function showList(list,start,end){
 	if(list.length>0){
 		for(var i=start;i<end;i++){
 			var stock = list[i];
-			var $tr = "<tr onclick='jump(this);'>"+
+			if((i+1)%2==0){
+				trStyle = "<tr style='background-color:#eff6fa;cursor:pointer' onclick='jump(this);'>";
+			}else{
+				trStyle = "<tr style='cursor:pointer' onclick='jump(this);'>";
+			}
+			var $tr = trStyle+
 				"<td class='num'>"+(i+1)+"</td>"+
 				"<td class='name'>"+stock.drugsId+"</td>"+
 				"<td class='name'>"+stock.drugsName+"</td>"+

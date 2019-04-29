@@ -26,10 +26,8 @@ public interface WardMapper {
 	void bedSave(Bed bed);
 	/**
 	 * 病房的查询
-	 * @param wardId
-	 * @return
 	 */
-	Ward wardQueryById(@Param("wardId") Integer wardId);
+	Ward wardQueryById(Integer wardNo);
 	/**
 	 * 
 	 * @param ward
@@ -52,6 +50,13 @@ public interface WardMapper {
 	 * @return
 	 */
 	List<Map<String, Object>> departQuery(@Param("departNo") Integer departNo);
+	
+	
+	//病房额定容量统计
+	Integer wardspace(Ward ward);
+	
+	//删除病房
+	void wardDelete(Integer wardNo);
 	/**
 	 * 每个科室的病床总数
 	 * @param departNo

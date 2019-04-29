@@ -3,6 +3,7 @@
 <html>
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 <link rel="stylesheet" href="css/base.css" />
 <link rel="stylesheet" href="css/parameter-setting.css" />
 <link rel="stylesheet" type="text/css" href="css/jquery.dialog.css" />
@@ -11,11 +12,9 @@
 </head>
 <body>
 	<div class="title">
-		<h2>参数设置</h2>
+		<h2>系统配置</h2>
 	</div>
-
 	<div style="width: 100%; float: right;">
-
 		<table style="width:50%; float: left">
 			<thead>
 				<tr>
@@ -23,29 +22,27 @@
 					<th>名称</th>
 				</tr>
 			</thead>
-			<tbody id="show">
-			</tbody>
+			<tbody id="show"></tbody>
 		</table>
-		<table id="codelist" style="display: none; width:50%; float: right;">
+		<table id="codelist" style="display: none ;width:50%; float: right;">
 			<thead>
 				<tr>
 					<th>编号</th>
 					<th>名称</th>
 				</tr>
 			</thead>
-			<tbody id="showCode">
-			</tbody>
+			<tbody id="showCode"></tbody>
 		</table>
 	</div>
 	<div style="width: 100%;">
-		<label id="id" style="display: none"></label>
+		<label id="id" ></label>
 		<table id="codetitle"
 			style="display: none; border: none; margin-top: 10px; width: 50%; float: right">
 			<thead>
 				<tr>
-					<td style="float: right"><input type="button" id="codeadd"
-						class="button long2 ok" value="新增" /> <input type="button"
-						id="codesave" class="button long2 normal" value="保存" /></td>
+					<td style="float: right">
+					<input type="button" id="codeadd" class="button long2 ok" value="新增" /> 
+					<input type="button"id="codesave" class="button long2 normal" value="保存" /></td>
 				</tr>
 			</thead>
 		</table>
@@ -54,7 +51,7 @@
 		<div class="dialog-content">
 			<div class="ui-dialog-icon"></div>
 			<div class="ui-dialog-text">
-				<p class="dialog-content">你确定要删除参数？</p>
+				<p class="dialog-content">你确定要删除配置项？</p>
 				<p class="tips">如果是请点击“确定”，否则点“取消”</p>
 				<div class="buttons">
 					<input type="button" class="button long2 ok" value="确定" /> <input
@@ -68,11 +65,10 @@
 <script type="text/javascript" src="js/common.js"></script>
 <script type="text/javascript" src="js/core.js"></script>
 <script type="text/javascript" src="js/jquery.dialog.js"></script>
-<script type="text/javascript" src="js/parameterSetting.js"></script>
 <script type="text/javascript" src="js/jquery.pagination.js"></script>
+<script type="text/javascript" src="js/parameterSetting.js"></script>
 <script type="text/javascript">
 	$("tbody").find("tr:odd").css("backgroundColor", "#eff6fa");
-
 	showRemind('input[type=text], textarea', 'placeholder');
 </script>
 </html>

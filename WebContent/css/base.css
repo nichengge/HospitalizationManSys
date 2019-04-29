@@ -67,6 +67,11 @@ dl, dt, dd, ol, ul, li {
 	list-style: none;
 }
 
+.middlediv{
+	margin:0 auto;
+	} 
+
+
 /*some common class*/
 .left {
 	float: left;

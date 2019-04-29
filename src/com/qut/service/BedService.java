@@ -13,5 +13,7 @@ public interface BedService {
 	
 //查询房间是否已满
 	Integer bedStateQuery(Bed bed);
-
+	
+//查询指定房间号的入住人数，比如房间号=001且床位状态=1
+	Integer countwardpatient(Bed bed);
 }

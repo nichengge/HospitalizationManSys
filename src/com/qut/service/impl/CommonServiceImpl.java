@@ -41,7 +41,7 @@ public class CommonServiceImpl implements CommonService {
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED,isolation=Isolation.DEFAULT, rollbackFor = Exception.class)
 	public void parameterCodeInsert(Parameter parameter) {
-		commonMapper.parameterCodeInsert(parameter);
+		 commonMapper.parameterCodeInsert(parameter);
 	}
 
 	@Override

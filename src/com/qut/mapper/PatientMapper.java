@@ -24,6 +24,11 @@ public interface PatientMapper {
 	 */
 	List<Map<String, Object>> patientQuery(PatientCode patientCode);
 	/**
+	 * 病人列表的查询--通过身份证
+	 * @return
+	 */
+	List<Map<String, Object>> patientQueryBycerificateNo(String cerificateNo);
+	/**
 	 * 更新病人信息
 	 * @param patient
 	 */

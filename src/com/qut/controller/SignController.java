@@ -26,25 +26,27 @@ public class SignController {
 	@Resource(name = "signService")
 	private SignService signService;
 
-	@RequestMapping(value="/signSave.do",produces= "application/json;charset=utf-8")
+	@RequestMapping(value = "/signSave.do", produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public String signSave(@Param("patientId")String patientId, @Param("measureTime")String measureTime,@Param("temperature") String temperature,@Param("pulse") String pulse,
-			@Param("wardNo")String breathing,@Param("bloodSugar") String bloodSugar,@Param("bloodPressure") String bloodPressure,@Param("vein") String vein,@Param("remarks") String remarks
-			,HttpServletRequest request) throws ParseException, UnsupportedEncodingException {
+	public String signSave(@Param("patientId") String patientId, @Param("measureTime") String measureTime,
+			@Param("temperature") String temperature, @Param("pulse") String pulse, @Param("wardNo") String breathing,
+			@Param("bloodSugar") String bloodSugar, @Param("bloodPressure") String bloodPressure,
+			@Param("vein") String vein, @Param("remarks") String remarks, HttpServletRequest request)
+			throws ParseException, UnsupportedEncodingException {
 		Sign sign = new Sign();
-		sign.setPatientId(BaseUtils.toString(patientId));
-		sign.setMeasureTime(BaseUtils.toDates(measureTime));
-		sign.setTemperature(BaseUtils.toFloat(temperature));
-		sign.setPulse(BaseUtils.toInteger(pulse));
-		sign.setBreathing(BaseUtils.toInteger(breathing));
-		sign.setBloodSugar(BaseUtils.toFloat(bloodSugar));
-		sign.setBloodPressure(BaseUtils.toFloat(bloodPressure));
-		sign.setVein(BaseUtils.toFloat(vein));
-		sign.setRemarks(BaseUtils.toString(remarks));
-		sign.setUserId(BaseUtils.getUser(request).getId());
-		sign.setUserName(BaseUtils.getUser(request).getName());
+		sign.setPatientId(BaseUtils.toString(patientId));// 患者ID
+		sign.setMeasureTime(BaseUtils.toDates(measureTime));// 护理时间
+		sign.setTemperature(BaseUtils.toFloat(temperature));// 体温
+		sign.setPulse(BaseUtils.toInteger(pulse));// 心率
+		sign.setBreathing(BaseUtils.toInteger(breathing));// 呼吸
+		sign.setBloodSugar(BaseUtils.toFloat(bloodSugar));// 血糖
+		sign.setBloodPressure(BaseUtils.toString(bloodPressure));// 血压
+		sign.setVein(BaseUtils.toFloat(vein));// 静脉
+		sign.setRemarks(BaseUtils.toString(remarks));// 备注
+		sign.setUserId(BaseUtils.getUser(request).getId());// 护理医师ID
+		sign.setUserName(BaseUtils.getUser(request).getName());// 护理医师姓名
 		signService.signSave(sign);
-		JSON json =JSONSerializer.toJSON(new JsonResult<Sign>(sign));
+		JSON json = JSONSerializer.toJSON(new JsonResult<Sign>(sign));
 		return json.toString();
 	}
 

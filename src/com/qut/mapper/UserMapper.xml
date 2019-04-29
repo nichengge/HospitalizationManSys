@@ -14,8 +14,7 @@
 		user_name as "name",
 		user_password as "password",
 		user_phone as "phone",
-		user_describe as
-		"describe",
+		user_describe as "describe",
 		create_time as "createtime"
 		from
 		user
@@ -38,8 +37,7 @@
 		select
 		user_id as "id",
 		user_name as "name",
-		user_password as
-		"password",
+		user_password as "password",
 		user_phone as "phone",
 		user_describe as "describe",
 		create_time as "createtime"
@@ -65,6 +63,8 @@
 		user
 		where
 		1 = 1
+		and
+		user_describe != 5
 		and
 		if(#{id} is
 		null,0=0,user_id=#{id})

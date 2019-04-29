@@ -20,26 +20,21 @@
 		a.nation as "nation",
 		a.birth as "birth",
 		a.department as "department",
-		g.`name` as
-		"departmentName",
+		g.`name` as "departmentName",
 		a.certificateNo as "cerificateNo",
-		a.workUnit as
-		"workUnit",
+		a.workUnit as "workUnit",
 		a.doctorId as "doctorId",
 		b.`name` as "doctorName",
 		a.admissionTime as "admissionTime",
 		a.homeAddress as "homeAddress",
 		a.homePhone as "homePhone",
 		a.contacts as "contacts",
-		a.contactsPhone as
-		"contactsPhone",
+		a.contactsPhone as "contactsPhone",
 		a.admissionStatus as "admissionStatus",
-		a.roomType as
-		"roomType",
+		a.roomType as "roomType",
 		c.`name` as "roomTypeName",
 		a.roomNo as "roomNo",
-		a.bedNo as
-		"bedNo",
+		a.bedNo as "bedNo",
 		a.state as "state",
 		a.settlementState as "settlementState",
 		a.leaveTime as "leaveTime"
@@ -82,6 +77,53 @@
 		order by
 		id,admissionTime
 	</select>
+	
+	<select id="patientQueryBycerificateNo" parameterType="com.qut.pojo.PatientCode" resultType="map">
+		select
+		a.id as "id",
+		a.patientId as "patientId",
+		a.patientName as "name",
+		a.gender as "gender",
+		a.nation as "nation",
+		a.birth as "birth",
+		a.department as "department",
+		g.`name` as "departmentName",
+		a.certificateNo as "cerificateNo",
+		a.workUnit as "workUnit",
+		a.doctorId as "doctorId",
+		b.`name` as "doctorName",
+		a.admissionTime as "admissionTime",
+		a.homeAddress as "homeAddress",
+		a.homePhone as "homePhone",
+		a.contacts as "contacts",
+		a.contactsPhone as "contactsPhone",
+		a.admissionStatus as "admissionStatus",
+		a.roomType as "roomType",
+		c.`name` as "roomTypeName",
+		a.roomNo as "roomNo",
+		a.bedNo as "bedNo",
+		a.state as "state",
+		a.settlementState as "settlementState",
+		a.leaveTime as "leaveTime"
+		from
+		patient a LEFT JOIN doctor b ON
+		a.doctorId = b.doctorId
+		LEFT JOIN category c ON a.roomType = c.type
+		LEFT JOIN (
+		SELECT e.parameter_values "value",e.parameter_name "name"
+		from
+		parameter d LEFT JOIN paracode e ON d.`code` = e.`code`
+		where
+		d.name="科室"
+		) g ON a.department = g.`value`
+		where
+		1=1
+		and
+		if(#{cerificateNo} is null,0=0,certificateNo = #{cerificateNo})
+		order by
+		certificateNo,admissionTime,id
+	</select>
+	
 	<update id="patientUpdate" parameterType="com.qut.pojo.Patient">
 		update
 		patient

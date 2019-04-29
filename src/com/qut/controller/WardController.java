@@ -3,7 +3,9 @@ package com.qut.controller;
 import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
-
+import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.HashMap;
 import javax.annotation.Resource;
 
 import org.apache.ibatis.annotations.Param;
@@ -13,7 +15,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.qut.pojo.Bed;
 import com.qut.pojo.Ward;
+import com.qut.pojo.Category;
+import com.qut.pojo.Parameter;
 import com.qut.service.WardService;
+import com.qut.service.CategoryService;
+import com.qut.service.CommonService;
 import com.qut.util.BaseUtils;
 import com.qut.util.JsonResult;
 
@@ -26,6 +32,10 @@ import net.sf.json.JsonConfig;
 public class WardController {
 	@Resource(name = "wardService")
 	private WardService wardService;
+	@Resource(name = "categoryService")
+	private CategoryService categoryService;
+	@Resource(name = "commonService")
+	private CommonService commonService;
 
 	@RequestMapping(value = "/wardQuery.do", produces = "application/json;charset=utf-8")
 	@ResponseBody
@@ -48,26 +58,55 @@ public class WardController {
 	@RequestMapping(value = "/wardSave.do", produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public String wardSave(@Param("createTime") String createTime, @Param("departmentNo") String departmentNo,
-			@Param("typeNo") String typeNo, @Param("wardNo") String wardNo) throws ParseException {
+			@Param("typeNo") String typeNo, @Param("wardNo") String wardNo, @Param("wardSpace") String wardSpace)
+			throws ParseException {
 		Ward ward = new Ward();
 		ward.setCreateTime(BaseUtils.toDate(createTime));
 		ward.setDepartmentNo(BaseUtils.toInteger(departmentNo));
 		ward.setType(BaseUtils.toInteger(typeNo));
 		ward.setWardNo(BaseUtils.toInteger(wardNo));
+		ward.setwardSpace(BaseUtils.toInteger(wardSpace));
 		ward.setState(0);
 		// 为病房表增加数据
 		wardService.wardSave(ward);
-		// 为床位表增加数据
-		Integer i = BaseUtils.toInteger(wardNo);
-		Integer start = 4 * (i - 1) + 1;
-		for (int a = start; a <= i * 4; a++) {
-			// 每新增一个病房就新增四张床位，床位号为病房号的四倍
+
+		// 根据容量生成床位号，每个房间的床位号是（房间号*100）+ 床号，床号是1,2,3……自然序列。
+		// 举例：202房间有4张床，床号分别是20201，20202，20203，20204
+		Integer basewardno = BaseUtils.toInteger(wardNo);// 最初前端传入的房间号
+		Integer wardno = basewardno * 100;// 扩大100倍后的房间号
+		Integer wardspace = BaseUtils.toInteger(wardSpace);
+		for (int i = 1; i <= wardspace; i++) {
 			Bed bed = new Bed();
-			bed.setBedNo(a);
-			bed.setWardNo(i);
+			bed.setBedNo((wardno + i));
+			bed.setWardNo(basewardno);
 			bed.setState(0);
 			wardService.bedSave(bed);
 		}
+
+		// 病房信息写入参数化表paracode
+		/**
+		 * paracode写入的病房信息是：code,parameter_value,parameter_value 其中，code是004，代表是病房信息
+		 * parameter_value是病房房间号 parameter_value是病房类型名称
+		 * 由于病房类型名称在category表中，此接口传入的参数typeNo仅仅是病房类型待代号
+		 * 所以，先调用/categoryQuery.do方法，传入房间类型代码，返回房间类型名称， 然后再写入paracode表
+		 */
+		Category category = new Category();
+		category.setType(BaseUtils.toInteger(typeNo));
+		List<Category> list = categoryService.categoryQuery(category);
+		// 取出list中的name属性
+		// list.stream().map(集合变量::集合类变量属性).collect(Collectors.toList());
+		List<String> wardTypeName = new ArrayList<String>();
+		wardTypeName = list.stream().map(Category::getName).collect(Collectors.toList());
+		// System.out.println("列表_病房类型名称："+wardTypeName);
+		// 列表转字符串
+		String wardTypeName_String = String.join("", wardTypeName);
+		// System.out.println("字符串_病房类型名称："+wardTypeName_String);
+		Parameter parameter = new Parameter();
+		parameter.setCode("004");
+		parameter.setValue(BaseUtils.toInteger(wardNo));
+		parameter.setName(wardTypeName_String);
+		commonService.parameterCodeInsert(parameter);
+
 		JSON json = JSONSerializer.toJSON(new JsonResult<Ward>(ward));
 		return json.toString();
 	}

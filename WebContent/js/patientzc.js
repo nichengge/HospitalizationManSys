@@ -192,7 +192,17 @@ function register(){
 	//校验
 	var name = $("#name").val();
 	if(name==null||name==""){
-		alert("名字不能为空");
+		alert("患者姓名不能为空");
+		return false;
+	}
+	var name = $("#contacts").val();
+	if(name==null||name==""){
+		alert("联系人不能为空");
+		return false;
+	}
+	var homePhoneLen = $("#homePhone").val().length;
+	if(homePhoneLen > 11){
+		alert("家庭电话长度不正确!");
 		return false;
 	}
 	var birth = $("#birth").val();
@@ -215,9 +225,14 @@ function register(){
 		alert("家庭住址不能为空！");
 		return false;
 	}
-	var homePhone = $("#homePhone").val();
-	if(homePhone==null||homePhone==""){
-		alert("家庭电话不能为空！");
+	var contacts = $("#contactsPhone").val();
+	if(contacts==null||contacts==""){
+		alert("联系人电话不能为空！");
+		return false;
+	}
+	var contactsPhoneNum = /^1([38][0-9]|4[579]|5[0-3,5-9]|6[6]|7[0135678]|9[89])\d{8}$/;
+	if(!contactsPhoneNum.test(contacts)){
+		alert("联系人手机号不正确!");
 		return false;
 	}
 	var departmentNo = $("#departmentNo").val();

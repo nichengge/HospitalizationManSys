@@ -3,6 +3,7 @@
 <html>
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 <link rel="stylesheet" href="css/base.css" />
 <link rel="stylesheet" href="css/info-reg.css" />
 <title>医院住院管理系统</title>
@@ -40,13 +41,14 @@
 				<label>权限设置：</label>
 				<div class="select-wrap">
 					<div class="select-title ue-clear">
-						<span>--选择用户类型--</span><i class="icon"></i>
+						<span>--请选择--</span><i class="icon"></i>
 					</div>
 					<ul class="select-list" style="height: 100px; overflow: auto;">
 						<li value="0">患者</li>
-						<li value="1">医生</li>
-						<li value="2">患者服务中心</li>
-						<li value="3">数据管理员</li>
+						<li value="1">护士</li>
+						<li value="2">医生</li>
+						<li value="3">服务前台</li>
+						<li value="4">系统管理员</li>
 					</ul>
 				</div>
 			</div>

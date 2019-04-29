@@ -15,35 +15,26 @@ import com.qut.pojo.Cost;
 public interface CostMapper {
 	/**
 	 * 预交费用的保存
-	 * @param cost
 	 */
 	void costAdd(Cost cost);
 
 	/**
 	 * 预交费用查询
-	 * @param cost
-	 * @return
 	 */
 	List<Map<String, Object>> costQuery(Map<String, Object> map);
 
 	/**
 	 * 药品费用
-	 * @param map
-	 * @return
 	 */
 	Map<String, Object> drugsCostQuery(Map<String, Object> map);
 
 	/**
 	 * 退药费用
-	 * @param map
-	 * @return
 	 */
 	Map<String, Object> drugWithdrawal(Map<String, Object> map);
 
 	/**
 	 * 退药费用
-	 * @param map
-	 * @return
 	 */
 	Map<String, Object> costQueryTotal(Map<String, Object> map);
 

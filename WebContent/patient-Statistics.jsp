@@ -3,6 +3,7 @@
 <html>
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 <link rel="stylesheet" href="css/base.css" />
 <link rel="stylesheet" href="css/info-mgt.css" />
 
@@ -11,7 +12,7 @@
 
 <body>
 	<div class="title">
-		<h2>病人统计</h2>
+		<h2>区间病人统计</h2>
 	</div>
 	<input style="display:none;" type="text" id="des"/>
 	<div class="query">
@@ -38,26 +39,25 @@
 		<table id="showList">
 			<thead>
 				<tr>
-					<th class="num">序号</th>
 					<th class="node">科室编号</th>
 					<th class="name">科室名称</th>
-					<th class="node">入院人数</th>
-					<th class="node">入院总人数</th>
-					<th class="node">所占百分比（%）</th>
-					<th class="node">出院人数</th>
-					<th class="node">出院总人数</th>
-					<th class="node">所占百分比（%）</th>
+					<th class="node">累计入院</th>
+					<th class="node">累计出院</th>
+					<th class="node">出院比(%)</th>
 				</tr>
 			</thead>
-			<tbody id="show">
-			</tbody>
+			<tbody id="show"></tbody>
 		</table>
-		<div id="zhanweifu1" style="height: 100px; width: 1123px;display:inline-block" ></div>
-		<div id="zhanweifu2" style="height: 100px; width: 100px;display:inline-block" ></div>
-		<div id="myBarDiv" style="height: 300px; width: 430px;display:inline-block" ></div>
-		<div id="myLineDiv" style="height: 300px; width: 430px;display:inline-block" ></div>
 	</div>
 	<div class="pagination ue-clear"></div>
+	
+	<!-- 数据可视化显示区 -->
+	<HR style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="100%" color=#eaf4fa SIZE=3>
+	<div class="title">
+		<h2>数据概览</h2>
+		<div id="myBarDiv" style="height: 400px; width: 100%;display:inline-block;margin:0 auto" ></div>
+		<div id="myPieDiv" style="height: 400px; width: 100%;display:inline-block;margin:0 auto" ></div>
+	</div>
 </body>
 <script type="text/javascript" src="js/echarts.js"></script>
 <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
@@ -66,65 +66,5 @@
 <script type="text/javascript" src="js/core.js"></script>
 <script type="text/javascript" src="js/jquery.pagination.js"></script>
 <script type="text/javascript" src="js/patient-Statistics.js"></script>
-<script type="text/javascript">
-
-
-<!--柱状图数据可视化-->
-var myChart = echarts.init(document.getElementById('myBarDiv'));
-var option = {
-		 title: {
-             text: '住院人数统计图'
-         },
-         tooltip : {
-             show : true
-         },
-         legend : {
-             data : [ '住院人数' ]
-         },
-         xAxis : [ {//横坐标
-             type : 'category'
-         } ],
-         yAxis : [ {//纵坐标
-             type : 'value'
-         } ],
-         series : [ {
-             name : '住院人数',//鼠标放到条上的提示字
-             type : 'bar'//条形图类型
-         } ]
-     };
-		//加载数据到option
-			loadDataBar(option);
-		//设置option
-			myChart.setOption(option);
-</script>
-
-<!--折线图数据可视化-->
-<script type="text/javascript">
-var myChart = echarts.init(document.getElementById('myLineDiv'));
-var option = {
-		 title: {
-             text: '住院占比图(%)'
-         },
-         tooltip : {
-             show : true
-         },
-         legend : {
-             data : [ '住院人数' ]
-         },
-         xAxis : [ {//横坐标
-             type : 'category'
-         } ],
-         yAxis : [ {//纵坐标
-             type : 'value'
-         } ],
-         series : [ {
-             name : '住院人数',//鼠标放到条上的提示字
-             type : 'line'//条形图类型
-         } ]
-     };
-		//加载数据到option
-			loadDataLine(option);
-		//设置option
-			myChart.setOption(option);
-</script>
+<script type="text/javascript"></script>
 </html>

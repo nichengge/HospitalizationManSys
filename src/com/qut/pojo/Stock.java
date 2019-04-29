@@ -3,7 +3,6 @@ package com.qut.pojo;
 import java.io.Serializable;
 /**
  * 药品库存表
- * @author minchao
  *
  */
 public class Stock implements Serializable {

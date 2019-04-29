@@ -1,7 +1,7 @@
-  var list;
+var list;
 var $tbody = $("#show");
 var start = 0;
-var end = 7;
+var end = 15;
 $(function(){
 	$(".confirm").click(patientQuery);
 	//科室列表
@@ -84,9 +84,9 @@ function showList(lists,start,end){
 			}
 			var trStyle;
 			if((i+1)%2==0){
-				trStyle = "<tr style='background-color:#eff6fa' onclick='jump(this);'>";
+				trStyle = "<tr style='background-color:#eff6fa;cursor:pointer' onclick='jump(this);'>";
 			}else{
-				trStyle = "<tr onclick='jump(this);'>";
+				trStyle = "<tr style='cursor:pointer' onclick='jump(this);'>";
 			}
 			var admissionTime=patient.admissionTime.substring(0,patient.admissionTime.length-2);
 			var $tr = trStyle+
@@ -109,7 +109,7 @@ function jump(obj){
 	var id = $(obj).children().siblings().next().html();
 	var name = $(obj).children().next().next().html();
 	var bedNo = $(obj).children().next().next().next().next().next().next().html();
-	console.log("bedNo:"+bedNo);
+	//console.log("bedNo:"+bedNo);
 	var tiao = parent.window.$("#tiao").val();
 	$('#patientId',window.parent.document).val(id);
 	$('#patientName',window.parent.document).val(name);

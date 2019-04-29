@@ -3,6 +3,7 @@
 <html>
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 <link rel="stylesheet" href="css/base.css" />
 <link rel="stylesheet" href="css/info-mgt.css" />
 <link rel="stylesheet" type="text/css" href="css/jquery.dialog.css" />
@@ -19,17 +20,16 @@
 		<div class="query-conditions ue-clear">
 			<div class="conditions name ue-clear">
 				<label>用户类型：</label>
-				<div class="select-wrap">
-					<div class="select-title ue-clear">
+				<div class="select-wrap" id="usertype">
+					<div class="select-title ue-clear" >
 						<span>请选择</span><i class="icon"></i>
 					</div>
 					<ul class="select-list">
-						<li value="-1">请选择</li>
 						<li value="0">患者</li>
-						<li value="1">医生</li>
-						<li value="2">患者服务中心</li>
-						<li value="3">数据管理员</li>
-						<li value="4">超级管理员</li>
+						<li value="1">护士</li>
+						<li value="2">医生</li>
+						<li value="3">服务前台</li>
+						<li value="4">系统管理员</li>
 					</ul>
 				</div>
 			</div>
@@ -82,10 +82,10 @@
 			 		<p> 手机号：<input type="text" name="phoneUpdate" id="phoneUpdate"><label style="color:red;" class="phoneUpdateError"></label></p>
 			 	 	<p> 权&nbsp;&nbsp; 限：<select id="select_id">
 			 	 		<option value="0">患者</option>
-			 	 		<option value="1">医生</option>
-			 	 		<option value="2">患者服务中心</option>
-			 	 		<option value="3">数据管理员</option>
-			 	 		<option value="4">超级管理员</option>
+			 	 		<option value="1">护士</option>
+			 	 		<option value="2">医生</option>
+			 	 		<option value="3">服务前台</option>
+			 	 		<option value="4">系统管理员</option>
 			 	 	</select></p>
 			 		<div class="buttons">
 			 			<br>

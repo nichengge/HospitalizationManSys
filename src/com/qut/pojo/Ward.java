@@ -2,16 +2,14 @@ package com.qut.pojo;
 
 import java.io.Serializable;
 import java.util.Date;
-/**
- * 病房表
- * @author minchao
- */
+
 public class Ward implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private Integer wardNo;
 	private Integer departmentNo;
 	private Integer type;
+	private Integer wardSpace;//额定容量
 	private Integer state;
 	private Date createTime;
 
@@ -50,7 +48,15 @@ public class Ward implements Serializable {
 	public void setType(Integer type) {
 		this.type = type;
 	}
+	
+	public Integer getwardSpace() {
+		return wardSpace;
+	}
 
+	public void setwardSpace(Integer space) {
+		this.wardSpace = space;
+	}
+	
 	public Integer getState() {
 		return state;
 	}
@@ -70,7 +76,7 @@ public class Ward implements Serializable {
 	@Override
 	public String toString() {
 		return "Ward [id=" + id + ", wardNo=" + wardNo + ", departmentNo=" + departmentNo + ", type=" + type
-				+ ", state=" + state + ", createTime=" + createTime + "]";
+				+ ", state=" + state + ",space=" + wardSpace + ", createTime=" + createTime + "]";
 	}
 
 }

@@ -3,6 +3,7 @@
 <html>
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 <link rel="stylesheet" href="css/base.css" />
 <link rel="stylesheet" href="css/info-reg.css" />
 <title>医院住院管理系统</title>
@@ -13,295 +14,205 @@
 </style>
 </head>
 <body>
-	<div class="title">
-		<h2>入院登记</h2>
-	</div>
-	<div class="main">
-		<form id="patientRegForm">
-			<div style="display:none;">
-				<input id="nationNo" name="nationNo" value="1" />
-				<input id="departmentNo" name="departmentNo" value="0" /> 
-				<input id="marryNo" name="marryNo" value="0" /> 
-				<input id="typeNo" name="typeNo" value="0" /> 
-				<input id="wardNo" name="wardNo" value="0" />
-				<input id="bedNo" name="bedNo" value="0" /> 
-				<input id="doctorNo" name="doctorNo" value="0" /> 
-				<input id="statusNo" name="statusNo" value="0" />
-				<input id="genderNo" name="genderNo" value="0" />
-			</div>
-			<table>
-				<tr>
-					<td>
-						<p class="short-inpue-clear">
-							<label><font color="red">*</font>姓
-								&nbsp;&nbsp;&nbsp;&nbsp;名：</label>
-						</p>
-					</td>
-					<td>
-						<p class="short-input ue-clear">
-							<input type="text" name="name" id="name" />
-						</p>
-					</td>
-					<td>
-						<p class="short-input ue-clear">
-							<label>民 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;族：</label>
-						</p>
-					</td>
-					<td>
-						<div class="short-input select ue-clear">
-							<div class="select-wrap">
-								<div class="select-title ue-clear" id="nation">
-									<span>汉族</span><i class="icon"></i>
-								</div>
-								<ul class="select-list" id="nations"
+<div class="title">
+  <h2>入院登记</h2>
+</div>
+<div class="main">
+  <form id="patientRegForm">
+    <div style="display:none;">
+      <input id="nationNo" name="nationNo" value="1" />
+      <input id="departmentNo" name="departmentNo" value="0" />
+      <input id="marryNo" name="marryNo" value="0" />
+      <input id="typeNo" name="typeNo" value="0" />
+      <input id="wardNo" name="wardNo" value="0" />
+      <input id="bedNo" name="bedNo" value="0" />
+      <input id="doctorNo" name="doctorNo" value="0" />
+      <input id="statusNo" name="statusNo" value="0" />
+      <input id="genderNo" name="genderNo" value="0" />
+    </div>
+    <table>
+      <tr>
+        <td><p class="short-inpue-clear">
+            <label><font color="red">*</font>姓
+              &nbsp;&nbsp;&nbsp;&nbsp;名：</label>
+          </p></td>
+        <td><p class="short-input ue-clear">
+            <input type="text" name="name" id="name" />
+          </p></td>
+        <td><p class="short-input ue-clear">
+            <label>性&nbsp;&nbsp;&nbsp;&nbsp;别：</label>
+          </p></td>
+        <td><div class="short-input select ue-clear">
+            <div class="select-wrap">
+              <div class="select-title ue-clear" id="gender"> <span>请选择</span><i class="icon"></i> </div>
+              <ul class="select-list" id="genders">
+                <li value="1">男</li>
+                <li value="2">女</li>
+              </ul>
+            </div>
+          </div></td>
+      </tr>
+      <tr>
+        <td><p class="short-input ue-clear">
+            <label>民 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;族：</label>
+          </p></td>
+        <td><div class="short-input select ue-clear">
+            <div class="select-wrap">
+              <div class="select-title ue-clear" id="nation"> <span>汉族</span><i class="icon"></i> </div>
+              <ul class="select-list" id="nations"
 									style="height: 100px; overflow: auto;">
-								</ul>
-							</div>
-						</div>
-					</td>
-				</tr>
-				
-				<tr>
-					<td>
-						<p class="short-input ue-clear">
-							<label><font color="red">*</font>科
-								&nbsp;&nbsp;&nbsp;&nbsp;室：</label>
-						</p>
-					</td>
-					<td>
-						<div class="short-input select ue-clear">
-							<div class="select-wrap">
-								<div class="select-title ue-clear" id="department">
-									<span>请选择</span><i class="icon"></i>
-								</div>
-								<ul class="select-list" id="depart"
+              </ul>
+            </div>
+          </div></td>
+        <td><p class="short-input ue-clear">
+            <label><font color="red">*</font>生
+              &nbsp;&nbsp;&nbsp;&nbsp;日：</label>
+          </p></td>
+        <td><p class="short-input ue-clear">
+            <input type="date" id="birth" name="birth" onblur="checkpatientTime()"/>
+          </p></td>
+      </tr>
+      <tr>
+        <td><p class="short-input ue-clear">
+            <label><font color="red">*</font>身份证号：</label>
+          </p></td>
+        <td><p class="short-input ue-clear">
+            <input type="text" name="cerificateNo" id="cerificateNo" />
+          
+          <p class="short-input ue-clear"> </td>
+        <td><p class="short-input ue-clear">
+            <label>工作单位：</label>
+          </p></td>
+        <td><p class="short-input ue-clear">
+            <input type="text" name="workUnit" id="workUnit" />
+          
+          <p class="short-input ue-clear"> </td>
+      </tr>
+      <tr>
+        <td><p class="short-input ue-clear">
+            <label><font color="red">*</font>家庭住址：</label>
+          </p></td>
+        <td><p class="short-input ue-clear">
+            <input type="text" name="homeAddress" id="homeAddress" />
+          
+          <p class="short-input ue-clear"> </td>
+        <td><p class="short-input ue-clear">
+            <label>家庭电话：</label>
+          </p></td>
+        <td><p class="short-input ue-clear">
+            <input type="text" name="homePhone" id="homePhone" />
+          
+          <p class="short-input ue-clear"> </td>
+      </tr>
+      <tr>
+        <td><p class="short-input ue-clear">
+            <label>婚姻状况：</label>
+          </p></td>
+        <td><div class="short-input select ue-clear">
+            <div class="select-wrap">
+              <div class="select-title ue-clear" id="marry"> <span>未婚</span><i class="icon"></i> </div>
+              <ul class="select-list" id="marrys">
+                <li value="0">未婚</li>
+                <li value="1">已婚</li>
+              </ul>
+            </div>
+          </div></td>
+      </tr>
+      <tr>
+        <td><p class="short-input ue-clear">
+            <label><font color="red">*</font>科
+              &nbsp;&nbsp;&nbsp;&nbsp;室：</label>
+          </p></td>
+        <td><div class="short-input select ue-clear">
+            <div class="select-wrap">
+              <div class="select-title ue-clear" id="department"> <span>请选择</span><i class="icon"></i> </div>
+              <ul class="select-list" id="depart"
 									style="height: 100px; overflow: auto;">
-								</ul>
-							</div>
-						</div>
-					</td>
-					<td>
-						<p class="short-input ue-clear">
-							<label><font color="red">*</font>生
-								&nbsp;&nbsp;&nbsp;&nbsp;日：</label>
-						</p>
-					</td>
-					<td>
-						<p class="short-input ue-clear">
-							<input type="date" id="birth" name="birth" onblur="checkpatientTime()"/>
-						</p>
-					</td>
-				</tr>
-				
-				
-				<tr>
-					<td>
-						<p class="short-input ue-clear">
-							<label><font color="red">*</font>身份证号：</label>
-						</p>
-					</td>
-					<td>
-						<p class="short-input ue-clear">
-							<input type="text" name="cerificateNo" id="cerificateNo" />
-						<p class="short-input ue-clear">
-					</td>
-					<td>
-						<p class="short-input ue-clear">
-							<label>工作单位：</label>
-						</p>
-					</td>
-					<td>
-						<p class="short-input ue-clear">
-							<input type="text" name="workUnit" id="workUnit" />
-						<p class="short-input ue-clear">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<p class="short-input ue-clear">
-							<label>婚姻状况：</label>
-						</p>
-					</td>
-					<td>
-						<div class="short-input select ue-clear">
-							<div class="select-wrap">
-								<div class="select-title ue-clear" id="marry">
-									<span>未婚</span><i class="icon"></i>
-								</div>
-								<ul class="select-list" id="marrys">
-									<li value="0">未婚</li>
-									<li value="1">已婚</li>
-								</ul>
-							</div>
-						</div>
-					</td>
-					<td>
-						<p class="short-input ue-clear">
-							<label><font color="red">*</font>主治医师：</label>
-						</p>
-					</td>
-					<td>
-						<div class="short-input select ue-clear">
-							<div class="select-wrap">
-								<div class="select-title ue-clear" id="doctor">
-									<span>请选择</span><i class="icon"></i>
-								</div>
-								<ul class="select-list" id="doctors"
+              </ul>
+            </div>
+          </div></td>
+        <td><p class="short-input ue-clear">
+            <label><font color="red">*</font>主治医师：</label>
+          </p></td>
+        <td><div class="short-input select ue-clear">
+            <div class="select-wrap">
+              <div class="select-title ue-clear" id="doctor"> <span>请选择</span><i class="icon"></i> </div>
+              <ul class="select-list" id="doctors"
 									style="height: 100px; overflow: auto;">
-								</ul>
-							</div>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<p class="short-input ue-clear">
-							<label><font color="red">*</font>家庭住址：</label>
-						</p>
-					</td>
-					<td>
-						<p class="short-input ue-clear">
-							<input type="text" name="homeAddress" id="homeAddress" />
-						<p class="short-input ue-clear">
-					</td>
-					<td>
-						<p class="short-input ue-clear">
-							<label><font color="red">*</font>家庭电话：</label>
-						</p>
-					</td>
-					<td>
-						<p class="short-input ue-clear">
-							<input type="text" name="homePhone" id="homePhone" />
-						<p class="short-input ue-clear">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<p class="short-input ue-clear">
-							<label><font color="red">*</font>入院情况：</label>
-						</p>
-					</td>
-					<td>
-						<div class="short-input select ue-clear">
-							<div class="select-wrap">
-								<div class="select-title ue-clear" id="statu">
-									<span>请选择</span><i class="icon"></i>
-								</div>
-								<ul class="select-list" id="status"
+              </ul>
+            </div>
+          </div></td>
+      </tr>
+      <tr>
+        <td><p class="short-input ue-clear">
+            <label><font color="red">*</font>病房类型：</label>
+          </p></td>
+        <td><div class="short-input select ue-clear">
+            <div class="select-wrap">
+              <div class="select-title ue-clear" id="type"> <span>请选择</span><i class="icon"></i> </div>
+              <ul class="select-list" id="types"
 									style="height: 100px; overflow: auto;">
-									<li value="1">一般</li>
-									<li value="2">急</li>
-									<li value="3">危</li>
-								</ul>
-							</div>
-						</div>
-					</td>
-					<td>
-						<p class="short-input ue-clear">
-							<label><font color="red">*</font>病房类型：</label>
-						</p>
-					</td>
-					<td>
-						<div class="short-input select ue-clear">
-							<div class="select-wrap">
-								<div class="select-title ue-clear" id="type">
-									<span>请选择</span><i class="icon"></i>
-								</div>
-								<ul class="select-list" id="types"
+              </ul>
+            </div>
+          </div></td>
+        <td><p class="short-input ue-clear">
+            <label><font color="red">*</font>病 房 号：</label>
+          </p></td>
+        <td><div class="short-input select ue-clear">
+            <div class="select-wrap">
+              <div class="select-title ue-clear" id="ward"> <span>请选择</span><i class="icon"></i> </div>
+              <ul class="select-list" id="wards"
 									style="height: 100px; overflow: auto;">
-								</ul>
-							</div>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<p class="short-input ue-clear">
-							<label><font color="red">*</font>病 房 号：</label>
-						</p>
-					</td>
-					<td>
-						<div class="short-input select ue-clear">
-							<div class="select-wrap">
-								<div class="select-title ue-clear" id="ward">
-									<span>请选择</span><i class="icon"></i>
-								</div>
-								<ul class="select-list" id="wards"
+              </ul>
+            </div>
+          </div></td>
+      </tr>
+      <tr>
+        <td><p class="short-input ue-clear">
+            <label><font color="red">*</font>床 位 号：</label>
+          </p></td>
+        <td><div class="short-input select ue-clear">
+            <div class="select-wrap">
+              <div class="select-title ue-clear" id="bed"> <span>请选择</span><i class="icon"></i> </div>
+              <ul class="select-list" id="beds"
 									style="height: 100px; overflow: auto;">
-								</ul>
-							</div>
-						</div>
-					</td>
-					<td>
-						<p class="short-input ue-clear">
-							<label><font color="red">*</font>床 位 号：</label>
-						</p>
-					</td>
-					<td>
-						<div class="short-input select ue-clear">
-							<div class="select-wrap">
-								<div class="select-title ue-clear" id="bed">
-									<span>请选择</span><i class="icon"></i>
-								</div>
-								<ul class="select-list" id="beds"
+              </ul>
+            </div>
+          </div></td>
+        <td><p class="short-input ue-clear">
+            <label><font color="red">*</font>入院状况：</label>
+          </p></td>
+        <td><div class="short-input select ue-clear">
+            <div class="select-wrap">
+              <div class="select-title ue-clear" id="statu"> <span>请选择</span><i class="icon"></i> </div>
+              <ul class="select-list" id="status"
 									style="height: 100px; overflow: auto;">
-								</ul>
-							</div>
-						</div>
-					</td>
-				</tr>
-				
-				<tr>
-					<td>
-						<p class="short-input ue-clear">
-							<label>性&nbsp;&nbsp;&nbsp;&nbsp;别：</label>
-						</p>
-					</td>
-					<td>
-						<div class="short-input select ue-clear">
-							<div class="select-wrap">
-								<div class="select-title ue-clear" id="gender">
-									<span>请选择</span><i class="icon"></i>
-								</div>
-								<ul class="select-list" id="genders">
-									<li value="1">男</li>
-									<li value="2">女</li>
-								</ul>
-							</div>
-						</div>
-					</td>
-					<td>
-						<p class="short-input ue-clear">
-							<label><font color="red">*</font>联系人电话：</label>
-						</p>
-					</td>
-					<td>
-						<p class="short-input ue-clear">
-							<input type="text" name="contactsPhone" id="contactsPhone" />
-						<p class="short-input ue-clear">
-					</td>
-				</tr>
-				
-				<tr>
-					<td>
-						<p class="short-input ue-clear">
-							<label><font color="red">*</font>联 系 人：</label>
-						</p>
-					</td>
-					<td>
-						<p class="short-input ue-clear">
-							<input type="text" name="contacts" id="contacts" />
-						</p>
-					</td>
-				</tr>
-				
-			</table>
-		</form>
-	</div>
-	<div class="btn">
-		<a href="javascript:void(0);" id="register" class="confirm">登记</a> <a
-			href="javascript:void(0);" id="reset" class="clear">重置</a>
-	</div>
+                <li value="1">一般</li>
+                <li value="2">急</li>
+                <li value="3">危</li>
+              </ul>
+            </div>
+          </div></td>
+      </tr>
+      <tr>
+        <td><p class="short-input ue-clear">
+            <label><font color="red">*</font>紧急联 系 人：</label>
+          </p></td>
+        <td><p class="short-input ue-clear">
+            <input type="text" name="contacts" id="contacts" />
+          </p></td>
+        <td><p class="short-input ue-clear">
+            <label><font color="red">*</font>手机号：</label>
+          </p></td>
+        <td><p class="short-input ue-clear">
+            <input type="text" name="contactsPhone" id="contactsPhone" />
+          
+          <p class="short-input ue-clear"> </td>
+      </tr>
+    </table>
+  </form>
+</div>
+<div class="btn"> <a href="javascript:void(0);" id="register" class="confirm">登记</a> <a href="javascript:void(0);" id="reset" class="clear">重置</a> </div>
 </body>
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/common.js"></script>

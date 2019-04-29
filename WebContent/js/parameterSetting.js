@@ -1,6 +1,7 @@
 var $tbodys = $("#showCode");
 var $tbody = $("#show");
 var id = "";
+var value = "";
 var danqian = null;
 $(function(){
 	$("#codeadd").click(codeadd);
@@ -37,10 +38,11 @@ $(function(){
 	$("#parameter").click(showParameter);
 });
 
+
 function showParameter(obj){
 	$(obj).parent().find("input").css('background-color','#FFFFFF');
 	$(obj).find("input").css('background-color','#E8F1F7');
-	var code = obj.childNodes[0].childNodes[1].value;
+	window.code = obj.childNodes[0].childNodes[1].value;//取参数编码设置为全局变量，后面的函数还要使用这个变量。天坑。。。。鼓捣了一下午。。。坑爹
 	$.ajax({
 		url:'common/parameterCodeQuery.do',
 		type:'post',
@@ -59,7 +61,7 @@ function showParameter(obj){
 						  "</label>"+
 						  "<input readonly='readonly' size='50%' type='text' value='"+paracode.code+
 						  "'/></td><td>"+
-						  "<input  size='50%' type='text' value='"+paracode.name+
+						  "<input  readonly='readonly' size='50%' type='text' value='"+paracode.name+
 						  "'/></td><td><img src='images/delico.png' onclick='deletetr(this);'></td></tr>";
 					$tbodys.append($tr);
 						
@@ -81,7 +83,8 @@ function codeadd(){
  
 function deletetr(obj){
    id = $(obj).parent().parent('tr').find("label").text();
-   dangqian = obj;
+   value = $(obj).parent().parent('tr').find("input").val(); 
+   window.dangqian = obj;
    selectDrugs();
 }
 
@@ -89,7 +92,6 @@ function deletetr(obj){
  * 对输入框进行校验：
  * 1.是否为空
  * 2.是否与其他有重复
- * @param obj
  */
 //判空
 function checkNull(obj){
@@ -105,6 +107,7 @@ function changeColor(obj){
 	$(obj).css("color","");
 	$(obj).val("");
 }
+
 //判断是否重复
 function checkNo(obj){
 	 checkNull(obj);
@@ -127,7 +130,7 @@ function checkNo(obj){
 	  } 
 	  if(times>1){
 		  $(obj).css("color","red");
-		  $(obj).val("*重复了");
+		  $(obj).val("*参数重复");
 		  return false;
 	  }
 }
@@ -150,7 +153,7 @@ function checkName(obj){
 	  } 
 	  if(times>1){
 		  $(obj).css("color","red");
-		  $(obj).val("*重复了");
+		  $(obj).val("*参数重复");
 	  }
 }
 
@@ -160,18 +163,17 @@ function checkNamef(obj){
 
 //保存
 function codesave(){
-	var code = $("#id").text();
 	var leng = $("#showCode tr").length;
 	var array="";
 	for(var i=0; i<leng; i++) 
 	{ 	
 		var id =  $("#showCode tr").eq(i).find("label").text();
-		var value = $("#showCode tr").eq(i).find("input:first").val(); 
+		var value2 = $("#showCode tr").eq(i).find("input:first").val(); 
 	    var name = $("#showCode tr").eq(i).find("input")[1].value; 
 	    if(id==""){
 	    	id="-1";
 	    }
-	    array=array+id+":"+value+":"+name+":"+code+",";
+	    array=array+id+":"+value2+":"+name+":"+code+",";
 	} 
 	$.ajax({
 		url:'common/parameterCodeSave.do',
@@ -179,27 +181,38 @@ function codesave(){
 		data:{"list":array,"code":code},
 		dataType: 'JSON',
 		success:function(result){
-			 alert("保存成功！");
+			if(result.state==0){alert("保存成功！");}
+			else if(result.state==0){alert("保存成功!");}
+			else if(result.state==4){alert("请到病房管理-新置病房菜单添加新病房!");}
+			else if(result.state==5){alert("系统角色不允许修改!");}
+			else if(result.state==6){alert("请求码异常!");}
 			window.location.reload();
 		}
 	});
 }
+
+
 //点击删除的确认
 function ok(){
 	 if(id==""){
 		   //没有在数据库中的数据直接删除
+		 	//alert("进入删除区");
 		   $(dangqian).parent().parent('tr').remove();
 	  }else{
 		  //在数据库中的参数要发送请求删除
 		  $.ajax({
 				url:'common/parameterCodeDelete.do',
 				type:'post',
-				data:{"id":id},
+				data:{"id":id,"value":value,"code":code},
 				dataType: 'JSON',
 				success:function(result){
-					if(result.state==0){
-						alert("删除成功");
-					}
+					if(result.state==0){alert("删除成功");}
+					else if(result.state==1){alert("当前科室正在使用!");}
+					else if(result.state==2){alert("当前职称正在使用!");}
+					else if(result.state==3){alert("当前病房类型正在使用!");}
+					else if(result.state==4){alert("当前病房正在使用!");}
+					else if(result.state==5){alert("系统角色不允许删除");}
+					else if(result.state==6){alert("请求码异常!");}
 					window.location.reload();
 				}
 				});

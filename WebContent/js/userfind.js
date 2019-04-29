@@ -1,4 +1,6 @@
 //将用户的权限作为全局变量
+var start = 0;
+var end = 15;
 var id = $("#id");
 var startTime = $("#startTime");
 var endTime = $("#endTime");
@@ -31,8 +33,6 @@ function Query(){
 	var names = username.val(); 
 	var describe = $("#des").val();
 	var data = {"id":ids,"startTime":startTimes,"endTime":endTimes,"name":names, "describe":describe};
-	var start = 0;
-	var end = 7;
 	$.ajax({
 		url:'account/userQuery.do',
 		type:'post',
@@ -78,15 +78,21 @@ function showList(list,start,end){
 				describe = "患者";
 			}
 			if(user.describe=="1"){
-				describe = "医生";
+				describe = "护士";
 			}
 			if(user.describe=="2"){
-				describe = "患者服务中心";
+				describe = "医生";
 			}
 			if(user.describe=="3"){
-				describe = "数据管理员";
+				describe = "服务前台";
 			}
 			if(user.describe=="4"){
+				describe = "系统管理员";
+			}
+			/*超管用户是系统底层后门用户,不允许系统查到,
+			  *需要查到超管先删掉SQL语句中的：and user_describe != 5
+			 */
+			if(user.describe=="5"){
 				describe = "超级管理员";
 			}
 			var trStyle;
@@ -143,10 +149,7 @@ function userUpdate(obj){
 	showUser(userId,username,userPhone,quanxian);
 }
 function Reset(){
-	 id.val("");
-	 startTime.val("");
-	 endTime.val("");
-	 username.val(""); 
+	window.location.reload(true);
 }
 
 //修改用户信息弹窗

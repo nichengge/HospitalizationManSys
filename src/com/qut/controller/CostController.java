@@ -62,7 +62,7 @@ public class CostController {
 	@RequestMapping(value = "/costTotal.do", produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public String costTotal(@Param("patientId") String patientId) {
-		List<Map<String, Object>> list = costService.costTotal(patientId);
+		List<Map<String, Object>> list = costService.costTotal(patientId);// 费用计算业务逻辑在CostServiceImpl.java
 		JSON json = JSONSerializer.toJSON(new JsonResult<List<Map<String, Object>>>(list));
 		return json.toString();
 	}

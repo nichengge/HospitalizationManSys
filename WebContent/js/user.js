@@ -15,14 +15,38 @@ $(function(){
 			$("#kccx").css("display","");
 		$("#jiesuanzhongxin").css("display","");
 			$("#fycx").css("display","");
+			$("#jfjl").css("display","");
 		$("#hulizhongxin").css("display","");
+			$("#lrtzsj").css("display","");
 			$("#tzsjcx").css("display","");
+			$("#zyls").css("display","");
+			$("#yyls").css("display","");
 		$("#gangwei").text("[患者]");
 	}
 	
+	//护士
+	if(Jurisdiction==1){
+		$("#ruyuanguanli").css("display","");
+			$("#zycx").css("display","");
+		$("#yaopinguanli").css("display","");
+			$("#ypff").css("display","");
+		$("#jiesuanzhongxin").css("display","");
+			$("#jfjl").css("display","");
+			$("#fycx").css("display","");
+		$("#hulizhongxin").css("display","");
+			$("#lrtzsj").css("display","");
+			$("#tzsjcx").css("display","");
+			$("#yyls").css("display","");
+		$("#chuyuanguanli").css("display","");
+			$("#cycx").css("display","");
+		$("#tongjizhongxin").css("display","");
+			$("#brtj").css("display","");
+			$("#bftj").css("display","");
+		$("#gangwei").text("[护士]");
+	}
 	
 	//医生
-	if(Jurisdiction==1){
+	if(Jurisdiction==2){
 		$("#ruyuanguanli").css("display","");
 			$("#zycx").css("display","");
 		$("#yaopinguanli").css("display","");
@@ -31,6 +55,8 @@ $(function(){
 		$("#hulizhongxin").css("display","");
 			$("#lrtzsj").css("display","");
 			$("#tzsjcx").css("display","");
+			$("#zyls").css("display","");
+			$("#yyls").css("display","");
 		$("#chuyuanguanli").css("display","");
 			$("#cycx").css("display","");
 		$("#tongjizhongxin").css("display","");
@@ -40,8 +66,8 @@ $(function(){
 	}
 	
 	
-	//患者服务中心
-	if(Jurisdiction==2){
+	//服务前台
+	if(Jurisdiction==3){
 		$("#ruyuanguanli").css("display","");
 			$("#rydj").css("display","");
 			$("#zycx").css("display","");
@@ -49,14 +75,13 @@ $(function(){
 			$("#tycl").css("display","");
 			$("#kccx").css("display","");
 		$("#jiesuanzhongxin").css("display","");
-			$("#yjfy").css("display","");
+			$("#fyyj").css("display","");
+			$("#jfjl").css("display","");
 			$("#fycx").css("display","");
-			$("#fyjs").css("display","");
-		$("#hulizhongxin").css("display","");
-			$("#zbfcl").css("display","");
 		$("#chuyuanguanli").css("display","");
 			$("#cydj").css("display","");
 			$("#cycx").css("display","");
+			$("#zbfcl").css("display","");
 		$("#tongjizhongxin").css("display","");
 			$("#brtj").css("display","");
 			$("#bftj").css("display","");
@@ -64,8 +89,8 @@ $(function(){
 	}
 	
 	
-	//数据管理员
-	if(Jurisdiction==3){
+	//系统管理员
+	if(Jurisdiction==4){
 		$("#bingfangguanli").css("display","");
 			$("#xzbf").css("display","");
 			$("#bfjgtz").css("display","");
@@ -82,12 +107,15 @@ $(function(){
 		$("#yishengguanli").css("display","");
 			$("#yslr").css("display","");
 			$("#yscx").css("display","");
-		$("#gangwei").text("[数据管理员]");
+		$("#canshushezhi").css("display","");
+			$("#cssz").css("display","");
+			$("#yxrz").css("display","");
+		$("#gangwei").text("[系统管理员]");
 	}
 	
 	
 	//超级管理员
-	if(Jurisdiction==4){
+	if(Jurisdiction==5){
 		$("#ruyuanguanli").css("display","");
 			$("#rydj").css("display","");
 			$("#zycx").css("display","");
@@ -101,16 +129,18 @@ $(function(){
 			$("#rkcx").css("display","");
 			$("#kccx").css("display","");
 		$("#jiesuanzhongxin").css("display","");
-			$("#yjfy").css("display","");
+			$("#fyyj").css("display","");
+			$("#jfjl").css("display","");
 			$("#fycx").css("display","");
-			$("#fyjs").css("display","");
 		$("#hulizhongxin").css("display","");
 			$("#lrtzsj").css("display","");
-			$("#zbfcl").css("display","");
 			$("#tzsjcx").css("display","");
+			$("#zyls").css("display","");
+			$("#yyls").css("display","");
 		$("#chuyuanguanli").css("display","");
 			$("#cydj").css("display","");
 			$("#cycx").css("display","");
+			$("#zbfcl").css("display","");
 		$("#tongjizhongxin").css("display","");
 			$("#brtj").css("display","");
 			$("#bftj").css("display","");
@@ -120,9 +150,9 @@ $(function(){
 		$("#yishengguanli").css("display","");
 			$("#yslr").css("display","");
 			$("#yscx").css("display","");
-			//参数设置页面，答辩的时候隐藏了
-		//$("#canshushezhi").css("display","");
-			//$("#cssz").css("display","");
+		$("#canshushezhi").css("display","");
+			$("#cssz").css("display","");
+			$("#yxrz").css("display","");
 		$("#gangwei").text("[超级管理员]");
 	}
 

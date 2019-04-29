@@ -4,7 +4,7 @@ var listTitle;
 var listDepartment;
 var $tbody = $("#show");
 var start = 0;
-var end = 7;
+var end = 15;
 
 $(function() {
 	$("#select").click(select);

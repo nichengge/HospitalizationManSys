@@ -5,9 +5,9 @@
 <mapper namespace="com.qut.mapper.WardMapper">
 	<insert id="wardSave" parameterType="com.qut.pojo.Ward">
 		insert into
-		ward(wardNo,departmentNo,type,state,createTime)
+		ward(wardNo,departmentNo,type,state,space,createTime)
 		values
-		(#{wardNo},#{departmentNo},#{type},#{state},#{createTime})
+		(#{wardNo},#{departmentNo},#{type},#{state},#{wardSpace},#{createTime})
 	</insert>
 	<insert id="bedSave" parameterType="com.qut.pojo.Bed">
 		insert into
@@ -54,20 +54,18 @@
 		select
 		id as "id",
 		wardNo as "wardNo",
-		departmentNo as
-		"departmentNo",
+		departmentNo as "departmentNo",
 		type as "type",
 		state as "state",
-		createTime as
-		"createTime"
+		createTime as "createTime"
 		from
 		ward
 		where
-		id = #{wardId}
+		wardNo = #{wardNo}
 	</select>
 	<insert id="logWard" parameterType="com.qut.pojo.Patient">
 		insert into
-		wardUpdate(patientId,roomType,updateTime)
+		wardupdate(patientId,roomType,updateTime)
 		values(#{patientId},#{roomType},curdate())
 	</insert>
 	<select id="departQuery" parameterType="Integer" resultType="map">
@@ -128,4 +126,10 @@
 		BY
 		b.departmentNo
 	</select>
+	<select id="wardspace" parameterType="com.qut.pojo.Ward" resultType="Integer">
+		select space from ward where 1=1 and wardNo=#{wardNo}
+	</select>
+	<delete id="wardDelete" parameterType="Integer">
+		delete from ward where wardNo=#{wardNo}
+	</delete>
 </mapper>

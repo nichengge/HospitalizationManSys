@@ -34,9 +34,10 @@ body {
 	overflow: visible;
 	float: left;
 	line-height: 30px;
-	width: 380px;
+	width: 340px;
 	margin: 6px 63px 0 25px;
 }
+
 .query .conditionst {
 	 overflow: visible;
 	float: left;
@@ -44,6 +45,7 @@ body {
 	width: 380px;
 	margin: 6px 0px 0 0px;
 }
+
 .query .conditionst label {
 	float: left;
 	width: 72px;
@@ -208,6 +210,7 @@ body {
 	float: left;
 	margin: 0 2px;
 }
+
 
 /*»À‘±*/
 .query .staff input {

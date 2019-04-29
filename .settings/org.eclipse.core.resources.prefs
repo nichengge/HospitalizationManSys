@@ -8,3 +8,5 @@ encoding//WebContent/css/styles.css=ISO-8859-1
 encoding//WebContent/fonts/dashboard.eot=windows-1252
 encoding//WebContent/js/chart.min.js=ISO-8859-1
 encoding//WebContent/js/jquery.validate.min.js=ISO-8859-1
+encoding//src/db.properties=UTF-8
+encoding//src/log4j.properties=UTF-8

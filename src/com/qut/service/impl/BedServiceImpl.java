@@ -35,4 +35,8 @@ public class BedServiceImpl implements BedService {
 		return bedMapper.bedStateQuery(bed);
 	}
 
+	@Override
+	public Integer countwardpatient(Bed bed) {
+		return bedMapper.countwardpatient(bed);
+	}
 }

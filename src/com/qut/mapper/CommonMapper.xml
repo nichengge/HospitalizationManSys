@@ -53,4 +53,25 @@
  		from
 			nation
 	</select>
+	<!-- 参数插入 -->
+	<insert id="parameterCodeInsert" parameterType="com.qut.pojo.Parameter">
+		insert into paracode(code,parameter_values,parameter_name)
+		values(#{code},#{value},#{name})
+	</insert>
+	<!-- 参数更新 -->
+	<update id="parameterCodeUpdate" parameterType="com.qut.pojo.Parameter">
+		update paracode 
+		set code=#{code},
+		parameter_values=#{value},
+		parameter_name=#{name}
+		where 
+		code_id = #{id}
+	</update>
+	<!-- 参数删除 -->
+	<delete id="parameterCodeDelete" parameterType="com.qut.pojo.Parameter">
+		delete 
+		from paracode 
+		where 
+		code_id = #{id}
+	</delete>
 </mapper>

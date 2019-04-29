@@ -86,7 +86,7 @@ function showMessage(){
 				if(patient[0].settlementState==0){
 					settlementState = "否";
 				}
-				console.log(patient[0]);
+				//console.log(patient[0]);
 				$("#patientName").val(patient[0].name);
 				$("#cardId").val(patient[0].cerificateNo);
 				$("#gender").val(gender);

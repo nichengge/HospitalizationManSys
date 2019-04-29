@@ -4,10 +4,8 @@ import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +16,9 @@ import com.qut.pojo.DrugsCode;
 import com.qut.pojo.Grant;
 import com.qut.pojo.Stock;
 import com.qut.pojo.WithdrawalDrug;
+import com.qut.pojo.grantDrugs;
 import com.qut.service.DrugsService;
+import com.qut.service.grantDrugsService;
 import com.qut.util.BaseUtils;
 import com.qut.util.JsonDateValueProcessor;
 import com.qut.util.JsonResult;
@@ -32,6 +32,8 @@ import net.sf.json.JsonConfig;
 public class DrugsController {
 	@Resource(name = "drugsService")
 	private DrugsService drugsService;
+	@Resource(name = "grantDrugsService")
+	private grantDrugsService grantdrugsService;
 
 	@RequestMapping(value = "/drugsSave.do", produces = "application/json;charset=utf-8")
 	@ResponseBody
@@ -143,6 +145,15 @@ public class DrugsController {
 	public String grantQuery(@Param("patientId") String patientId) {
 		List<Stock> list = drugsService.grantQuery(patientId);
 		JSON json = JSONSerializer.toJSON(new JsonResult<List<Stock>>(list));
+		return json.toString();
+	}
+
+	@RequestMapping(value = "/grantDrugsFindByPatienId.do", produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public String grantDrugsFindByPatienId(@Param("patientId") String patientId) {
+		List<grantDrugs> list = grantdrugsService.grantDrugsFindByPatienId(patientId);
+
+		JSON json = JSONSerializer.toJSON(new JsonResult<List<grantDrugs>>(list));
 		return json.toString();
 	}
 

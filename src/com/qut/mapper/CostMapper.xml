@@ -83,9 +83,10 @@
 	<select id="bedCodeQuery" parameterType="map" resultType="map">
 		select
 		a.updateTime as "updateTime",
-		b.price as "price"
+		b.price as "price",
+		b.name as "wardTypeName"
 		from
-		wardUpdate a LEFT
+		wardupdate a LEFT
 		JOIN category b ON a.roomType = b.type
 		where
 		a.patientId = #{patientId}

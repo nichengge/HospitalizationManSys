@@ -27,8 +27,12 @@ public class PatientServiceImpl implements PatientService {
 
 	@Override
 	public List<Map<String, Object>> patientQuery(PatientCode patientCode) {
-		
 		return patientMapper.patientQuery(patientCode);
+	}
+	
+	@Override
+	public List<Map<String, Object>> patientQueryBycerificateNo(String cerificateNo) {
+		return patientMapper.patientQueryBycerificateNo(cerificateNo);
 	}
 
 	@Override

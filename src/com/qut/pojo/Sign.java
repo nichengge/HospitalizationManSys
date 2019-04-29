@@ -13,7 +13,7 @@ public class Sign implements Serializable {
 	private String userId;
 	private String userName;
 	private Float temperature;
-	private Float bloodPressure;
+	private String bloodPressure;
 	private Integer pulse;
 	private Integer breathing;
 	private Float bloodSugar;
@@ -66,11 +66,11 @@ public class Sign implements Serializable {
 		this.temperature = temperature;
 	}
 
-	public Float getBloodPressure() {
+	public String getBloodPressure() {
 		return bloodPressure;
 	}
 
-	public void setBloodPressure(Float bloodPressure) {
+	public void setBloodPressure(String bloodPressure) {
 		this.bloodPressure = bloodPressure;
 	}
 

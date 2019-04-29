@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 <title>医院住院管理系统</title>
 <link rel="shortcut icon" href="images/favicon.ico">
 <link href="css/login-main.css" rel="stylesheet" type="text/css" />
@@ -57,12 +58,8 @@
 <script type="text/javascript" src="js/login.js"></script>
 <script type="text/javascript" src="js/common.js"></script>
 
-<!--[if IE 6]>
-<script src="js/DD_belatedPNG.js" type="text/javascript"></script>
-<script>DD_belatedPNG.fix('.png')</script>
-<![endif]-->
 <div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
-<p>Copyrigth  ©️ 2018 &nbsp;&nbsp; <a href="http://www.github.com/yzqyfly/" target="_blank" title="熠睿GitHub主页">熠睿fsci</a></p>
+<p>Copyrigth  ©️ 2019 &nbsp;&nbsp; <a href="http://www.github.com/yzqyfly/" target="_blank" title="熠睿GitHub主页">熠睿fsci</a></p>
 </div>
 </body >
 </html>

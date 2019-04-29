@@ -5,7 +5,9 @@ $(function(){
 		url : 'category/categoryQuery.do',
 		type : 'post',
 		data : {
-			"id" : ""
+			"id" : "",
+			 "type":"",
+			 "name":"",
 		},
 		dataType : 'JSON',
 		success : function(result) {

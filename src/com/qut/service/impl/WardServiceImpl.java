@@ -47,7 +47,6 @@ public class WardServiceImpl implements WardService {
 	 */
 	@Override
 	public Ward wardQueryById(Integer wardId) {
-
 		return wardMapper.wardQueryById(wardId);
 	}
 
@@ -76,6 +75,16 @@ public class WardServiceImpl implements WardService {
 
 	}
 
+	@Override
+	public Integer wardspace(Ward ward) {
+		return wardMapper.wardspace(ward);
+	}
+	
+	@Override
+	public void wardDelete(Integer wardNo) {
+		wardMapper.wardDelete(wardNo);
+	}
+	
 	/**
 	 * 病床使用情况统计
 	 */

@@ -16,9 +16,12 @@
 		if(#{state} is null,0=0,state=#{state})
 	</select>
 	<update id="bedUpdate" parameterType="com.qut.pojo.Bed">
-		update bed set state = #{state} where bedNo = #{bedNo}
+		update bed set state = #{state} where bedNo = #{bedNo} and ward = #{wardNo}
 	</update>
 	<select id="bedStateQuery" parameterType="com.qut.pojo.Bed" resultType="Integer">
 		select sum(A.state) from bed A where A.ward=#{wardNo}
+	</select>
+	<select id="countwardpatient" parameterType="com.qut.pojo.Bed" resultType="Integer">
+		select count(ward) from bed where 1=1 and ward=#{wardNo} and state =#{state}
 	</select>
 </mapper>

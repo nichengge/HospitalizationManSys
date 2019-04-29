@@ -3,6 +3,7 @@
 <html>
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 <link rel="stylesheet" href="css/base.css" />
 <link rel="stylesheet" href="css/info-reg.css" />
 <link rel="stylesheet" type="text/css" href="css/jquery.dialog.css" />
@@ -95,7 +96,7 @@
 					<tr>
 					<td>
 						<p class="short-input ue-clear">
-							<label><font color="red">*</font>收款人编号：</label>
+							<label><font color="red">*</font>收款用户：</label>
 						</p>
 					</td>
 					<td>

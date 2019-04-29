@@ -13,6 +13,14 @@
 			updateTime as "updateTime"
 		from
 		category
+		where
+		1=1
+		and
+		if(#{id} is null,0=0,id=#{id})
+		and
+		if(#{type} is null,0=0,type=#{type})
+		and
+		if(#{name} is null,0=0,name=#{name})
 	</select>
 	<update id="categoryUpdate" parameterType="com.qut.pojo.Category">
 		update 

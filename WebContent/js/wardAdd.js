@@ -7,6 +7,9 @@ $(function(){
 	$('#wardNo').on('focus', function() {
 		$('#wardError').empty();
 	});
+	$('#wardspace').on('focus', function() {
+		$('#wardspaceerror').empty();
+	});
 	$('.icon').on('click', function() {
 		$('#departError').empty();
 		$('#typeError').empty();
@@ -84,6 +87,7 @@ function check() {
 	var wardNo = $("#wardNo").val();
 	var departmentNo = $("#departmentNo").val();
 	var typeNo = $("#typeNo").val();
+	var wardspace = $("#wardspace").val();
 	var createTime = $("#createTime").val();
 
 	if (wardNo == null || wardNo == "") {
@@ -120,6 +124,18 @@ function check() {
 		return false;
 	}
 
+	if (wardspace == null || wardspace == "") {
+		$("#wardspaceerror").css("color", "red");
+		$("#wardspaceerror").text("* 病房容量不能为空");
+		return false;
+	}
+	var regex1 =  /^\+?[1-9][0-9]*$/;
+	if(!regex1.test(wardspace)){
+		$("#wardspaceerror").css("color", "red");
+		$("#wardspaceerror").text("* 病房容量必须为整数");
+		return false;
+	}
+	
 	if (createTime == null || createTime == "") {
 		$("#createError").css("color", "red");
 		$("#createError").text("* 创建时间不能为空");
@@ -179,5 +195,6 @@ function reset() {
 	$("#wardError").css("color", "");
 	$("#createTime").val(getNowFormatDate());
 	$("#wardError").text("*必须为正整数");
+	$("#wardspaceerror").text("*必须为正整数");
 
 }

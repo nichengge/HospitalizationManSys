@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User login(String name, String password)throws NameOrPasswordException{
 		if(name==null||name.trim().isEmpty()){
-			throw new NameOrPasswordException(1, "用户为空");
+			throw new NameOrPasswordException(1, "用户名为空");
 		}
 		if(password==null||password.trim().isEmpty()){
 			throw new NameOrPasswordException(2, "密码为空");
@@ -62,7 +62,6 @@ public class UserServiceImpl implements UserService {
 	 */
 	@Override
 	public User findUserById(String id) {
-		
 		return userMapper.findUserById(id);
 	}
 

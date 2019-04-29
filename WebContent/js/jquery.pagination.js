@@ -1,7 +1,7 @@
 //maxentries 总的记录数
 jQuery.fn.pagination = function(maxentries, opts) {
 	opts = jQuery.extend({
-				items_per_page : 7,        			// 每页显示多少条记录
+				items_per_page : 15,        			// 每页显示多少条记录
 				current_page : 0,          			//当前页码
 				num_display_entries : 2,   			// 中间显示页码的个数
 				num_edge_entries : 2,          		// 末尾显示页码的个数

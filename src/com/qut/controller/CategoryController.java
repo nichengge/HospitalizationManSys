@@ -5,6 +5,8 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -28,7 +30,7 @@ public class CategoryController {
 
 	@RequestMapping(value = "/categoryQuery.do", produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public String categoryQuery() {
+	public String categoryQuery(@Param("id") Integer id, @Param("type") Integer type, @Param("name") String name) {
 		List<Category> list = categoryService.categoryQuery(new Category());
 		JsonConfig jc = new JsonConfig();
 		jc.registerJsonValueProcessor(Date.class, new JsonDateValueProcessor("yyyy-MM-dd"));

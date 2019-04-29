@@ -3,6 +3,7 @@
 <html>
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
 <link rel="stylesheet" href="css/base.css" />
 <link rel="stylesheet" href="css/info-mgt.css" />
 
@@ -19,7 +20,7 @@
 		<div class="query">
 			<div class="query-conditions ue-clear" id="zhuyuan_find">
 				<div class="conditionst name ue-clear">
-					<label>科&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;室：</label>
+					<label>&nbsp;&nbsp;科&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;室：</label>
 					<div class="select-wrap">
 						<div class="select-title ue-clear" id="department">
 							<span>请选择</span><i class="icon"></i>
@@ -34,11 +35,11 @@
 						name="patientId" />
 				</div>
 				<div class="conditionst staff ue-clear">
-					<label>病&nbsp;&nbsp;房&nbsp;&nbsp;号：</label> <input type="text"
+					<label>&nbsp;&nbsp;病&nbsp;&nbsp;房&nbsp;&nbsp;号：</label> <input type="text"
 						name="wardNo" />
 				</div>
 				<div class="conditionst time ue-clear">
-					<label>入院时间：</label>
+					<label>&nbsp;&nbsp;入院时间：</label>
 					<div class="time-select">
 						<input type="date" name="start" id="start" placeholder="开始时间" onblur="checkstarttime()"/>
 					</div>
@@ -48,7 +49,7 @@
 					</div>
 				</div>
 				<div class="conditionst staff ue-clear">
-					<label>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</label> <input
+					<label>&nbsp;&nbsp;姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</label> <input
 						type="text" id="name" name="name" />
 				</div>
 				<div class="conditionst staff ue-clear">
@@ -83,21 +84,25 @@
 	</form>
 	<div class="pagination ue-clear" id="showbuttom"></div>
 </body>
+
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/common.js"></script>
 <script type="text/javascript" src="js/jquery.pagination.js"></script>
 <script type="text/javascript" src="js/patientfind.js"></script>
+
 <script type="text/javascript">
 $("#department").on("click",function(){
 	$("#depart").toggle();
 	return false;
 });
+
 $("#depart").on("click","li",function(){
 	var txt = $(this).text();
 	var label = $(this).val();
 	$("#department").find("span").text(txt);
 	$("#departmentNo").val(label);
 });
+
 function checkstarttime(){
 	if($("#start").val()!=""){
 	var startTime=$("#start").val();  
@@ -109,8 +114,8 @@ function checkstarttime(){
 		$("#start").val(getNowFormatDate());
 	}
 	}
-
 }
+
 function getNowFormatDate() {
     var date = new Date();
     var seperator1 = "-";

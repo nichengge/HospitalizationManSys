@@ -14,9 +14,11 @@ import com.qut.pojo.Bed;
 import com.qut.pojo.Patient;
 import com.qut.pojo.PatientCode;
 import com.qut.pojo.Ward;
+import com.qut.pojo.User;
 import com.qut.service.BedService;
 import com.qut.service.PatientService;
 import com.qut.service.WardService;
+import com.qut.service.UserService;
 import com.qut.util.BaseUtils;
 import com.qut.util.JsonResult;
 
@@ -32,6 +34,8 @@ public class PatientController {
 	private BedService bedService;
 	@Resource(name = "wardService")
 	private WardService wardService;
+	@Resource(name = "userService")
+	private UserService userService;
 
 	@RequestMapping(value = "/patientAdd.do", produces = "application/json;charset=utf-8")
 	@ResponseBody
@@ -60,21 +64,38 @@ public class PatientController {
 		patientService.patientAdd(patient);
 		// 记录床位信息
 		wardService.logWard(patient);
+
 		// 更改床位的状态
 		Bed bed = new Bed();
 		bed.setWardNo(patient.getRoomNo());
 		bed.setBedNo(patient.getBedNo());
 		bed.setState(1);
 		bedService.bedUpdate(bed);
+
 		// 判断房间是否满，如果满就改变状态
-		Integer sum = bedService.bedStateQuery(bed);
-		if (sum == 4) {
+		Ward ward = new Ward();
+		ward.setWardNo(patient.getRoomNo());
+		Integer patientNum = bedService.countwardpatient(bed);// 当前病房的患者数
+		Integer wardspace = wardService.wardspace(ward);// 当前病房的额定容量
+		if (patientNum == wardspace) {// 已经住满
 			// 改变病房的状态
-			Ward ward = new Ward();
-			ward.setWardNo(bed.getWardNo());
+			ward.setWardNo(patient.getRoomNo());
 			ward.setState(1);
 			wardService.wardUpdate(ward);
 		}
+
+		// 将患者的基本信息插入到user表，如果患者以前住过院，用户表里会存有患者身份证，则不再插入
+		User user = new User();
+		user.setId(request.getParameter("cerificateNo"));// 用户ID是患者入院的身份证号
+		user.setName(request.getParameter("name"));// 用户姓名是患者的入院姓名
+		user.setPassword("123456");// 患者初始密码123456
+		user.setDescribe(0);// 账户类型是0--患者
+		User checkuser = userService.findUserById(request.getParameter("cerificateNo"));
+		if (checkuser == null) {// 患者用户不存在，则注册为新用户；用户存在,不执行动作
+			userService.register(user);
+		} else {
+		}
+
 		JSON json = JSONSerializer.toJSON(new JsonResult<Patient>(new Patient()));
 		return json.toString();
 	}
@@ -94,7 +115,7 @@ public class PatientController {
 		patientCode.setEnd(BaseUtils.toDate(request.getParameter("end")));
 		patientCode.setOutStatus(0);
 		List<Map<String, Object>> list = patientService.patientQuery(patientCode);
-		for (Map<String, Object> map : list) {
+		for (Map<String, Object> map : list) {// 此处不对从库中取出的时间做toString转化会报java.lang.IllegalArgumentException
 			String admissionTime = map.get("admissionTime").toString();
 			map.put("admissionTime", admissionTime);
 			String birth = map.get("birth").toString();
@@ -104,65 +125,115 @@ public class PatientController {
 		return json.toString();
 	}
 
+	@RequestMapping(value = "/patientQueryBycerificateNo.do", produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public String patientQueryBycerificateNo(HttpServletRequest request) throws ParseException {
+		String patientcerificateNo = BaseUtils.toString(request.getParameter("cerificateNo"));
+		List<Map<String, Object>> list = patientService.patientQueryBycerificateNo(patientcerificateNo);
+		for (Map<String, Object> map : list) {// 此处不对从库中取出的时间做toString转化会报java.lang.IllegalArgumentException
+			String admissionTime = map.get("admissionTime").toString();
+			map.put("admissionTime", admissionTime);
+			String birth = map.get("birth").toString();
+			map.put("birth", birth);
+			if (map.get("leaveTime") != null) {
+				String leaveTime = map.get("leaveTime").toString();
+				map.put("leaveTime", leaveTime);
+			} else {
+				String leaveTime = "未出院";
+				map.put("leaveTime", leaveTime);
+			}
+		}
+		JSON json = JSONSerializer.toJSON(new JsonResult<List<Map<String, Object>>>(list));
+		// System.out.println("返回的json是："+json.toString());
+		return json.toString();
+	}
+
 	@RequestMapping(value = "/patientUpdate.do", produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public String patientUpdate(HttpServletRequest request) {
 		String patientId = BaseUtils.toString(request.getParameter("patientId"));
 		Integer departmentNo = BaseUtils.toInteger(request.getParameter("departmentNo"));
 		Integer typeNo = BaseUtils.toInteger(request.getParameter("typeNo"));
-		Integer wardNo = BaseUtils.toInteger(request.getParameter("wardNo"));
-		Integer bedNo = BaseUtils.toInteger(request.getParameter("bedNo"));
+		Integer new_ward_No = BaseUtils.toInteger(request.getParameter("wardNo"));
+		Integer new_bed_No = BaseUtils.toInteger(request.getParameter("bedNo"));
 		Integer doctorNo = BaseUtils.toInteger(request.getParameter("doctorNo"));
-		Integer ybed = BaseUtils.toInteger(request.getParameter("ybed"));
-		Integer yroom = BaseUtils.toInteger(request.getParameter("yroom"));
+		Integer old_bed_Num = BaseUtils.toInteger(request.getParameter("ybed"));
+		Integer old_ward_Num = BaseUtils.toInteger(request.getParameter("yroom"));
 		Patient patient = new Patient();
 		patient.setPatientId(patientId);
 		patient.setDepartment(departmentNo);
 		patient.setRoomType(typeNo);
-		patient.setBedNo(bedNo);
-		patient.setRoomNo(wardNo);
+		patient.setBedNo(new_bed_No);
+		patient.setRoomNo(new_ward_No);
 		patient.setDoctorId(doctorNo);
-		// 更新病人信息
+
+		// 更新病人信息到病人信息表(patient)
 		patientService.patientUpdate(patient);
-		// 记录改变床位记录
+
+		// 记录改变床位记录到病房变更表(wardupdate)
 		wardService.logWard(patient);
-		// 改变原床位的状态为可住
-		Bed bed = new Bed();
-		bed.setBedNo(ybed);
-		bed.setState(0);
-		bedService.bedUpdate(bed);
-		// 判断原病房是否已满
-		Ward ward = wardService.wardQueryById(yroom);
-		if (ward.getState() == 1) {
-			// 改变房间状态为未满
-			Ward ward2 = new Ward();
-			ward2.setWardNo(yroom);
-			ward2.setState(0);
+
+		// 改变原床位的状态为可住到床位表(bed)
+		Bed old_bed = new Bed();
+		old_bed.setWardNo(old_ward_Num);
+		old_bed.setBedNo(old_bed_Num);
+		old_bed.setState(0);
+		bedService.bedUpdate(old_bed);
+
+		// 改变新床位的状态为已住
+		Bed new_bed = new Bed();
+		new_bed.setWardNo(new_ward_No);
+		new_bed.setBedNo(new_bed_No);
+		new_bed.setState(1);
+		bedService.bedUpdate(new_bed);
+
+		/**
+		 * 改变原病房状态，如果之前为已满，则改为未满
+		 */
+		Ward ward1 = wardService.wardQueryById(old_ward_Num);
+		if (ward1.getState() == 1) {
+			ward1.setWardNo(old_ward_Num);
+			ward1.setState(0);
+			wardService.wardUpdate(ward1);
+		}
+
+		/**
+		 * 改变新病房状态，如果满了，就把状态改为已满
+		 */
+		Ward ward2 = new Ward();
+		ward2.setWardNo(new_ward_No);
+		Integer patientNum = bedService.countwardpatient(new_bed);// 当前病房的患者数
+		Integer wardspace = wardService.wardspace(ward2);// 当前病房的额定容量
+		if (patientNum == wardspace) {// 已经住满
+			// 改变病房的状态
+			ward2.setState(1);
 			wardService.wardUpdate(ward2);
 		}
+
 		JSON json = JSONSerializer.toJSON(new JsonResult<Patient>(patient));
 		return json.toString();
 	}
 
 	@RequestMapping(value = "/patientLeave.do", produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public String patientLeave(String patientId, Integer bedNo,Integer roomNo) {
-		// 改变病人的是否出院的状态
+	public String patientLeave(String patientId, Integer bedNo, Integer roomNo) {
+		// 标记patient表中的leaveState状态为1，标记为出院
 		patientService.patientLeave(patientId);
+
 		// 改变原床位的状态为可住
 		Bed bed = new Bed();
+		bed.setWardNo(roomNo);
 		bed.setBedNo(bedNo);
 		bed.setState(0);
-		bedService.bedUpdate(bed);
+		bedService.bedUpdate(bed);// 将bed表中的roomNum&&bedNo行的State标记为0，床位设置为未使用
+
 		// 判断原病房是否已满
 		Ward ward = wardService.wardQueryById(roomNo);
-		if (ward.getState() == 1) {
-			// 改变房间状态为未满
-			Ward ward2 = new Ward();
-			ward2.setWardNo(roomNo);
-			ward2.setState(0);
-			wardService.wardUpdate(ward2);
+		if (ward.getState() == 1) {// 如果之前已经住满了，则把新状态置为未住满，state=0
+			ward.setState(0);
+			wardService.wardUpdate(ward);
 		}
+
 		JSON json = JSONSerializer.toJSON(new JsonResult<Patient>(new Patient()));
 		return json.toString();
 	}
@@ -176,7 +247,7 @@ public class PatientController {
 	}
 
 	@RequestMapping(value = "/leftFind.do", produces = "application/json;charset=utf-8")
-	@ResponseBody
+	@ResponseBody // 出院记录查询
 	public String leftFind(String patientId, String patientName, String inStart, String inEnd, String outStart,
 			String outEnd) throws ParseException {
 		PatientCode patientCode = new PatientCode();

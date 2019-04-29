@@ -3,6 +3,7 @@
 <html>
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 <link rel="stylesheet" href="css/base.css" />
 <link rel="stylesheet" href="css/info-mgt.css" />
 <link rel="stylesheet" type="text/css" href="css/jquery.dialog.css" />
@@ -26,7 +27,7 @@
 		<div class="query-conditions ue-clear">
 		
 			<div class="conditionst name ue-clear" >
-				<label>科室：</label>
+				<label>&nbsp;&nbsp;科室：</label>
 				<div class="select-wrap">
 					<div class="select-title ue-clear" id="department">
 						<span>请选择</span><i class="icon"></i>
@@ -40,7 +41,7 @@
 					id="name" type="text" />
 			</div>
 			<div class="conditionst time ue-clear">
-				<label>入职时间：</label>
+				<label>&nbsp;&nbsp;入职时间：</label>
 				<div class="time-select">
 					<input type="date" id="startTime" placeholder="开始时间" />
 				</div>

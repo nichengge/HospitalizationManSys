@@ -4,10 +4,11 @@
 <html>
 <head>
 <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="robots" content="all,follow">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="all,follow">
+<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=0.5, maximum-scale=1.0, user-scalable=yes"/>
 
     <title>医院住院管理系统</title>
     <link rel="shortcut icon" href="images/favicon.ico">
@@ -31,6 +32,11 @@
             <!-- 左上标题 -->
                   <div class="navbar-header">
                       <a href="user.jsp" class="navbar-brand">医院住院管理系统</a>
+                      <a id="toggle-btn" href="#" class="menu-btn active">
+	                     <span></span>
+	                     <span></span>
+	                     <span></span>
+                       </a>
                   </div>
                 
                 
@@ -100,6 +106,7 @@
                     <ul id="2" class="collapse list-unstyled">
                         <li><a href="out_hospital.jsp" target="iframe" id="cydj" style="display:none;">出院登记</a></li> 
                         <li><a href="left-find.jsp" target="iframe" id="cycx" style="display:none;">出院查询</a></li> 
+                         <li><a href="ward-transfer.jsp"  target="iframe" id="zbfcl" style="display:none;">转院/病房</a></li>
                     </ul>
                 </li>
 				
@@ -114,9 +121,9 @@
 				
 				<li id="jiesuanzhongxin" style="display:none;"><a href="#4" aria-expanded="false" data-toggle="collapse"><i class="fa fa-map-o"></i>结算中心</a>
 					<ul id="4" class="collapse list-unstyled">
-                        <li><a href="cost_yujiao.jsp" target="iframe" id="yjfy" style="display:none;">预缴费用</a></li> 
-                        <li><a href="costQuery.jsp" target="iframe" id="fycx" style="display:none;">费用查询</a></li> 
-						<li><a href="cost_jiesuan.jsp" target="iframe" id="fyjs" style="display:none;">费用结算</a></li> 
+                        <li><a href="cost_yujiao.jsp" target="iframe" id="fyyj" style="display:none;">费用预缴</a></li> 
+                        <li><a href="costQuery.jsp" target="iframe" id="jfjl" style="display:none;">缴费记录</a></li> 
+						<li><a href="cost_jiesuan.jsp" target="iframe" id="fycx" style="display:none;">费用查询</a></li> 
                     </ul>
 				</li>
 				
@@ -125,7 +132,8 @@
                     <ul id="5" class="collapse list-unstyled">
                         <li><a href="sign-entry.jsp" target="iframe" id="lrtzsj" style="display:none;">录入体征数据</a></li> 
 						<li><a href="sign-query.jsp" target="iframe" id="tzsjcx" style="display:none;">体征数据查询</a></li> 
-                        <li><a href="ward-transfer.jsp"  target="iframe" id="zbfcl" style="display:none;">转病房处理</a></li>                   
+                        <li><a href="history_inhospital.jsp"  target="iframe" id="zyls" style="display:none;">住院历史</a></li>    
+                        <li><a href="history_drug.jsp"  target="iframe" id="yyls" style="display:none;">用药历史</a></li>              
                     </ul>
                 </li>
 				
@@ -167,9 +175,10 @@
 				
 				
 				
-				<li id="canshushezhi" style="display:none;"><a href="#0" aria-expanded="false" data-toggle="collapse"> <i class="icon-list"></i>参数设置</a>
+				<li id="canshushezhi" style="display:none;"><a href="#0" aria-expanded="false" data-toggle="collapse"> <i class="icon-list"></i>系统配置</a>
 					<ul id="0" class="collapse list-unstyled">
-                        <li><a href="parameter-setting.jsp" target="iframe" id="cssz" style="display:none;">参数设置</a></li> 
+                        <li><a href="parameter-setting.jsp" target="iframe" id="cssz" style="display:none;">参数设置</a></li>
+                        <li><a href="Log.jsp" target="iframe" id="yxrz" style="display:none;">运行日志</a></li> 
                     </ul>
 				</li>
 				
@@ -179,7 +188,7 @@
         
         <!-- 主内容显示区域 -->
         <div class="content-inner form-cont">
-			<iframe src="http://health.china.com.cn/" id="iframe" name="iframe" width="100%" height="100%" frameborder="0"></iframe>
+			<iframe  id="iframe" name="iframe" width=100% height=1080pixels frameborder="0"></iframe>
 		</div>
 		
 		

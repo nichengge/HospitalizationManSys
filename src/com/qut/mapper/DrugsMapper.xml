@@ -146,7 +146,7 @@
 	<!-- 药品发放 -->
 	<insert id="grantAdd" parameterType="com.qut.pojo.Grant">
 		insert into
-		grantDrug(drugId,drugName,drugPrice,drugCount,patientName,patientId,
+		grantdrug(drugId,drugName,drugPrice,drugCount,patientName,patientId,
 		grantUserId,grantUserName,grantTime)
 		values(#{drugId},#{drugName},#{drugPrice},#{drugCount},#{patientName},
 		#{patientId},#{grantUserId},#{grantUserName},NOW())

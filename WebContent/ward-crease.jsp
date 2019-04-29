@@ -3,6 +3,7 @@
 <html>
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 <link rel="stylesheet" href="css/base.css" />
 <link rel="stylesheet" href="css/info-reg.css" />
 <title>医院住院管理系统</title>
@@ -45,6 +46,11 @@
 				</div>
 				&nbsp;&nbsp;&nbsp;&nbsp;<span id="typeError"></span>
 			</div>
+			<p class="short-input ue-clear">
+				<label><font color="red">*</font>容&nbsp;&nbsp;量：</label> <input
+					id="wardspace" name="wardSpace" type="text" placeholder="容量"> <span
+					id="wardspaceerror"><em>*</em>必须为正整数</span>
+			</p>
 			<p class="short-input ue-clear">
 				<label><font color="red">*</font>创建时间：</label> <input type="text"
 					id="createTime" name="createTime" readonly="readonly" placeholder="创建时间" />

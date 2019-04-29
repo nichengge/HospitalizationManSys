@@ -39,6 +39,15 @@ public interface WardService {
 	 */
 	void logWard(Patient patient);
 	/**
+	 * 删除病房
+	 * */
+	void wardDelete(Integer wardNo);
+	/**
+	 * 查询病房额定容量
+	 */
+	Integer wardspace(Ward ward);
+	
+	/**
 	 * 病床使用情况统计
 	 * @param id
 	 * @return

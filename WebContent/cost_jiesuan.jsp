@@ -3,6 +3,7 @@
 <html>
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 <link rel="stylesheet" href="css/base.css" />
 <link rel="stylesheet" href="css/info-mgt.css" />
 <link rel="stylesheet" type="text/css" href="css/jquery.dialog.css" />
@@ -21,9 +22,9 @@
 					<label id="patientIdError"></label>
 					<input type="text" style="display:none;" id="patientName">
 			</div>
-			 <div class="query-btn ue-clear">
-			<a href="javascript:;" id="select" class="confirm">查询</a>
-			<a href="javascript:;" id="reset" class="clear">结算</a>
+		<div class="query-btn ue-clear">
+			<a href="javascript:;" id="select" class="confirm">费用查询</a>
+			<a href="javascript:;" id="reset" class="clear">费用结算</a>
 		</div>
 		</div>
 	</div>
@@ -52,7 +53,7 @@
 		<div class="dialog-content">
 			<div class="ui-dialog-icon"></div>
 			<div class="ui-dialog-text">
-				<p class="dialog-content">确定结算完成？</p>
+				<p class="dialog-content">确定支付？</p>
 				<p class="tips">如果是请点击“确定”，否则点“取消”</p>
 				<div class="buttons">
 					<input type="button" class="button long2 jiesuanOK" value="确定" /> <input
@@ -68,5 +69,6 @@
 <script type="text/javascript" src="js/core.js"></script>
 <script type="text/javascript" src="js/jquery.dialog.js"></script>
 <script type="text/javascript" src="js/jquery.pagination.js"></script>
+<script type="text/javascript" src="js/cookie_util.js"></script>
 <script type="text/javascript" src="js/expense-settlement.js"></script>
 </html>
