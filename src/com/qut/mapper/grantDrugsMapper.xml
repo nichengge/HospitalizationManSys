@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qut.mapper.grantDrugsMapper">
+<select id="grantDrugsFindByPatienId" parameterType="String" resultType="com.qut.pojo.grantDrugs">
+	select *
+	from grantdrug
+	where
+	1=1
+	and
+	if(#{patientId} is null,0=0,patientId = #{patientId})
+	order by
+	patientId,Id
+</select>
+</mapper>

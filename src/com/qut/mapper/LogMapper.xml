@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qut.mapper.LogMapper">
+
+	<select id="LogsQuery" parameterType="com.qut.pojo.Log"
+		resultType="com.qut.pojo.Log">
+		select id as 'id',type as 'type',create_time as
+		'create_time',detial as
+		'detial'
+		from log
+		where
+		1=1
+		and
+		if(#{type} is
+		null,0=0,type=#{type})
+		and
+		if(#{startTime} is
+		null,0=0,create_time &gt;=
+		#{startTime})
+		and
+		if(#{endTime} is
+		null,0=0,create_time &lt;= #{endTime})
+		order by id DESC
+		limit 500
+	</select>
+
+	<select id="LogQueryById" parameterType="com.qut.pojo.Log"
+		resultType="com.qut.pojo.Log">
+		select id as 'id',type as 'type',create_time as
+		'create_time',detial as
+		'detial'
+		from log
+		where
+		1=1
+		and
+		id=#{id}
+	</select>
+</mapper>
