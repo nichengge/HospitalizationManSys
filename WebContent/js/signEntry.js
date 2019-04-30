@@ -113,10 +113,19 @@ function save(){
 	$.ajax({
 		url:"sign/signSave.do",
 		data:saveData,
-		type:"POST"
+		dataType:"json",
+		type:"POST",
+		success:function(result){
+			if(result.state==0){
+					alert("录入成功！");
+				} 
+				window.location.reload();
+			},
+		error:function(result){
+				alert("录入失败");
+				window.location.reload();
+			}
 	});
-	alert("录入成功！");
-	window.location.reload();
 }
 
 //病人查询
