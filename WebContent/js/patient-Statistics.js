@@ -91,8 +91,8 @@ function showbar(lists){
 			 title: {text: '各科室区间累计入院统计图',x:'center'},
 	         tooltip : {show : true},
 	         legend : {orient: 'vertical',right: 'right',data: ['科室']},
-	         xAxis : [{type : 'category'}],
-	         yAxis : [{type : 'value'} ],
+	         xAxis : [{type : 'value',minInterval: 1}],//minInterval: 1保证坐标数据按整数划分
+	         yAxis : [{type : 'category'} ],
 	         series : [{type : 'bar', name: '科室'}]//每一个柱状条
 	     	};
 	//坑1：图例：legend(图例)属性的的data值要与series属性的name值一致
@@ -101,10 +101,10 @@ function showbar(lists){
 			其中数据源是data列表：data[]
 			具体使用方法见showpie(lists)函数的动态构造图例部分
 			*/
-	//动态构造横坐标值
-    option.xAxis[0].data = [];
+	//动态构造纵坐科室名称
+    option.yAxis[0].data = [];
     for (var i=0; i<lists.length; i++) {
-        option.xAxis[0].data.push(lists[i].parameter_name);
+        option.yAxis[0].data.push(lists[i].parameter_name);
     }
     //动态构造每一个竖条数据
     option.series[0].data = [];

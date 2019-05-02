@@ -65,3 +65,10 @@ function cleanYerror(){
 function onReset(){
 	$("input").attr("value","");
 }
+
+//回车登录
+$(document).keydown(function (event) {
+	if (event.keyCode == 13) {
+	$("#login").click();
+	}
+	});

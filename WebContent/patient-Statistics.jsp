@@ -55,7 +55,7 @@
 	<HR style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="100%" color=#eaf4fa SIZE=3>
 	<div class="title">
 		<h2>数据概览</h2>
-		<div id="myBarDiv" style="height: 400px; width: 100%;display:inline-block;margin:0 auto" ></div>
+		<div id="myBarDiv" style="height: 600px; width: 100%;display:inline-block;margin:0 auto" ></div>
 		<div id="myPieDiv" style="height: 400px; width: 100%;display:inline-block;margin:0 auto" ></div>
 	</div>
 </body>

@@ -188,7 +188,7 @@
         
         <!-- 主内容显示区域 -->
         <div class="content-inner form-cont">
-			<iframe  id="iframe" name="iframe" width=100% height=1080pixels frameborder="0"></iframe>
+			<iframe  id="iframe" name="iframe" src="welcome.jsp" width=100% height=1080pixels frameborder="0"></iframe>
 		</div>
 		
 		

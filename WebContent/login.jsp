@@ -41,7 +41,7 @@
 				</div>
 				
 				<div>
-					<input type="button" class="submit" value="登录" onclick="Login();" >
+					<input type="button" id = "login" class="submit" value="登录" onclick="Login();" >
 				</div>
 				</form>
 			</div>

@@ -17,7 +17,11 @@
 </style>
 <body style="background-color:#F1F8FC">
 	<div style="margin-top:200px;">
-	 <font size="5px">欢迎使用住院管理系统！</font>
+	 <font size="5px">欢迎使用住院管理系统!</font>
+	 <br>
+	 <font size="3px">欢迎页开发中……</font>
+	 <br>
+	 <font size="1px">当前版本号:2.1.7_ Beta_0502</font>
 	 </div>
 </body>
  
