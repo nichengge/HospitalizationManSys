@@ -21,7 +21,7 @@
 	 <br>
 	 <font size="3px">欢迎页开发中……</font>
 	 <br>
-	 <font size="1px">当前版本号:2.1.7_ Beta_0502</font>
+	 <font size="1px">当前版本号:2.1.8_ Beta_0504</font>
 	 </div>
 </body>
  
