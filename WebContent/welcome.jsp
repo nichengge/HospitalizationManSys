@@ -16,13 +16,34 @@
 	}
 </style>
 <body style="background-color:#F1F8FC">
-	<div style="margin-top:200px;">
-	 <font size="5px">欢迎使用住院管理系统!</font>
+	<div style="margin-top:80px;">
+	<font size="5px">===欢迎使用住院管理系统===</font>
+	<br>
+	<img src="./images/welcome.png" />
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<label id = "nowIP"></label>
+	<br>
+	 <font size="1px">当前系统版本:2.1.11_ Beta_0507</font>
 	 <br>
-	 <font size="3px">欢迎页开发中……</font>
-	 <br>
-	 <font size="1px">当前版本号:2.1.8_ Beta_0504</font>
+	&copy; Copyright 2019 QUT fsci
 	 </div>
 </body>
- 
+
+<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="js/core.js"></script>
+
+<!-- 获取当前IP的JS -->
+ <script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+ <script type="text/javascript">
+ var IP = "当前登录IP:" + returnCitySN['cip'] + "," + returnCitySN['cname'];
+ $("#nowIP").text(IP);
+ //alert(returnCitySN['cip'] + returnCitySN['cname']);
+ </script>
 </html>

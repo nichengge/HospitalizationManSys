@@ -2,9 +2,9 @@ package com.qut.pojo;
 
 import java.io.Serializable;
 import java.util.Date;
+
 /**
  * 病房调价表
- * @author minchao
  */
 public class Category implements Serializable {
 	private static final long serialVersionUID = 1L;

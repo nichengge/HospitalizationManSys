@@ -1,6 +1,7 @@
 package com.qut.pojo;
 
 import java.io.Serializable;
+
 /**
  * 药品库存表
  *
@@ -12,8 +13,9 @@ public class Stock implements Serializable {
 	private String drugsName;
 	private Float price;
 	private Integer account;
-	public Stock(){
-		
+
+	public Stock() {
+
 	}
 
 	public Integer getId() {
@@ -55,7 +57,7 @@ public class Stock implements Serializable {
 	public void setAccount(Integer account) {
 		this.account = account;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Stock [id=" + id + ", drugsId=" + drugsId + ", drugsName=" + drugsName + ", price=" + price

@@ -9,7 +9,7 @@ public class Ward implements Serializable {
 	private Integer wardNo;
 	private Integer departmentNo;
 	private Integer type;
-	private Integer wardSpace;//额定容量
+	private Integer wardSpace;// 额定容量
 	private Integer state;
 	private Date createTime;
 
@@ -48,7 +48,7 @@ public class Ward implements Serializable {
 	public void setType(Integer type) {
 		this.type = type;
 	}
-	
+
 	public Integer getwardSpace() {
 		return wardSpace;
 	}
@@ -56,7 +56,7 @@ public class Ward implements Serializable {
 	public void setwardSpace(Integer space) {
 		this.wardSpace = space;
 	}
-	
+
 	public Integer getState() {
 		return state;
 	}
@@ -72,7 +72,7 @@ public class Ward implements Serializable {
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Ward [id=" + id + ", wardNo=" + wardNo + ", departmentNo=" + departmentNo + ", type=" + type

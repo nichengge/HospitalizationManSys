@@ -55,7 +55,7 @@
   <!-- 监听log4jlistener.java，获取系统运行路径，在web项目路径下打印日志 -->
  <!-- 
   <listener>
-   <listener-class>com.qut.service.impl.GetLogsDir</listener-class>
+   <listener-class>com.qut.util.Log4jLogsDir</listener-class>
   </listener>
    -->
   <welcome-file-list>

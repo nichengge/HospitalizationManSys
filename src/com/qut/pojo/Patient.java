@@ -5,8 +5,6 @@ import java.util.Date;
 
 /**
  * 病人信息表
- * 
- * @author minchao
  */
 public class Patient implements Serializable {
 	private static final long serialVersionUID = 1L;

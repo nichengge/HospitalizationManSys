@@ -2,10 +2,9 @@ package com.qut.pojo;
 
 import java.io.Serializable;
 import java.util.Date;
+
 /**
  * 病人退药封装类
- * @author minchao
- *
  */
 public class WithdrawalDrug implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -18,9 +17,9 @@ public class WithdrawalDrug implements Serializable {
 	private String drugsId;
 	private Date entiyTime;
 	private String reason;
-	
-	public  WithdrawalDrug(){
-		
+
+	public WithdrawalDrug() {
+
 	}
 
 	public Integer getId() {
@@ -94,7 +93,7 @@ public class WithdrawalDrug implements Serializable {
 	public void setReason(String reason) {
 		this.reason = reason;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "WithdrawalDrug [id=" + id + ", patientId=" + patientId + ", patientName=" + patientName + ", count="

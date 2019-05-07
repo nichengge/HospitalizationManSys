@@ -19,12 +19,14 @@ import com.qut.pojo.WithdrawalDrug;
 public interface DrugsMapper {
 	/**
 	 * 药品的入库
+	 * 
 	 * @param drugs
 	 */
 	void drugsSave(Drugs drugs);
 
 	/**
 	 * 查询药品(根据ID)
+	 * 
 	 * @param id
 	 * @return
 	 */
@@ -32,12 +34,14 @@ public interface DrugsMapper {
 
 	/**
 	 * 更新药品
+	 * 
 	 * @param id
 	 */
 	void DrugsUpdate(Drugs drugs);
 
 	/**
 	 * 药品的条件查询
+	 * 
 	 * @param drugsCode
 	 * @return
 	 */
@@ -45,6 +49,7 @@ public interface DrugsMapper {
 
 	/**
 	 * 根据药品编号查询是否在库存中含有该药品
+	 * 
 	 * @param drugId
 	 * @return
 	 */
@@ -52,12 +57,14 @@ public interface DrugsMapper {
 
 	/**
 	 * 更新库存
+	 * 
 	 * @param drugs
 	 */
 	void drugsStockAdd(Drugs drugs);
 
 	/**
 	 * 插入库存
+	 * 
 	 * @param drugs
 	 */
 	void drugsStockSave(Drugs drugs);
@@ -69,6 +76,7 @@ public interface DrugsMapper {
 
 	/**
 	 * 药品发放
+	 * 
 	 * @param grant
 	 */
 	void grantAdd(Grant grant);
@@ -80,6 +88,7 @@ public interface DrugsMapper {
 
 	/**
 	 * 药品发放查询
+	 * 
 	 * @param patient
 	 * @return
 	 */
@@ -87,6 +96,7 @@ public interface DrugsMapper {
 
 	/**
 	 * 退药
+	 * 
 	 * @param withdrawalDrug
 	 */
 	void DrugWithdrawal(WithdrawalDrug withdrawalDrug);

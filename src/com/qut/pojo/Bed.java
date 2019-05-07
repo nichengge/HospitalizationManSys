@@ -3,7 +3,7 @@ package com.qut.pojo;
 import java.io.Serializable;
 
 /*
- * 床号表
+ * 床号表封装类
  */
 public class Bed implements Serializable {
 	private static final long serialVersionUID = 1L;

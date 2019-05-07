@@ -5,6 +5,7 @@ var end = 15;
 $(function(){
 	 $(".confirm").click(confirm);
 	 $(".clear").click(clear);
+	 $("#patientId").click(selectPatient);
 });
 
 $(function(){
@@ -18,8 +19,9 @@ $(function(){
 	var usertype = cookie.split("#")[2].substring(0);
 	//alert(usertype);
 	if(usertype == 0){//是患者类型的用户
-		document.getElementById("patientId").setAttribute("readOnly", false);
-		document.getElementById("name").setAttribute("readOnly", false);
+		document.getElementById("patientId").setAttribute("type","hidden");
+		document.getElementById("patientNum").setAttribute("style","display:none;");
+		document.getElementById("patientName").setAttribute("readOnly", false);
 		document.getElementById("bedNo").setAttribute("readOnly", false);
 		$.ajax({//通过身份证查询patient表的患者信息
 			url:"patient/patientQueryBycerificateNo.do",
@@ -34,7 +36,7 @@ $(function(){
 					var patientName = list[lastNameNum-1].name;
 					var patientBedNo = list[lastNameNum-1].bedNo
 					$("#patientId").val(patientID);
-					$("#name").val(patientName);
+					$("#patientName").val(patientName);
 					$("#bedNo").val(patientBedNo);
 				}
 			}
@@ -212,6 +214,21 @@ function line_check(lists){
 			}
 	}
 
+//病人查询
+function selectPatient(){
+	var ok = $('.patientQuery').Dialog("open");
+}
+ 
+$('.patientQuery').Dialog({
+	title:'选择病人',
+	autoOpen: false,
+	width:1000,
+	height:400
+});
+
+function close(){
+	$('.patientQuery').Dialog('close');
+}
 
 //清空条件按钮
 function clear(){

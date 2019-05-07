@@ -4,22 +4,26 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qut.mapper.CommonMapper">
 	<!-- 职位列表 -->
-	<select id="titleQuery" parameterType="String" resultType="com.qut.pojo.Common">
+	<select id="titleQuery" parameterType="String"
+		resultType="com.qut.pojo.Common">
 		select
 		b.parameter_values as "value",
-		b.parameter_name as "name"
+		b.parameter_name as
+		"name"
 		from
 		parameter a,
 		paracode b
 		where
 		a.name = #{name}
 		and
-		a.code = b.code
+		a.code =
+		b.code
 	</select>
 	<!-- 参数查询 -->
 	<select id="parameterQuery" resultType="com.qut.pojo.Parameter">
 		select
-		parameter_id as "id",
+		parameter_id as
+		"id",
 		code as "code",
 		name as "name"
 		from
@@ -37,7 +41,7 @@
 		where
 		code = #{code}
 	</select>
-	<!--病房类型-->
+	<!--病房类型 -->
 	<select id="wardTypeQuery" resultType="com.qut.pojo.Parameter">
 		select
 		type as "value",
@@ -45,33 +49,37 @@
 		from
 		category
 	</select>
-	<!--民族查询-->
+	<!--民族查询 -->
 	<select id="nationQuery" resultType="com.qut.pojo.Parameter">
 		select
-			nationNum value,
-			nationName name
- 		from
-			nation
+		nationNum value,
+		nationName name
+		from
+		nation
 	</select>
 	<!-- 参数插入 -->
-	<insert id="parameterCodeInsert" parameterType="com.qut.pojo.Parameter">
-		insert into paracode(code,parameter_values,parameter_name)
+	<insert id="parameterCodeInsert"
+		parameterType="com.qut.pojo.Parameter">
+		insert into
+		paracode(code,parameter_values,parameter_name)
 		values(#{code},#{value},#{name})
 	</insert>
 	<!-- 参数更新 -->
-	<update id="parameterCodeUpdate" parameterType="com.qut.pojo.Parameter">
-		update paracode 
+	<update id="parameterCodeUpdate"
+		parameterType="com.qut.pojo.Parameter">
+		update paracode
 		set code=#{code},
 		parameter_values=#{value},
 		parameter_name=#{name}
-		where 
+		where
 		code_id = #{id}
 	</update>
 	<!-- 参数删除 -->
-	<delete id="parameterCodeDelete" parameterType="com.qut.pojo.Parameter">
-		delete 
-		from paracode 
-		where 
+	<delete id="parameterCodeDelete"
+		parameterType="com.qut.pojo.Parameter">
+		delete
+		from paracode
+		where
 		code_id = #{id}
 	</delete>
 </mapper>

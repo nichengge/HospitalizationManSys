@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import com.qut.pojo.PatientCode;
 import com.qut.pojo.Sign;
+
 /**
  * 体征dao
  */
@@ -13,11 +14,14 @@ import com.qut.pojo.Sign;
 public interface SignMapper {
 	/**
 	 * 体征数据录入
+	 * 
 	 * @param sign
 	 */
 	void signSave(Sign sign);
+
 	/**
 	 * 病人体征数据查询
+	 * 
 	 * @param patientCode
 	 * @return
 	 */

@@ -2,27 +2,27 @@ package com.qut.pojo;
 
 import java.io.Serializable;
 import java.util.Date;
+
 /**
- * 病人封装类 
- * @author minchao
+ * 病人封装类
  *
  */
 public class PatientCode implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private String patientId; 		
-	private Integer bedNo;    		
-	private Integer departmentNo;	
-	private Integer wardNo;			
-	private Date start;				
-	private Date end;				
-	private String name;			
-	private Date outStart; 			
-	private Date outEnd;		
-	private Integer outStatus;		
+	private String patientId;
+	private Integer bedNo;
+	private Integer departmentNo;
+	private Integer wardNo;
+	private Date start;
+	private Date end;
+	private String name;
+	private Date outStart;
+	private Date outEnd;
+	private Integer outStatus;
 	private Integer jsStatus;
-	
-	public PatientCode(){
-		
+
+	public PatientCode() {
+
 	}
 
 	public String getPatientId() {
@@ -112,13 +112,11 @@ public class PatientCode implements Serializable {
 	public void setJsStatus(Integer jsStatus) {
 		this.jsStatus = jsStatus;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "PatientCode [patientId=" + patientId + ", bedNo=" + bedNo
-				+ ", departmentNo=" + departmentNo + ", wardNo=" + wardNo
-				+ ", start=" + start + ", end=" + end + ", name=" + name
-				+ ", outStart=" + outStart + ", outEnd=" + outEnd
-				+ ", outStatus=" + outStatus + ", jsStatus=" + jsStatus + "]";
+		return "PatientCode [patientId=" + patientId + ", bedNo=" + bedNo + ", departmentNo=" + departmentNo
+				+ ", wardNo=" + wardNo + ", start=" + start + ", end=" + end + ", name=" + name + ", outStart="
+				+ outStart + ", outEnd=" + outEnd + ", outStatus=" + outStatus + ", jsStatus=" + jsStatus + "]";
 	}
 }

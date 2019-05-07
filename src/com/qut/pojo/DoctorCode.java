@@ -2,11 +2,11 @@ package com.qut.pojo;
 
 import java.io.Serializable;
 import java.util.Date;
+
 /**
- *  医生封装类
- * @author minchao
+ * 医生封装类
  */
-public class DoctorCode implements Serializable{
+public class DoctorCode implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String name;

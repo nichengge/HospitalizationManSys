@@ -49,11 +49,11 @@
 
 
              <!-- 右上角头像-->
-             <li class="nav-item dropdown"><a id="profile" class="nav-link logout" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="images/userface.JPG" alt="..." class="img-fluid rounded-circle" style="height: 30px; width: 30px;"></a>
+             <li class="nav-item dropdown"><a id="profile" class="nav-link logout" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="images/userface.png" alt="..." class="img-fluid rounded-circle" style="height: 30px; width: 30px;"></a>
                  <ul aria-labelledby="profile" class="dropdown-menu profile">
                      <li>
                          <div rel="nofollow"  class="dropdown-item d-flex">
-                             <div class="msg-profile"> <img src="images/userface.JPG" alt="..." class="img-fluid rounded-circle"></div>
+                             <div class="msg-profile"> <img src="images/userface.png" alt="..." class="img-fluid rounded-circle"></div>
                              <div class="msg-body">
                                  <h3 class="h5" id="name"></h3><span id="gangwei"></span>
                              </div>
@@ -188,7 +188,7 @@
         
         <!-- 主内容显示区域 -->
         <div class="content-inner form-cont">
-			<iframe  id="iframe" name="iframe" src="welcome.jsp" width=100% height=1080pixels frameborder="0"></iframe>
+			<iframe  id="iframe" name="iframe" src="welcome.jsp" width=100% height=850pixels frameborder="0"></iframe>
 		</div>
 		
 		

@@ -1,6 +1,6 @@
 package com.qut.service.impl;
+
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -16,14 +16,13 @@ public class LogServiceImpl implements LogService {
 	@Resource(name = "LogMapper")
 	private LogMapper LogMapper;
 
-
 	@Override
-	public List<Log> LogsQuery(Log log){
+	public List<Log> LogsQuery(Log log) {
 		return LogMapper.LogsQuery(log);
 	}
-	
+
 	@Override
-	public List<Log> LogQueryById(Log log){
+	public List<Log> LogQueryById(Log log) {
 		return LogMapper.LogQueryById(log);
 	}
 }

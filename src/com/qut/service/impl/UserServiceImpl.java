@@ -25,11 +25,11 @@ public class UserServiceImpl implements UserService {
 	 * 用户登录
 	 */
 	@Override
-	public User login(String name, String password)throws NameOrPasswordException{
-		if(name==null||name.trim().isEmpty()){
+	public User login(String name, String password) throws NameOrPasswordException {
+		if (name == null || name.trim().isEmpty()) {
 			throw new NameOrPasswordException(1, "用户名为空");
 		}
-		if(password==null||password.trim().isEmpty()){
+		if (password == null || password.trim().isEmpty()) {
 			throw new NameOrPasswordException(2, "密码为空");
 		}
 		name = name.trim();
@@ -37,11 +37,11 @@ public class UserServiceImpl implements UserService {
 		User useryz = new User();
 		useryz.setId(name);
 		User user = userMapper.findUserById(name);
-		if(user==null){
+		if (user == null) {
 			throw new NameOrPasswordException(1, "用户不存在");
 		}
-		if(user!=null&&password.equals(user.getPassword())){
-			//登录成功
+		if (user != null && password.equals(user.getPassword())) {
+			// 登录成功
 			return user;
 		}
 		throw new NameOrPasswordException(2, "密码错误");
@@ -70,7 +70,7 @@ public class UserServiceImpl implements UserService {
 	 */
 	@Override
 	public List<User> userQuery(UserCode userCode) {
-		
+
 		return userMapper.userQuery(userCode);
 	}
 
@@ -78,7 +78,7 @@ public class UserServiceImpl implements UserService {
 	 * 用户删除
 	 */
 	@Override
-	@Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public void userDelete(String id) {
 		userMapper.userDelete(id);
 	}
@@ -87,7 +87,7 @@ public class UserServiceImpl implements UserService {
 	 * 修改密码
 	 */
 	@Override
-	@Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public void updateUser(User user) {
 		userMapper.updateUser(user);
 
@@ -97,7 +97,7 @@ public class UserServiceImpl implements UserService {
 	 * 更新用户信息
 	 */
 	@Override
-	@Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public void updateUserMessage(User user) {
 		userMapper.updateUserMessage(user);
 

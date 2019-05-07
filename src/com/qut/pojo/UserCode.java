@@ -2,10 +2,9 @@ package com.qut.pojo;
 
 import java.io.Serializable;
 import java.util.Date;
+
 /**
  * 用户封装类
- * @author minchao
- *
  */
 public class UserCode implements Serializable {
 	private static final long serialVersionUID = 1L;

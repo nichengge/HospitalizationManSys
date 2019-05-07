@@ -6,11 +6,11 @@
 	<select id="categoryQuery" parameterType="com.qut.pojo.Category"
 		resultType="com.qut.pojo.Category">
 		select
-			id as "id",
-			type as "type",
-			name as "name",
-			price as "price",
-			updateTime as "updateTime"
+		id as "id",
+		type as "type",
+		name as "name",
+		price as "price",
+		updateTime as "updateTime"
 		from
 		category
 		where
@@ -20,15 +20,17 @@
 		and
 		if(#{type} is null,0=0,type=#{type})
 		and
-		if(#{name} is null,0=0,name=#{name})
+		if(#{name} is
+		null,0=0,name=#{name})
 	</select>
-	<update id="categoryUpdate" parameterType="com.qut.pojo.Category">
-		update 
-			category
-		set 
-			price = #{price},
-			updateTime = CURDATE()
-		where 
-			id = #{id}
+	<update id="categoryUpdate"
+		parameterType="com.qut.pojo.Category">
+		update
+		category
+		set
+		price = #{price},
+		updateTime = CURDATE()
+		where
+		id = #{id}
 	</update>
 </mapper>	

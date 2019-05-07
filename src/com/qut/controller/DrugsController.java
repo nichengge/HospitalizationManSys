@@ -150,9 +150,10 @@ public class DrugsController {
 
 	@RequestMapping(value = "/grantDrugsFindByPatienId.do", produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public String grantDrugsFindByPatienId(@Param("patientId") String patientId) {
+	public String grantDrugsFindByPatienId(HttpServletRequest request) throws ParseException {
+		String patientId = BaseUtils.toString(request.getParameter("patientId"));
 		List<grantDrugs> list = grantdrugsService.grantDrugsFindByPatienId(patientId);
-
+		System.out.println("返回结果:" + list);
 		JSON json = JSONSerializer.toJSON(new JsonResult<List<grantDrugs>>(list));
 		return json.toString();
 	}

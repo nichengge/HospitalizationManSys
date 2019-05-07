@@ -162,22 +162,27 @@
 		drugId = #{drugId}
 	</update>
 	<!-- 药品发放查询 -->
-	<select id="grantQuery" parameterType="String" resultType="com.qut.pojo.Stock">
+	<select id="grantQuery" parameterType="String"
+		resultType="com.qut.pojo.Stock">
 		select
 		id as "id",
 		drugId as "drugsId",
-		drugName as "drugsName",
+		drugName as
+		"drugsName",
 		price as
 		"price",
 		count as "count"
 		from stock
 		where
-		drugId in (select drugId from
+		drugId in
+		(select drugId from
 		grantdrug where patientId = #{patientId}
-		group by drugId)
+		group by
+		drugId)
 	</select>
 	<!-- 退药 -->
-	<insert id="DrugWithdrawal" parameterType="com.qut.pojo.WithdrawalDrug">
+	<insert id="DrugWithdrawal"
+		parameterType="com.qut.pojo.WithdrawalDrug">
 		insert into
 		withdrawal(patientId,patientName,count,userName,userId,drugsId,entiyTime,reason)
 		values(#{patientId},#{patientName},#{count},#{userName},#{userId},#{drugsId},CURDATE(),#{reason})

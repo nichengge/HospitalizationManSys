@@ -1,11 +1,10 @@
-	package com.qut.pojo;
+package com.qut.pojo;
 
 import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 药品表
- * @author minchao
  */
 public class Drugs implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -129,7 +128,7 @@ public class Drugs implements Serializable {
 	public void setVilidityTime(Date vilidityTime) {
 		this.vilidityTime = vilidityTime;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Drugs [id=" + id + ", drugsid=" + drugsid + ", name=" + name + ", manufacturer=" + manufacturer

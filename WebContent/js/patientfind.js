@@ -113,7 +113,7 @@ function jump(obj){
 	var tiao = parent.window.$("#tiao").val();
 	$('#patientId',window.parent.document).val(id);
 	$('#patientName',window.parent.document).val(name);
-	$('#bedNo',window.parent.document).val(bedNo+"号");
+	$('#bedNo',window.parent.document).val(bedNo);
 	window.location.reload();
 	parent.close();
 	/*parent.showMessage();*/

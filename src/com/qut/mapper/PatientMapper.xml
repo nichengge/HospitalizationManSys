@@ -10,27 +10,33 @@
 		values
 		(#{patientId},#{name},#{gender},#{nation},#{birth},#{department},#{cerificateNo},#{workUnit},#{maritalStatus},#{doctorId},NOW(),#{homeAddress},#{homePhone},#{contacts},#{contactsPhone},#{admissionStatus},#{roomType},#{roomNo},#{bedNo},#{state})
 	</insert>
-	<select id="patientQuery" parameterType="com.qut.pojo.PatientCode"
-		resultType="map">
+	<select id="patientQuery"
+		parameterType="com.qut.pojo.PatientCode" resultType="map">
 		select
-		a.id as "id",
+		a.id as
+		"id",
 		a.patientId as "patientId",
 		a.patientName as "name",
-		a.gender as "gender",
+		a.gender as
+		"gender",
 		a.nation as "nation",
 		a.birth as "birth",
-		a.department as "department",
+		a.department as
+		"department",
 		g.`name` as "departmentName",
-		a.certificateNo as "cerificateNo",
+		a.certificateNo as
+		"cerificateNo",
 		a.workUnit as "workUnit",
 		a.doctorId as "doctorId",
 		b.`name` as "doctorName",
 		a.admissionTime as "admissionTime",
 		a.homeAddress as "homeAddress",
 		a.homePhone as "homePhone",
-		a.contacts as "contacts",
+		a.contacts
+		as "contacts",
 		a.contactsPhone as "contactsPhone",
-		a.admissionStatus as "admissionStatus",
+		a.admissionStatus as
+		"admissionStatus",
 		a.roomType as "roomType",
 		c.`name` as "roomTypeName",
 		a.roomNo as "roomNo",
@@ -41,11 +47,14 @@
 		from
 		patient a LEFT JOIN doctor b ON
 		a.doctorId = b.doctorId
-		LEFT JOIN category c ON a.roomType = c.type
+		LEFT JOIN
+		category c ON a.roomType = c.type
 		LEFT JOIN (
-		SELECT e.parameter_values "value",e.parameter_name "name"
+		SELECT e.parameter_values
+		"value",e.parameter_name "name"
 		from
-		parameter d LEFT JOIN paracode e ON d.`code` = e.`code`
+		parameter d LEFT JOIN paracode e ON
+		d.`code` = e.`code`
 		where
 		d.name="科室"
 		) g ON a.department = g.`value`
@@ -63,9 +72,11 @@
 		and
 		if(#{start} is null,0=0,admissionTime &gt;= #{start})
 		and
-		if(#{end} is null,0=0,admissionTime &lt;= #{end})
+		if(#{end} is
+		null,0=0,admissionTime &lt;= #{end})
 		and
-		if(#{wardNo} is null,0=0,roomNo=#{wardNo})
+		if(#{wardNo} is
+		null,0=0,roomNo=#{wardNo})
 		and
 		if(#{bedNo} is null,0=0,bedNo=#{bedNo})
 		and
@@ -77,27 +88,34 @@
 		order by
 		id,admissionTime
 	</select>
-	
-	<select id="patientQueryBycerificateNo" parameterType="com.qut.pojo.PatientCode" resultType="map">
+
+	<select id="patientQueryBycerificateNo"
+		parameterType="com.qut.pojo.PatientCode" resultType="map">
 		select
-		a.id as "id",
+		a.id as
+		"id",
 		a.patientId as "patientId",
 		a.patientName as "name",
-		a.gender as "gender",
+		a.gender as
+		"gender",
 		a.nation as "nation",
 		a.birth as "birth",
-		a.department as "department",
+		a.department as
+		"department",
 		g.`name` as "departmentName",
-		a.certificateNo as "cerificateNo",
+		a.certificateNo as
+		"cerificateNo",
 		a.workUnit as "workUnit",
 		a.doctorId as "doctorId",
 		b.`name` as "doctorName",
 		a.admissionTime as "admissionTime",
 		a.homeAddress as "homeAddress",
 		a.homePhone as "homePhone",
-		a.contacts as "contacts",
+		a.contacts
+		as "contacts",
 		a.contactsPhone as "contactsPhone",
-		a.admissionStatus as "admissionStatus",
+		a.admissionStatus as
+		"admissionStatus",
 		a.roomType as "roomType",
 		c.`name` as "roomTypeName",
 		a.roomNo as "roomNo",
@@ -108,22 +126,26 @@
 		from
 		patient a LEFT JOIN doctor b ON
 		a.doctorId = b.doctorId
-		LEFT JOIN category c ON a.roomType = c.type
+		LEFT JOIN
+		category c ON a.roomType = c.type
 		LEFT JOIN (
-		SELECT e.parameter_values "value",e.parameter_name "name"
+		SELECT e.parameter_values
+		"value",e.parameter_name "name"
 		from
-		parameter d LEFT JOIN paracode e ON d.`code` = e.`code`
+		parameter d LEFT JOIN paracode e ON
+		d.`code` = e.`code`
 		where
 		d.name="科室"
 		) g ON a.department = g.`value`
 		where
 		1=1
 		and
-		if(#{cerificateNo} is null,0=0,certificateNo = #{cerificateNo})
+		if(#{cerificateNo} is null,0=0,certificateNo =
+		#{cerificateNo})
 		order by
 		certificateNo,admissionTime,id
 	</select>
-	
+
 	<update id="patientUpdate" parameterType="com.qut.pojo.Patient">
 		update
 		patient
@@ -167,10 +189,12 @@
 		b.`name`="科室"
 	</sql>
 	<!--科室查询 -->
-	<select id="departmentQuery" parameterType="map" resultType="map">
+	<select id="departmentQuery" parameterType="map"
+		resultType="map">
 		select
 		b.parameter_id as "parameter_id",
-		c.parameter_values as
+		c.parameter_values
+		as
 		"parameter_values",
 		c.parameter_name as "parameter_name"
 		from

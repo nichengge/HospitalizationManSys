@@ -34,8 +34,10 @@ public interface DoctorService {
 	 * @param doctor
 	 */
 	void updateDoctorMessage(Doctor doctor);
+
 	/**
 	 * 查询
+	 * 
 	 * @param id
 	 * @return
 	 */

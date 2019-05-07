@@ -46,7 +46,7 @@ public class DoctorServiceImpl implements DoctorService {
 
 	@Override
 	public Doctor doctorById(Integer id) {
-		
+
 		return doctorMapper.doctorById(id);
 	}
 

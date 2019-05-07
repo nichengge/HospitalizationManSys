@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="css/font-icon-style.css">
     <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
     <link rel="stylesheet" href="css/form.css">
-<title>Insert title here</title>
+<title>修改密码</title>
 </head>
 <body>
  <div class="card form" id="resetpwd">

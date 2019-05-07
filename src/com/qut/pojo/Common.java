@@ -1,9 +1,9 @@
 package com.qut.pojo;
 
 import java.io.Serializable;
+
 /**
- * 	下拉列表
- * @author minchao
+ * 下拉列表
  *
  */
 public class Common implements Serializable {
@@ -30,5 +30,5 @@ public class Common implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 }

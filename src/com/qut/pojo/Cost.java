@@ -5,7 +5,6 @@ import java.util.Date;
 
 /**
  * 预交费用表
- * @author minchao
  */
 public class Cost implements Serializable {
 	private static final long serialVersionUID = 1L;

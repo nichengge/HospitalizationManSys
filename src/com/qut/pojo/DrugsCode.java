@@ -2,6 +2,7 @@ package com.qut.pojo;
 
 import java.io.Serializable;
 import java.util.Date;
+
 /**
  * 药品的封装类
  */
@@ -13,9 +14,9 @@ public class DrugsCode implements Serializable {
 	private Date rkEnd;
 	private Date bzStart;
 	private Date bzEnd;
-	
-	public DrugsCode(){
-		
+
+	public DrugsCode() {
+
 	}
 
 	public String getId() {
@@ -65,7 +66,7 @@ public class DrugsCode implements Serializable {
 	public void setBzEnd(Date bzEnd) {
 		this.bzEnd = bzEnd;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "DrugsCode [id=" + id + ", name=" + name + ", rkStart=" + rkStart + ", rkEnd=" + rkEnd + ", bzStart="

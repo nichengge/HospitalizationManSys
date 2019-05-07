@@ -2,6 +2,7 @@ package com.qut.pojo;
 
 import java.io.Serializable;
 import java.util.Date;
+
 /**
  * 退药处理表
  */
@@ -17,9 +18,9 @@ public class Grant implements Serializable {
 	private String grantUserId;
 	private String grantUserName;
 	private Date grantTime;
-	
-	public Grant(){
-		
+
+	public Grant() {
+
 	}
 
 	public Integer getId() {
@@ -101,7 +102,7 @@ public class Grant implements Serializable {
 	public void setGrantTime(Date grantTime) {
 		this.grantTime = grantTime;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Grant [id=" + id + ", drugId=" + drugId + ", drugName=" + drugName + ", drugPrice=" + drugPrice

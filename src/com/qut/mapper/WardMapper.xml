@@ -54,10 +54,12 @@
 		select
 		id as "id",
 		wardNo as "wardNo",
-		departmentNo as "departmentNo",
+		departmentNo as
+		"departmentNo",
 		type as "type",
 		state as "state",
-		createTime as "createTime"
+		createTime as
+		"createTime"
 		from
 		ward
 		where
@@ -68,17 +70,20 @@
 		wardupdate(patientId,roomType,updateTime)
 		values(#{patientId},#{roomType},curdate())
 	</insert>
-	<select id="departQuery" parameterType="Integer" resultType="map">
+	<select id="departQuery" parameterType="Integer"
+		resultType="map">
 		select
 		d.parameter_id as "parameter_id",
-		f.parameter_values as
+		f.parameter_values
+		as
 		"parameter_values",
 		f.parameter_name as "parameter_name"
 		from
 		parameter d
 		LEFT JOIN paracode f ON d.`code` = f.`code`
 		WHERE
-		d.`name` = "科室"
+		d.`name` =
+		"科室"
 		and
 		if(#{departNo} is null,0=0,f.parameter_values=#{departNo})
 	</select>
@@ -126,10 +131,12 @@
 		BY
 		b.departmentNo
 	</select>
-	<select id="wardspace" parameterType="com.qut.pojo.Ward" resultType="Integer">
+	<select id="wardspace" parameterType="com.qut.pojo.Ward"
+		resultType="Integer">
 		select space from ward where 1=1 and wardNo=#{wardNo}
 	</select>
 	<delete id="wardDelete" parameterType="Integer">
-		delete from ward where wardNo=#{wardNo}
+		delete from ward where
+		wardNo=#{wardNo}
 	</delete>
 </mapper>

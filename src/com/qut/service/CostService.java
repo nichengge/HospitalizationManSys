@@ -8,6 +8,7 @@ import com.qut.pojo.Cost;
 public interface CostService {
 	/**
 	 * 预交费用保存
+	 * 
 	 * @param cost
 	 */
 	void costAdd(Cost cost);
@@ -21,8 +22,10 @@ public interface CostService {
 	 * 费用结算查询
 	 */
 	List<Map<String, Object>> costTotal(String patientId);
+
 	/**
 	 * 药品数量
+	 * 
 	 * @param patienId
 	 * @param drugId
 	 * @return

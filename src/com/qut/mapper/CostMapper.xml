@@ -27,8 +27,10 @@
 		c.user_id = a.userId
 		where
 		1=1 and
-		if(#{patientId} is null,0=0,a.patientId = #{patientId}) and
-		if(#{patientName} is null,0=0,b.patientName like CONCAT('%',#{patientName},'%')) and
+		if(#{patientId} is
+		null,0=0,a.patientId = #{patientId}) and
+		if(#{patientName} is
+		null,0=0,b.patientName like CONCAT('%',#{patientName},'%')) and
 		if(#{startTime} is null,0=0,a.costTime &gt;= #{startTime})
 		and
 		if(#{endTime} is null,0=0,a.costTime &lt;= #{endTime})
@@ -84,20 +86,24 @@
 		select
 		a.updateTime as "updateTime",
 		b.price as "price",
-		b.name as "wardTypeName"
+		b.name as
+		"wardTypeName"
 		from
 		wardupdate a LEFT
-		JOIN category b ON a.roomType = b.type
+		JOIN category b ON a.roomType =
+		b.type
 		where
 		a.patientId = #{patientId}
 		order by
 		a.updateTime
 	</select>
-	<select id="drugscountQuery" parameterType="String" resultType="Integer">
+	<select id="drugscountQuery" parameterType="String"
+		resultType="Integer">
 		select
 		sum(drugCount)
 		from
-		grantdrug where patientId=#{patientId} and
+		grantdrug where
+		patientId=#{patientId} and
 		drugId=#{drugId}
 	</select>
 </mapper>	

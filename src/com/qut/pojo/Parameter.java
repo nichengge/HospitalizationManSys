@@ -3,7 +3,7 @@ package com.qut.pojo;
 import java.io.Serializable;
 
 /**
- * 参数表
+ * 参数封装类
  */
 public class Parameter implements Serializable {
 	private static final long serialVersionUID = 1L;

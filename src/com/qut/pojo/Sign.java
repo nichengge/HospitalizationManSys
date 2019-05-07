@@ -2,9 +2,9 @@ package com.qut.pojo;
 
 import java.io.Serializable;
 import java.util.Date;
+
 /**
- * 体征表
- * @author minchao
+ * 体征封装类
  */
 public class Sign implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -21,9 +21,9 @@ public class Sign implements Serializable {
 	private Float vein;
 	private Date createTime;
 	private String remarks;
-	
-	public Sign(){
-		
+
+	public Sign() {
+
 	}
 
 	public Integer getSignId() {
@@ -129,7 +129,7 @@ public class Sign implements Serializable {
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Sign [signId=" + signId + ", patientId=" + patientId + ", userId=" + userId + ", userName=" + userName

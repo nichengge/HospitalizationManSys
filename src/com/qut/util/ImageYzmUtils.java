@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Random;
 import javax.imageio.ImageIO;
+
 /*图片验证码生成*/
 public class ImageYzmUtils {
 	// 图片的宽度
@@ -37,10 +38,8 @@ public class ImageYzmUtils {
 
 	/**
 	 * 
-	 * @param width
-	 * 图片宽
-	 * @param height
-	 * 图片高
+	 * @param width  图片宽
+	 * @param height 图片高
 	 */
 	public ImageYzmUtils(int width, int height) {
 		this.width = width;
@@ -50,14 +49,10 @@ public class ImageYzmUtils {
 
 	/**
 	 * 
-	 * @param width
-	 * 图片宽
-	 * @param height
-	 * 图片高
-	 * @param codeCount
-	 * 字符个数
-	 * @param lineCount
-	 * 干扰线条数
+	 * @param width     图片宽
+	 * @param height    图片高
+	 * @param codeCount 字符个数
+	 * @param lineCount 干扰线条数
 	 */
 	public ImageYzmUtils(int width, int height, int codeCount, int lineCount) {
 		this.width = width;
@@ -77,7 +72,7 @@ public class ImageYzmUtils {
 		buffImg = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 		Graphics2D g = buffImg.createGraphics();
 
-		// 将图像填充为白色 
+		// 将图像填充为白色
 		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, width, height);
 
@@ -108,8 +103,10 @@ public class ImageYzmUtils {
 		}
 		code = randomCode.toString();
 	}
+
 	/**
 	 * 获取随机颜色
+	 * 
 	 * @return
 	 */
 	private Color getRandomColor() {
@@ -118,8 +115,10 @@ public class ImageYzmUtils {
 		int b = getRandomNumber(255);
 		return new Color(r, g, b);
 	}
+
 	/**
-	 *  获取随机数
+	 * 获取随机数
+	 * 
 	 * @param number
 	 * @return
 	 */

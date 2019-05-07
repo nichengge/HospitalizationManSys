@@ -9,11 +9,11 @@ public class User implements Serializable {
 	private String name;
 	private String password;
 	private String phone;
-	private Integer describe; 
-	private Date createtime; 
-	
-	public User(){
-		
+	private Integer describe;
+	private Date createtime;
+
+	public User() {
+
 	}
 
 	public String getId() {
@@ -63,9 +63,10 @@ public class User implements Serializable {
 	public void setCreatetime(Date createtime) {
 		this.createtime = createtime;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "id=" + id + ", name=" + name + ", password=" + password + ", phone=" + phone + ", describe=" + describe+",createtime"+createtime;
+		return "id=" + id + ", name=" + name + ", password=" + password + ", phone=" + phone + ", describe=" + describe
+				+ ",createtime" + createtime;
 	}
 }

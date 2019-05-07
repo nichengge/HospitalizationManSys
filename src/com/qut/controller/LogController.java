@@ -1,25 +1,16 @@
 package com.qut.controller;
-
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.qut.pojo.Log;
-import com.qut.pojo.User;
 import com.qut.service.LogService;
-import com.qut.service.UserService;
 import com.qut.util.BaseUtils;
 import com.qut.util.JsonDateValueProcessor;
 import com.qut.util.JsonResult;

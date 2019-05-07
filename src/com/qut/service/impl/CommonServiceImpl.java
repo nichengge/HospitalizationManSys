@@ -15,7 +15,7 @@ import com.qut.pojo.Parameter;
 import com.qut.service.CommonService;
 
 @Service("commonService")
-@Transactional(propagation=Propagation.NOT_SUPPORTED,readOnly=true)
+@Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
 public class CommonServiceImpl implements CommonService {
 	@Resource(name = "commonMapper")
 	private CommonMapper commonMapper;
@@ -39,9 +39,9 @@ public class CommonServiceImpl implements CommonService {
 	}
 
 	@Override
-	@Transactional(propagation = Propagation.REQUIRED,isolation=Isolation.DEFAULT, rollbackFor = Exception.class)
+	@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT, rollbackFor = Exception.class)
 	public void parameterCodeInsert(Parameter parameter) {
-		 commonMapper.parameterCodeInsert(parameter);
+		commonMapper.parameterCodeInsert(parameter);
 	}
 
 	@Override

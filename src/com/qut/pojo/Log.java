@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 日志系统pojo
+ * 日志封装类
  */
 public class Log implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -14,7 +14,7 @@ public class Log implements Serializable {
 	private Date endTime;
 	private String detial;
 	private String create_time;
-	
+
 	public Log() {
 
 	}

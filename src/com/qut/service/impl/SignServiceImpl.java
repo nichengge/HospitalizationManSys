@@ -17,19 +17,20 @@ import com.qut.service.SignService;
 
 @Service("signService")
 @Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
-public class SignServiceImpl implements SignService{
-	@Resource(name="signMapper")
+public class SignServiceImpl implements SignService {
+	@Resource(name = "signMapper")
 	private SignMapper signMapper;
+
 	@Override
-	@Transactional(propagation=Propagation.REQUIRED,isolation=Isolation.DEFAULT,rollbackFor=Exception.class)
+	@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT, rollbackFor = Exception.class)
 	public void signSave(Sign sign) {
 		signMapper.signSave(sign);
-		
+
 	}
 
 	@Override
 	public List<Map<String, Object>> signQuery(PatientCode patientCode) {
-		
+
 		return signMapper.signQuery(patientCode);
 	}
 

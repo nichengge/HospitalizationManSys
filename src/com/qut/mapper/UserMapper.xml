@@ -14,7 +14,8 @@
 		user_name as "name",
 		user_password as "password",
 		user_phone as "phone",
-		user_describe as "describe",
+		user_describe as
+		"describe",
 		create_time as "createtime"
 		from
 		user
@@ -37,7 +38,8 @@
 		select
 		user_id as "id",
 		user_name as "name",
-		user_password as "password",
+		user_password as
+		"password",
 		user_phone as "phone",
 		user_describe as "describe",
 		create_time as "createtime"
@@ -69,7 +71,8 @@
 		if(#{id} is
 		null,0=0,user_id=#{id})
 		and
-		if(#{name} is null,0=0,user_name like
+		if(#{name} is null,0=0,user_name
+		like
 		CONCAT('%',#{name},'%'))
 		and
 		if(#{describe} is
