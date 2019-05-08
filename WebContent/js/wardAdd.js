@@ -1,5 +1,5 @@
 var list;
-$(function(){
+$(function() {
 	// 为按钮设置监听事件
 	$("#reset").click(reset);
 	$("#add").click(add);
@@ -67,7 +67,7 @@ $(function(){
 			}
 		}
 	});
-	//查询所有的病房列表
+	// 查询所有的病房列表
 	$.ajax({
 		url : 'ward/wardQuery.do',
 		type : 'post',
@@ -95,16 +95,16 @@ function check() {
 		$("#wardError").text("* 病房号不能为空");
 		return false;
 	}
-	var regex =  /^\+?[1-9][0-9]*$/;
-	if(!regex.test(wardNo)){
+	var regex = /^\+?[1-9][0-9]*$/;
+	if (!regex.test(wardNo)) {
 		$("#wardError").css("color", "red");
 		$("#wardError").text("* 病房号必须为正整数");
 		return false;
 	}
-	if(list!=null&&list.length>0){
-		for(var i=0;i<list.length;i++){
+	if (list != null && list.length > 0) {
+		for (var i = 0; i < list.length; i++) {
 			var ward = list[i];
-			if(ward.wardNo==wardNo){
+			if (ward.wardNo == wardNo) {
 				$("#wardError").css("color", "red");
 				$("#wardError").text("* 病房号已存在");
 				return false;
@@ -129,23 +129,22 @@ function check() {
 		$("#wardspaceerror").text("* 病房容量不能为空");
 		return false;
 	}
-	var regex1 =  /^\+?[1-9][0-9]*$/;
-	if(!regex1.test(wardspace)){
+	var regex1 = /^\+?[1-9][0-9]*$/;
+	if (!regex1.test(wardspace)) {
 		$("#wardspaceerror").css("color", "red");
 		$("#wardspaceerror").text("* 病房容量必须为整数");
 		return false;
 	}
-	
+
 	if (createTime == null || createTime == "") {
 		$("#createError").css("color", "red");
 		$("#createError").text("* 创建时间不能为空");
 		return false;
 	}
-	/*if(createTime<=getNowFormatDate()){
-		$("#createError").css("color", "red");
-		$("#createError").text("* 创建时间不能小于当前时间");
-		return false;
-	}*/
+	/*
+	 * if(createTime<=getNowFormatDate()){ $("#createError").css("color",
+	 * "red"); $("#createError").text("* 创建时间不能小于当前时间"); return false; }
+	 */
 	return true;
 }
 function add() {
@@ -174,18 +173,19 @@ function add() {
 
 }
 function getNowFormatDate() {
-    var date = new Date();
-    var seperator1 = "-";
-    var month = date.getMonth() + 1;
-    var strDate = date.getDate();
-    if (month >= 1 && month <= 9) {
-        month = "0" + month;
-    }
-    if (strDate >= 0 && strDate <= 9) {
-        strDate = "0" + strDate;
-    }
-    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate;
-    return currentdate;
+	var date = new Date();
+	var seperator1 = "-";
+	var month = date.getMonth() + 1;
+	var strDate = date.getDate();
+	if (month >= 1 && month <= 9) {
+		month = "0" + month;
+	}
+	if (strDate >= 0 && strDate <= 9) {
+		strDate = "0" + strDate;
+	}
+	var currentdate = date.getFullYear() + seperator1 + month + seperator1
+			+ strDate;
+	return currentdate;
 }
 function reset() {
 	$("#wardForm :input").val("");

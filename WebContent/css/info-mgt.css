@@ -30,7 +30,8 @@ body {
 .query-conditions {
 	overflow: visible;
 }
-.query .conditions{
+
+.query .conditions {
 	overflow: visible;
 	float: left;
 	line-height: 30px;
@@ -39,7 +40,7 @@ body {
 }
 
 .query .conditionst {
-	 overflow: visible;
+	overflow: visible;
 	float: left;
 	line-height: 30px;
 	width: 380px;
@@ -51,6 +52,7 @@ body {
 	width: 72px;
 	color: #000;
 }
+
 .query .conditions label {
 	float: left;
 	width: 72px;
@@ -210,7 +212,6 @@ body {
 	float: left;
 	margin: 0 2px;
 }
-
 
 /*»À‘±*/
 .query .staff input {

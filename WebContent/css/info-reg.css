@@ -53,6 +53,7 @@ body {
 	outline: none;
 	background: url(../images/inputbg.png) repeat-x;
 }
+
 .main p input[type="search"] {
 	width: 261px;
 	height: 30px;
@@ -63,6 +64,7 @@ body {
 	outline: none;
 	background: url(../images/inputbg.png) repeat-x;
 }
+
 .main p input[type="password"] {
 	width: 240px;
 	height: 28px;
@@ -88,6 +90,7 @@ body {
 	outline: none;
 	background: url(../images/inputbg.png) repeat-x;
 }
+
 .main p.short input[type="search"] {
 	width: 30px;
 	height: 28px;
@@ -98,6 +101,7 @@ body {
 	outline: none;
 	background: url(../images/inputbg.png) repeat-x;
 }
+
 .main p span {
 	float: left;
 	margin-left: 15px;
@@ -153,7 +157,7 @@ body {
 .main .select .select-wrap .select-title span {
 	float: left;
 }
- 
+
 .main .select .select-wrap .select-title .icon {
 	float: right;
 	margin-right: 3px;
