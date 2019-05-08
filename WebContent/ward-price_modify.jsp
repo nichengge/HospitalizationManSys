@@ -3,7 +3,8 @@
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta name="viewport"
+	content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <link rel="stylesheet" href="css/base.css" />
 <link rel="stylesheet" href="css/info-mgt.css" />
 <link rel="stylesheet" href="css/info-reg.css" />
@@ -14,7 +15,7 @@
 		<h2>病房价格调整</h2>
 	</div>
 	<div class="main">
-		
+
 		<div class="table-box">
 			<form id="updatePriceForm">
 				<input style="display: none;" id="total" name="total" />
@@ -47,38 +48,38 @@
 	</div>
 </body>
 <script>
-function check_price(i){
-	if(parseInt($("#price_input_modify"+i).val())<1){
-		alert("操作错误！！最低为1！")
-	 	$("#price_input_modify"+i).val("1");
-	 	return false;
+	function check_price(i) {
+		if (parseInt($("#price_input_modify" + i).val()) < 1) {
+			alert("操作错误！！最低为1！")
+			$("#price_input_modify" + i).val("1");
+			return false;
+		}
+
 	}
-	
-}
-function modify_price1(i){
-		 var id = "price_input_modify"+i;
-		 var id1 = "#price_input_modify"+i;
-	 	 var num = document.getElementById(id);
-	 	 if($(id1).val()==""){
-	 	 alert("操作错误！！")
-	 	 $(id1).val("1");
-	 	 return false;
-	 	 }
-	 	 if($(id1).val()=="1"){
-	 	 alert("操作错误！！")
-	 	 return false;
-	 	 }
-    	num.value = parseInt(num.value) - 1;
-}
-function modify_price2(i){
-	var id = "price_input_modify"+i;
-	var id1 = "#price_input_modify"+i;
-	var num = document.getElementById(id);
-	if($(id1).val()==""){
-	 	 $(id1).val("1");
-	 	 }
-    		num.value = parseInt(num.value) + 1;
-}
+	function modify_price1(i) {
+		var id = "price_input_modify" + i;
+		var id1 = "#price_input_modify" + i;
+		var num = document.getElementById(id);
+		if ($(id1).val() == "") {
+			alert("操作错误！！")
+			$(id1).val("1");
+			return false;
+		}
+		if ($(id1).val() == "1") {
+			alert("操作错误！！")
+			return false;
+		}
+		num.value = parseInt(num.value) - 1;
+	}
+	function modify_price2(i) {
+		var id = "price_input_modify" + i;
+		var id1 = "#price_input_modify" + i;
+		var num = document.getElementById(id);
+		if ($(id1).val() == "") {
+			$(id1).val("1");
+		}
+		num.value = parseInt(num.value) + 1;
+	}
 </script>
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/common.js"></script>
@@ -86,4 +87,3 @@ function modify_price2(i){
 <script type="text/javascript" src="js/jquery.dialog.js"></script>
 <script type="text/javascript" src="js/wardModify.js"></script>
 </html>
-		

@@ -52,18 +52,19 @@ public class SignController {
 
 	@RequestMapping(value = "/signQuery.do", produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public String signQuery(@Param(value = "patientId") String patientId, @Param("name") String name,
+	public String signQuery(@Param(value = "patientId") String patientId, @Param("name") String patientName,
 			@Param("wardNo") Integer wardNo, @Param("bedNo") Integer bedNo, @Param("start") String start,
 			@Param("end") String end) throws ParseException {
 		PatientCode patientCode = new PatientCode();
 		if (patientId == null || "".equals(patientId)) {
 			patientId = null;
 		}
-		if (name == null || "".equals(name)) {
-			name = null;
+		if (patientName == null || "".equals(patientName)) {
+			patientName = null;
 		}
+		//System.out.println("收到的patientName传参:"+patientName);
 		patientCode.setPatientId(patientId);
-		patientCode.setName(name);
+		patientCode.setName(patientName);
 		patientCode.setWardNo(wardNo);
 		patientCode.setBedNo(bedNo);
 		patientCode.setStart(BaseUtils.toDate(start));

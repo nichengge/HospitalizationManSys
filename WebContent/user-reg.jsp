@@ -3,7 +3,8 @@
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta name="viewport"
+	content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <link rel="stylesheet" href="css/base.css" />
 <link rel="stylesheet" href="css/info-reg.css" />
 <title>医院住院管理系统</title>
@@ -25,8 +26,9 @@
 					id="name" placeholder="真实姓名" /> <span id="nameError"></span>
 			</p>
 			<p class="short-input ue-clear">
-				<label><font color="red">*</font>手&nbsp;&nbsp;&nbsp;&nbsp;机：</label> <input type="text"
-					id="phone" placeholder="手机" /><span id="phoneError"></span>
+				<label><font color="red">*</font>手&nbsp;&nbsp;&nbsp;&nbsp;机：</label>
+				<input type="text" id="phone" placeholder="手机" /><span
+					id="phoneError"></span>
 			</p>
 			<p class="short-input ue-clear">
 				<label><font color="red">*</font>密&nbsp;&nbsp;&nbsp;&nbsp;码：</label>
@@ -63,15 +65,15 @@
 <script type="text/javascript" src="js/common.js"></script>
 <script type="text/javascript" src="js/userzc.js"></script>
 <script type="text/javascript">
-$(".select-title").on("click",function(){
-	$(".select-list").toggle();
-	return false;
-});
-$(".select-list").on("click","li",function(){
-	var txt = $(this).text();
-	$(".select-title").find("span").text(txt);
-});
+	$(".select-title").on("click", function() {
+		$(".select-list").toggle();
+		return false;
+	});
+	$(".select-list").on("click", "li", function() {
+		var txt = $(this).text();
+		$(".select-title").find("span").text(txt);
+	});
 
-showRemind('input[type=text], textarea','placeholder');
+	showRemind('input[type=text], textarea', 'placeholder');
 </script>
 </html>

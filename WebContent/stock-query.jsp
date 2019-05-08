@@ -3,7 +3,8 @@
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta name="viewport"
+	content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <link rel="stylesheet" href="css/base.css" />
 <link rel="stylesheet" href="css/info-mgt.css" />
 <title>医院住院管理系统</title>
@@ -50,6 +51,6 @@
 <script type="text/javascript" src="js/jquery.pagination.js"></script>
 <script type="text/javascript" src="js/stock_query.js"></script>
 <script type="text/javascript">
-
+	
 </script>
 </html>

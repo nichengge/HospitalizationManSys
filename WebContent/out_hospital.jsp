@@ -3,7 +3,8 @@
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta name="viewport"
+	content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <link rel="stylesheet" href="css/base.css" />
 <link rel="stylesheet" href="css/info-reg.css" />
 <link rel="stylesheet" type="text/css" href="css/jquery.dialog.css" />
@@ -13,24 +14,25 @@
 	<div class="title">
 		<h2>出院登记</h2>
 	</div>
-	
+
 	<div class="main">
 		<form id="leaveHospitalForm">
 			<table>
 				<tr>
 					<td>
 						<p class="short-inpue-clear">
-							<label><span style="color:red">*</span>住院号：</label>
+							<label><span style="color: red">*</span>住院号：</label>
 						</p>
 					</td>
 					<td>
 						<p class="short-input ue-clear">
-							<input type="search" readonly results="s" name="patientId" id="patientId" />
+							<input type="search" readonly results="s" name="patientId"
+								id="patientId" />
 						</p>
 					</td>
 					<td>
 						<p class="short-inpue-clear">
-							<label><span style="color:red">*</span>姓
+							<label><span style="color: red">*</span>姓
 								&nbsp;&nbsp;&nbsp;&nbsp;名：</label>
 						</p>
 					</td>
@@ -40,37 +42,37 @@
 						</p>
 					</td>
 				</tr>
-				
-				
+
+
 				<tr>
 					<td>
 						<p class="short-input ue-clear">
-							<label><span style="color:red">*</span>科
+							<label><span style="color: red">*</span>科
 								&nbsp;&nbsp;&nbsp;&nbsp;室：</label>
 						</p>
 					</td>
 					<td>
 						<p class="short-input ue-clear">
 							<input type="text" readonly name="department" id="department" />
-						</p> 
+						</p>
 					</td>
 					<td>
 						<p class="short-input ue-clear">
-							<label><span style="color:red">*</span>性&nbsp;&nbsp;&nbsp;&nbsp;别：</label>
+							<label><span style="color: red">*</span>性&nbsp;&nbsp;&nbsp;&nbsp;别：</label>
 						</p>
 					</td>
 					<td>
 						<p class="short-input ue-clear">
 							<input type="text" readonly name="gender" id="gender" />
-						</p> 
+						</p>
 					</td>
 				</tr>
-				
-				
+
+
 				<tr>
 					<td>
 						<p class="short-input ue-clear">
-							<label><span style="color:red">*</span>身份证号：</label>
+							<label><span style="color: red">*</span>身份证号：</label>
 						</p>
 					</td>
 					<td>
@@ -80,70 +82,71 @@
 					</td>
 					<td>
 						<p class="short-input ue-clear">
-							<label><span style="color:red">*</span>主治医师：</label>
+							<label><span style="color: red">*</span>主治医师：</label>
 						</p>
 					</td>
 					<td>
 						<p class="short-input ue-clear">
 							<input type="text" readonly name="doctorName" id="doctorName" />
-						</p> 
+						</p>
 					</td>
 				</tr>
-			 
+
 				<tr>
 					<td>
 						<p class="short-input ue-clear">
-							<label><span style="color:red">*</span>入院时间：</label>
+							<label><span style="color: red">*</span>入院时间：</label>
 						</p>
 					</td>
 					<td>
-						 <p class="short-input ue-clear">
+						<p class="short-input ue-clear">
 							<input type="text" readonly name="inTime" id="inTime" />
 						</p>
 					</td>
 					<td>
 						<p class="short-input ue-clear">
-							<label><span style="color:red">*</span>病 房 号：</label>
+							<label><span style="color: red">*</span>病 房 号：</label>
 						</p>
 					</td>
 					<td>
 						<p class="short-input ue-clear">
 							<input type="text" readonly name="roomNo" id="roomNo" />
 						</p>
-					</td>	
+					</td>
 				</tr>
 				<tr>
 					<td>
 						<p class="short-input ue-clear">
-							<label><span style="color:red">*</span>是否结算：</label>
+							<label><span style="color: red">*</span>是否结算：</label>
 						</p>
 					</td>
 					<td>
 						<p class="short-input ue-clear">
 							<input type="text" readonly name="jiesuan" id="jiesuan" />
-						</p> 
+						</p>
 					</td>
 					<td>
 						<p class="short-input ue-clear">
-							<label><span style="color:red">*</span>床 位 号：</label>
+							<label><span style="color: red">*</span>床 位 号：</label>
 						</p>
 					</td>
 					<td>
 						<p class="short-input ue-clear">
 							<input type="text" readonly name="bedNo" id="bedNo" />
-						</p> 
+						</p>
 					</td>
 				</tr>
 			</table>
 		</form>
 	</div>
 	<div class="btn">
-		<a href="javascript:void(0);"  class="confirm">登记</a> <a
+		<a href="javascript:void(0);" class="confirm">登记</a> <a
 			href="javascript:void(0);" class="clear">重置</a>
 	</div>
 	<!-- 查询病人 -->
-	<div  class="showDialog">
-		<iframe src="patient_find.jsp" frameBorder="0" width="100%" scrolling="auto" height="100%"></iframe>
+	<div class="showDialog">
+		<iframe src="patient_find.jsp" frameBorder="0" width="100%"
+			scrolling="auto" height="100%"></iframe>
 	</div>
 	<!-- 错误提示弹窗 -->
 	<div class="showError">
@@ -159,7 +162,7 @@
 		</div>
 	</div>
 </body>
- <script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/common.js"></script>
 <script type="text/javascript" src="js/core.js"></script>
 <script type="text/javascript" src="js/jquery.dialog.js"></script>

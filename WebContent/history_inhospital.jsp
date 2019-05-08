@@ -3,7 +3,8 @@
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta name="viewport"
+	content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <link rel="stylesheet" href="css/base.css" />
 <link rel="stylesheet" href="css/info-mgt.css" />
 <link rel="stylesheet" type="text/css" href="css/jquery.dialog.css" />
@@ -15,21 +16,21 @@
 	<div class="title">
 		<h2>历史住院记录查询</h2>
 	</div>
-	<input style="display:none;" type="text" id="des"/>
+	<input style="display: none;" type="text" id="des" />
 	<div class="query">
 		<div class="query-conditions ue-clear">
-		<form id="findForm">
-			<div class="query-conditions ue-clear">
-				<div class="conditions staff ue-clear">
-					<label>身&nbsp;&nbsp;份&nbsp;&nbsp;证：</label> <input type="text"
-						name="cerificateNo" id="cerificateNo"/>
+			<form id="findForm">
+				<div class="query-conditions ue-clear">
+					<div class="conditions staff ue-clear">
+						<label>身&nbsp;&nbsp;份&nbsp;&nbsp;证：</label> <input type="text"
+							name="cerificateNo" id="cerificateNo" />
+					</div>
 				</div>
-			</div>
-		</form>
+			</form>
 		</div>
 		<div class="query-btn ue-clear">
-			<a href="javascript:;" id="find" class="confirm">查询</a> 
-			<a href="javascript:;" id="cle" class="clear">清空条件</a>
+			<a href="javascript:;" id="find" class="confirm">查询</a> <a
+				href="javascript:;" id="cle" class="clear">清空条件</a>
 		</div>
 	</div>
 	<div class="table-box">
@@ -58,4 +59,3 @@
 <script type="text/javascript" src="js/cookie_util.js"></script>
 <script type="text/javascript" src="js/history_inhospital.js"></script>
 </html>
- 

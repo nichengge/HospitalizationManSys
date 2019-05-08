@@ -3,7 +3,8 @@
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta name="viewport"
+	content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <link rel="stylesheet" href="css/base.css" />
 <link rel="stylesheet" href="css/info-mgt.css" />
 <link rel="stylesheet" type="text/css" href="css/jquery.dialog.css" />
@@ -15,13 +16,13 @@
 	<div class="title">
 		<h2>用户查询</h2>
 	</div>
-	<input style="display:none;" type="text" id="des"/>
+	<input style="display: none;" type="text" id="des" />
 	<div class="query">
 		<div class="query-conditions ue-clear">
 			<div class="conditions name ue-clear">
 				<label>用户类型：</label>
 				<div class="select-wrap" id="usertype">
-					<div class="select-title ue-clear" >
+					<div class="select-title ue-clear">
 						<span>请选择</span><i class="icon"></i>
 					</div>
 					<ul class="select-list">
@@ -76,23 +77,35 @@
 	<div class="pagination ue-clear" id="showbuttom"></div>
 	<div class="showUser">
 		<div class=".ui-dialog-panel">
-			 	<form class="formDialog">
-			 		<p> 用户名：<input type="text" name="idUpdate" readonly id="idUpdate"/></p>
-			 		<p> 姓&nbsp;&nbsp; 名：<input type="text" name="nameUpdate" id="nameUpdate"><label style="color:red;" class="nameUpdateError"></label></p>
-			 		<p> 手机号：<input type="text" name="phoneUpdate" id="phoneUpdate"><label style="color:red;" class="phoneUpdateError"></label></p>
-			 	 	<p> 权&nbsp;&nbsp; 限：<select id="select_id">
-			 	 		<option value="0">患者</option>
-			 	 		<option value="1">护士</option>
-			 	 		<option value="2">医生</option>
-			 	 		<option value="3">服务前台</option>
-			 	 		<option value="4">系统管理员</option>
-			 	 	</select></p>
-			 		<div class="buttons">
-			 			<br>
-						<input type="button" style="margin-left:40px" class="button long2 ok" id="ok" value="确定" /> 
-						<input type="button" style="margin-left:80px" class="button long2 normal" id="no" value="取消" />
+			<form class="formDialog">
+				<p>
+					用户名：<input type="text" name="idUpdate" readonly id="idUpdate" />
+				</p>
+				<p>
+					姓&nbsp;&nbsp; 名：<input type="text" name="nameUpdate"
+						id="nameUpdate"><label style="color: red;"
+						class="nameUpdateError"></label>
+				</p>
+				<p>
+					手机号：<input type="text" name="phoneUpdate" id="phoneUpdate"><label
+						style="color: red;" class="phoneUpdateError"></label>
+				</p>
+				<p>
+					权&nbsp;&nbsp; 限：<select id="select_id">
+						<option value="0">患者</option>
+						<option value="1">护士</option>
+						<option value="2">医生</option>
+						<option value="3">服务前台</option>
+						<option value="4">系统管理员</option>
+					</select>
+				</p>
+				<div class="buttons">
+					<br> <input type="button" style="margin-left: 40px"
+						class="button long2 ok" id="ok" value="确定" /> <input
+						type="button" style="margin-left: 80px"
+						class="button long2 normal" id="no" value="取消" />
 				</div>
-			 </form>
+			</form>
 		</div>
 	</div>
 </body>
@@ -103,16 +116,20 @@
 <script type="text/javascript" src="js/jquery.pagination.js"></script>
 <script type="text/javascript" src="js/userfind.js"></script>
 <script type="text/javascript">
-$(".select-title").on("click",function(){
-	$(".select-list").hide();
-	$(this).siblings($(".select-list")).show();
-	return false;
-})
-$(".select-list").on("click","li",function(){
-	var txt = $(this).text();
-	var ok = $(this).val();
-	$(this).parent($(".select-list")).siblings($(".select-title")).find("span").text(txt);
-	$("#des").val(ok);
-})
+	$(".select-title").on("click", function() {
+		$(".select-list").hide();
+		$(this).siblings($(".select-list")).show();
+		return false;
+	})
+	$(".select-list").on(
+			"click",
+			"li",
+			function() {
+				var txt = $(this).text();
+				var ok = $(this).val();
+				$(this).parent($(".select-list")).siblings($(".select-title"))
+						.find("span").text(txt);
+				$("#des").val(ok);
+			})
 </script>
 </html>

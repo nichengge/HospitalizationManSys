@@ -3,7 +3,8 @@
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta name="viewport"
+	content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <link rel="stylesheet" href="css/base.css" />
 <link rel="stylesheet" href="css/info-mgt.css" />
 <link rel="stylesheet" type="text/css" href="css/jquery.dialog.css" />
@@ -15,13 +16,13 @@
 	<div class="title">
 		<h2>运行日志</h2>
 	</div>
-	<input style="display:none;" type="text" id="des"/>
+	<input style="display: none;" type="text" id="des" />
 	<div class="query">
 		<div class="query-conditions ue-clear">
 			<div class="conditions name ue-clear">
 				<label>事件类型：</label>
 				<div class="select-wrap" id="eventtype">
-					<div class="select-title ue-clear" >
+					<div class="select-title ue-clear">
 						<span>请选择</span><i class="icon"></i>
 					</div>
 					<ul class="select-list">
@@ -64,17 +65,30 @@
 		</table>
 	</div>
 	<div class="pagination ue-clear" id="showbuttom"></div>
-		<div class="showUser" id="logs">
+	<div class="showUser" id="logs">
 		<div class=".ui-dialog-panel">
-			 <p> 事件序号：<label style="color:red;" class="nameUpdateError" id="logid"></label></p>
-			 <p> 事件类型：<label style="color:red;" class="nameUpdateError" id="logtype"></label></p>
-			 <p> 事件时间：<label style="color:red;" class="phoneUpdateError" id="logcreate_time"></label></p>
-			 <p> 事件详情：<textarea rows="10" cols="45" name="logdetial" id="logdetial" readonly style="resize:none" ></textarea></p>
+			<p>
+				事件序号：<label style="color: red;" class="nameUpdateError" id="logid"></label>
+			</p>
+			<p>
+				事件类型：<label style="color: red;" class="nameUpdateError" id="logtype"></label>
+			</p>
+			<p>
+				事件时间：<label style="color: red;" class="phoneUpdateError"
+					id="logcreate_time"></label>
+			</p>
+			<p>
+				事件详情：
+				<textarea rows="10" cols="45" name="logdetial" id="logdetial"
+					readonly style="resize: none"></textarea>
+			</p>
 		</div>
 		<div class="buttons">
-			<br>
-			<input type="button" style="margin-left:80px" class="button long2 normal" id="previous" onclick='PreviousLog()' value="⏮上一个" />
-			<input type="button" style="margin-left:80px" class="button long2 normal" id="next" onclick='NextLog()' value="下一个⏭" />
+			<br> <input type="button" style="margin-left: 80px"
+				class="button long2 normal" id="previous" onclick='PreviousLog()'
+				value="⏮上一个" /> <input type="button" style="margin-left: 80px"
+				class="button long2 normal" id="next" onclick='NextLog()'
+				value="下一个⏭" />
 		</div>
 	</div>
 </body>
@@ -85,16 +99,20 @@
 <script type="text/javascript" src="js/jquery.paginationForLogJSP.js"></script>
 <script type="text/javascript" src="js/log.js"></script>
 <script type="text/javascript">
-$(".select-title").on("click",function(){
-	$(".select-list").hide();
-	$(this).siblings($(".select-list")).show();
-	return false;
-})
-$(".select-list").on("click","li",function(){
-	var txt = $(this).text();
-	var ok = $(this).val();
-	$(this).parent($(".select-list")).siblings($(".select-title")).find("span").text(txt);
-	$("#des").val(ok);
-})
+	$(".select-title").on("click", function() {
+		$(".select-list").hide();
+		$(this).siblings($(".select-list")).show();
+		return false;
+	})
+	$(".select-list").on(
+			"click",
+			"li",
+			function() {
+				var txt = $(this).text();
+				var ok = $(this).val();
+				$(this).parent($(".select-list")).siblings($(".select-title"))
+						.find("span").text(txt);
+				$("#des").val(ok);
+			})
 </script>
 </html>

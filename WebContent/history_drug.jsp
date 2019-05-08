@@ -3,7 +3,8 @@
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta name="viewport"
+	content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <link rel="stylesheet" href="css/base.css" />
 <link rel="stylesheet" href="css/info-mgt.css" />
 <link rel="stylesheet" type="text/css" href="css/jquery.dialog.css" />
@@ -15,21 +16,22 @@
 	<div class="title">
 		<h2>用药历史查询</h2>
 	</div>
-	<input style="display:none;" type="text" id="des"/>
+	<input style="display: none;" type="text" id="des" />
 	<div class="query">
 		<div class="query-conditions ue-clear">
-		<form id="findForm">
-			<div class="query-conditions ue-clear">
-				<div class="conditions staff ue-clear">
-					<label id="patientNum">住&nbsp;&nbsp;院&nbsp;&nbsp;号：</label> <input
-					type="search" results="s" readonly id="patientId" name="patientId" class="patientId" />
+			<form id="findForm">
+				<div class="query-conditions ue-clear">
+					<div class="conditions staff ue-clear">
+						<label id="patientNum">住&nbsp;&nbsp;院&nbsp;&nbsp;号：</label> <input
+							type="search" results="s" readonly id="patientId"
+							name="patientId" class="patientId" />
+					</div>
 				</div>
-			</div>
-		</form>
+			</form>
 		</div>
 		<div class="query-btn ue-clear">
-			<a href="javascript:;" id="find" class="confirm">查询</a> 
-			<a href="javascript:;" id="cle" class="clear">清空条件</a>
+			<a href="javascript:;" id="find" class="confirm">查询</a> <a
+				href="javascript:;" id="cle" class="clear">清空条件</a>
 		</div>
 	</div>
 	<div class="table-box">
@@ -51,8 +53,9 @@
 	</div>
 	<div class="pagination ue-clear"></div>
 	<!-- 病人查询 -->
- 	<div class="showDialog">
-		<iframe src="patient_find.jsp" frameBorder="0" width="100%" scrolling="auto" height="100%"></iframe>
+	<div class="showDialog">
+		<iframe src="patient_find.jsp" frameBorder="0" width="100%"
+			scrolling="auto" height="100%"></iframe>
 	</div>
 </body>
 <script type="text/javascript" src="js/jquery.js"></script>
@@ -63,4 +66,3 @@
 <script type="text/javascript" src="js/cookie_util.js"></script>
 <script type="text/javascript" src="js/history_drug.js"></script>
 </html>
- 

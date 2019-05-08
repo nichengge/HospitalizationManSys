@@ -3,7 +3,8 @@
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta name="viewport"
+	content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <link rel="stylesheet" href="css/base.css" />
 <link rel="stylesheet" href="css/parameter-setting.css" />
 <link rel="stylesheet" type="text/css" href="css/jquery.dialog.css" />
@@ -15,7 +16,7 @@
 		<h2>系统配置</h2>
 	</div>
 	<div style="width: 100%; float: right;">
-		<table style="width:50%; float: left">
+		<table style="width: 50%; float: left">
 			<thead>
 				<tr>
 					<th>编号</th>
@@ -24,7 +25,7 @@
 			</thead>
 			<tbody id="show"></tbody>
 		</table>
-		<table id="codelist" style="display: none ;width:50%; float: right;">
+		<table id="codelist" style="display: none; width: 50%; float: right;">
 			<thead>
 				<tr>
 					<th>编号</th>
@@ -35,14 +36,14 @@
 		</table>
 	</div>
 	<div style="width: 100%;">
-		<label id="id" ></label>
+		<label id="id"></label>
 		<table id="codetitle"
 			style="display: none; border: none; margin-top: 10px; width: 50%; float: right">
 			<thead>
 				<tr>
-					<td style="float: right">
-					<input type="button" id="codeadd" class="button long2 ok" value="新增" /> 
-					<input type="button"id="codesave" class="button long2 normal" value="保存" /></td>
+					<td style="float: right"><input type="button" id="codeadd"
+						class="button long2 ok" value="新增" /> <input type="button"
+						id="codesave" class="button long2 normal" value="保存" /></td>
 				</tr>
 			</thead>
 		</table>

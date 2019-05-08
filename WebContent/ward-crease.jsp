@@ -3,7 +3,8 @@
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta name="viewport"
+	content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <link rel="stylesheet" href="css/base.css" />
 <link rel="stylesheet" href="css/info-reg.css" />
 <title>医院住院管理系统</title>
@@ -48,13 +49,14 @@
 			</div>
 			<p class="short-input ue-clear">
 				<label><font color="red">*</font>容&nbsp;&nbsp;量：</label> <input
-					id="wardspace" name="wardSpace" type="text" placeholder="容量"> <span
-					id="wardspaceerror"><em>*</em>必须为正整数</span>
+					id="wardspace" name="wardSpace" type="text" placeholder="容量">
+				<span id="wardspaceerror"><em>*</em>必须为正整数</span>
 			</p>
 			<p class="short-input ue-clear">
 				<label><font color="red">*</font>创建时间：</label> <input type="text"
-					id="createTime" name="createTime" readonly="readonly" placeholder="创建时间" />
-				&nbsp;&nbsp;&nbsp;&nbsp;<span id="createError"></span>
+					id="createTime" name="createTime" readonly="readonly"
+					placeholder="创建时间" /> &nbsp;&nbsp;&nbsp;&nbsp;<span
+					id="createError"></span>
 			</p>
 		</div>
 		<input id="departmentNo" name="departmentNo" /> <input id="typeNo"
@@ -70,27 +72,28 @@
 <script type="text/javascript" src="js/wardAdd.js"></script>
 
 <script type="text/javascript">
-$("#department").on("click",function(){
-	$("#depart").toggle();
-	return false;
-});
-$("#depart").on("click","li",function(){
-	var txt = $(this).text();
-	var label = $(this).val();
-	$("#department").find("span").text(txt);
-	$("#departmentNo").val(label);
-});
-$("#type").on("click",function(){
-	$("#types").toggle();
-	return false;
-});
-$("#types").on("click","li",function(){
-	var txt = $(this).text();
-	var label = $(this).val();
-	$("#type").find("span").text(txt);
-	$("#typeNo").val(label);
-});
-var now = new Date(); 
-createTime.value=new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate();
+	$("#department").on("click", function() {
+		$("#depart").toggle();
+		return false;
+	});
+	$("#depart").on("click", "li", function() {
+		var txt = $(this).text();
+		var label = $(this).val();
+		$("#department").find("span").text(txt);
+		$("#departmentNo").val(label);
+	});
+	$("#type").on("click", function() {
+		$("#types").toggle();
+		return false;
+	});
+	$("#types").on("click", "li", function() {
+		var txt = $(this).text();
+		var label = $(this).val();
+		$("#type").find("span").text(txt);
+		$("#typeNo").val(label);
+	});
+	var now = new Date();
+	createTime.value = new Date().getFullYear() + '-'
+			+ (new Date().getMonth() + 1) + '-' + new Date().getDate();
 </script>
 </html>

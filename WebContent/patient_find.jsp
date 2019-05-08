@@ -3,7 +3,8 @@
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
+<meta name="viewport"
+	content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
 <link rel="stylesheet" href="css/base.css" />
 <link rel="stylesheet" href="css/info-mgt.css" />
 
@@ -35,13 +36,14 @@
 						name="patientId" />
 				</div>
 				<div class="conditionst staff ue-clear">
-					<label>&nbsp;&nbsp;病&nbsp;&nbsp;房&nbsp;&nbsp;号：</label> <input type="text"
-						name="wardNo" />
+					<label>&nbsp;&nbsp;病&nbsp;&nbsp;房&nbsp;&nbsp;号：</label> <input
+						type="text" name="wardNo" />
 				</div>
 				<div class="conditionst time ue-clear">
 					<label>&nbsp;&nbsp;入院时间：</label>
 					<div class="time-select">
-						<input type="date" name="start" id="start" placeholder="开始时间" onblur="checkstarttime()"/>
+						<input type="date" name="start" id="start" placeholder="开始时间"
+							onblur="checkstarttime()" />
 					</div>
 					<span class="line">-</span>
 					<div class="time-select">
@@ -49,8 +51,8 @@
 					</div>
 				</div>
 				<div class="conditionst staff ue-clear">
-					<label>&nbsp;&nbsp;姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</label> <input
-						type="text" id="name" name="name" />
+					<label>&nbsp;&nbsp;姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</label>
+					<input type="text" id="name" name="name" />
 				</div>
 				<div class="conditionst staff ue-clear">
 					<label>床&nbsp;&nbsp;位&nbsp;&nbsp;号：</label> <input type="text"
@@ -59,7 +61,8 @@
 			</div>
 			<div class="query-btn ue-clear">
 				<a href="javascript:void(0);" class="confirm">查询</a> <a
-					href="javascript:void(0);" class="clear" onclick="window.location.reload()">清空条件</a>
+					href="javascript:void(0);" class="clear"
+					onclick="window.location.reload()">清空条件</a>
 			</div>
 		</div>
 		<div class="table-box">
@@ -91,44 +94,45 @@
 <script type="text/javascript" src="js/patientfind.js"></script>
 
 <script type="text/javascript">
-$("#department").on("click",function(){
-	$("#depart").toggle();
-	return false;
-});
+	$("#department").on("click", function() {
+		$("#depart").toggle();
+		return false;
+	});
 
-$("#depart").on("click","li",function(){
-	var txt = $(this).text();
-	var label = $(this).val();
-	$("#department").find("span").text(txt);
-	$("#departmentNo").val(label);
-});
+	$("#depart").on("click", "li", function() {
+		var txt = $(this).text();
+		var label = $(this).val();
+		$("#department").find("span").text(txt);
+		$("#departmentNo").val(label);
+	});
 
-function checkstarttime(){
-	if($("#start").val()!=""){
-	var startTime=$("#start").val();  
-    var start=new Date(startTime.replace("-", "/").replace("-", "/"));  
-    var endTime=getNowFormatDate();  
-    var end=new Date(endTime.replace("-", "/").replace("-", "/"));
-	if(endTime<startTime){
-		alert("时间错误");
-		$("#start").val(getNowFormatDate());
+	function checkstarttime() {
+		if ($("#start").val() != "") {
+			var startTime = $("#start").val();
+			var start = new Date(startTime.replace("-", "/").replace("-", "/"));
+			var endTime = getNowFormatDate();
+			var end = new Date(endTime.replace("-", "/").replace("-", "/"));
+			if (endTime < startTime) {
+				alert("时间错误");
+				$("#start").val(getNowFormatDate());
+			}
+		}
 	}
-	}
-}
 
-function getNowFormatDate() {
-    var date = new Date();
-    var seperator1 = "-";
-    var month = date.getMonth() + 1;
-    var strDate = date.getDate();
-    if (month >= 1 && month <= 9) {
-        month = "0" + month;
-    }
-    if (strDate >= 0 && strDate <= 9) {
-        strDate = "0" + strDate;
-    }
-    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate;
-    return currentdate;
-}
+	function getNowFormatDate() {
+		var date = new Date();
+		var seperator1 = "-";
+		var month = date.getMonth() + 1;
+		var strDate = date.getDate();
+		if (month >= 1 && month <= 9) {
+			month = "0" + month;
+		}
+		if (strDate >= 0 && strDate <= 9) {
+			strDate = "0" + strDate;
+		}
+		var currentdate = date.getFullYear() + seperator1 + month + seperator1
+				+ strDate;
+		return currentdate;
+	}
 </script>
 </html>

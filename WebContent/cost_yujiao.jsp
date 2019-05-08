@@ -3,7 +3,8 @@
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta name="viewport"
+	content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <link rel="stylesheet" href="css/base.css" />
 <link rel="stylesheet" href="css/info-reg.css" />
 <link rel="stylesheet" type="text/css" href="css/jquery.dialog.css" />
@@ -14,8 +15,8 @@
 		<h2>预交费用</h2>
 	</div>
 	<div class="main">
-	<form id="costForm">
-		<table>          
+		<form id="costForm">
+			<table>
 				<tr>
 					<td>
 						<p class="short-inpue-clear">
@@ -24,7 +25,8 @@
 					</td>
 					<td>
 						<p class="short-input ue-clear">
-							<input type="search" results="s" readonly name="patientId" id="patientId" />
+							<input type="search" results="s" readonly name="patientId"
+								id="patientId" />
 						</p>
 					</td>
 					<td>
@@ -35,10 +37,10 @@
 					<td>
 						<p class="short-input ue-clear">
 							<input type="text" name="patientName" readonly id="patientName" />
-						</p> 
+						</p>
 					</td>
 				</tr>
-				
+
 				<tr>
 					<td>
 						<p class="short-input ue-clear">
@@ -47,13 +49,14 @@
 					</td>
 					<td>
 						<p class="short-input ue-clear">
-							<input type="text" name="departmentName" readonly id="departmentName" />
-						</p> 
+							<input type="text" name="departmentName" readonly
+								id="departmentName" />
+						</p>
 					</td>
 					<td>
 						<p class="short-input ue-clear">
-							<label>缴费方式：</label>
-							<input type = "text" name="types" id="types" value="现金" style="display:none;">
+							<label>缴费方式：</label> <input type="text" name="types" id="types"
+								value="现金" style="display: none;">
 						</p>
 					</td>
 					<td>
@@ -70,7 +73,7 @@
 						</div>
 					</td>
 				</tr>
-				
+
 				<tr>
 					<td>
 						<p class="short-input ue-clear">
@@ -80,7 +83,7 @@
 					<td>
 						<p class="short-input ue-clear">
 							<input type="text" name="doctorName" readonly id="doctorName" />
-						</p> 
+						</p>
 					</td>
 					<td>
 						<p class="short-input ue-clear">
@@ -93,7 +96,7 @@
 						<p class="short-input ue-clear">
 					</td>
 				</tr>
-					<tr>
+				<tr>
 					<td>
 						<p class="short-input ue-clear">
 							<label><font color="red">*</font>收款用户：</label>
@@ -102,7 +105,7 @@
 					<td>
 						<p class="short-input ue-clear">
 							<input type="text" name="userId" readonly readonly id="userId" />
-						</p> 
+						</p>
 					</td>
 					<td>
 						<p class="short-input ue-clear">
@@ -114,31 +117,34 @@
 							<input type="text" name="userName" readonly id="userName" />
 						<p class="short-input ue-clear">
 					</td>
-					</tr>
-				
+				</tr>
+
 				<tr>
-				<td>
+					<td>
 						<p class="short-input ue-clear">
 							<label>收款时间：</label>
 						</p>
 					</td>
 					<td>
 						<p class="short-input ue-clear">
-							<input type="text" name="collectionTime" readonly id="collectionTime" />
-						<p class="short-input ue-clear"> 
+							<input type="text" name="collectionTime" readonly
+								id="collectionTime" />
+						<p class="short-input ue-clear">
 					</td>
 				</tr>
-				
-				</table>
-				</form>
-				<div class="btn">
-			<a href="javascript:void(0);"  class="confirm">保存</a> 
-			<a href="javascript:void(0);"  class="clear" onclick="window.location.reload()">重置</a>
+
+			</table>
+		</form>
+		<div class="btn">
+			<a href="javascript:void(0);" class="confirm">保存</a> <a
+				href="javascript:void(0);" class="clear"
+				onclick="window.location.reload()">重置</a>
+		</div>
 	</div>
-	</div>  
 	<!-- 查询病人 -->
-	<div  class="showDialog">
-		<iframe src="patient_find.jsp" frameBorder="0" width="100%" scrolling="auto" height="100%"></iframe>
+	<div class="showDialog">
+		<iframe src="patient_find.jsp" frameBorder="0" width="100%"
+			scrolling="auto" height="100%"></iframe>
 	</div>
 </body>
 
@@ -149,17 +155,17 @@
 <script type="text/javascript" src="js/jquery.pagination.js"></script>
 <script type="text/javascript" src="js/cookie_util.js"></script>
 <script type="text/javascript" src="js/prepaidExpenses.js"></script>
- 
+
 <script type="text/javascript">
-$("#costType").on("click",function(){
-	$("#type").toggle();
-	return false;
-});
-$("#type").on("click","li",function(){
-	var txt = $(this).text();
-	var label = $(this).val();
-	$("#costType").find("span").text(txt);
-	$("#types").val(txt);
-});
+	$("#costType").on("click", function() {
+		$("#type").toggle();
+		return false;
+	});
+	$("#type").on("click", "li", function() {
+		var txt = $(this).text();
+		var label = $(this).val();
+		$("#costType").find("span").text(txt);
+		$("#types").val(txt);
+	});
 </script>
 </html>

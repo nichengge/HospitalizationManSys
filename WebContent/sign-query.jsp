@@ -3,7 +3,8 @@
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="viewport"
+	content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <link rel="stylesheet" href="css/base.css" />
 <link rel="stylesheet" href="css/info-mgt.css" />
 <link rel="stylesheet" type="text/css" href="css/jquery.dialog.css" />
@@ -28,8 +29,8 @@
 						name="bedNo" id="bedNo" />
 				</div>
 				<div class="conditions staff ue-clear">
-					<label id = "patientNum">住&nbsp;&nbsp;院&nbsp;&nbsp;号：</label> <input type="text"
-						name="patientId" id="patientId" />
+					<label id="patientNum">住&nbsp;&nbsp;院&nbsp;&nbsp;号：</label> <input
+						type="text" name="patientId" id="patientId" />
 				</div>
 				<div class="conditions time ue-clear">
 					<label>测量时间：</label>
@@ -46,11 +47,11 @@
 				<a href="javascript:void(0);" class="confirm">查询</a> <a
 					href="javascript:void(0);" class="clear">清空条件</a>
 			</div>
-		<!-- 病人查询 -->
-		<div class="patientQuery">
-			<iframe src="patient_find.jsp" frameBorder="0" width="100%"
-				scrolling="auto" height="100%"></iframe>
-		</div>
+			<!-- 病人查询 -->
+			<div class="patientQuery">
+				<iframe src="patient_find.jsp" frameBorder="0" width="100%"
+					scrolling="auto" height="100%"></iframe>
+			</div>
 		</div>
 		<div class="table-box">
 			<table>

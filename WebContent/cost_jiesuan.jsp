@@ -3,7 +3,8 @@
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta name="viewport"
+	content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <link rel="stylesheet" href="css/base.css" />
 <link rel="stylesheet" href="css/info-mgt.css" />
 <link rel="stylesheet" type="text/css" href="css/jquery.dialog.css" />
@@ -17,15 +18,15 @@
 	<div class="query">
 		<div class="query-conditions ue-clear">
 			<div class="conditions staff ue-clear">
-				<label><font color="red">*</font>住院号：</label> <input
-					type="search" results="s" readonly id="patientId" class="patientId" />
-					<label id="patientIdError"></label>
-					<input type="text" style="display:none;" id="patientName">
+				<label><font color="red">*</font>住院号：</label> <input type="search"
+					results="s" readonly id="patientId" class="patientId" /> <label
+					id="patientIdError"></label> <input type="text"
+					style="display: none;" id="patientName">
 			</div>
-		<div class="query-btn ue-clear">
-			<a href="javascript:;" id="select" class="confirm">费用查询</a>
-			<a href="javascript:;" id="reset" class="clear">费用结算</a>
-		</div>
+			<div class="query-btn ue-clear">
+				<a href="javascript:;" id="select" class="confirm">费用查询</a> <a
+					href="javascript:;" id="reset" class="clear">费用结算</a>
+			</div>
 		</div>
 	</div>
 	<div class="table-box">
@@ -45,8 +46,9 @@
 	</div>
 	<div class="pagination ue-clear"></div>
 	<!-- 查询病人 -->
-	<div  class="showDialog">
-		<iframe src="patient_find.jsp" frameBorder="0" width="100%" scrolling="auto" height="100%"></iframe>
+	<div class="showDialog">
+		<iframe src="patient_find.jsp" frameBorder="0" width="100%"
+			scrolling="auto" height="100%"></iframe>
 	</div>
 	<!-- 确定弹窗 -->
 	<div class="showJiesuanDialog">
@@ -56,13 +58,13 @@
 				<p class="dialog-content">确定支付？</p>
 				<p class="tips">如果是请点击“确定”，否则点“取消”</p>
 				<div class="buttons">
-					<input type="button" class="button long2 jiesuanOK" value="确定" /> <input
-						type="button" class="button long2 jiesuanNO" value="取消" />
+					<input type="button" class="button long2 jiesuanOK" value="确定" />
+					<input type="button" class="button long2 jiesuanNO" value="取消" />
 				</div>
 			</div>
 		</div>
 	</div>
-	
+
 </body>
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/common.js"></script>

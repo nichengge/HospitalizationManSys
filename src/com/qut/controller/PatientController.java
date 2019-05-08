@@ -113,7 +113,7 @@ public class PatientController {
 		patientCode.setBedNo(BaseUtils.toInteger(request.getParameter("bedNo")));
 		patientCode.setStart(BaseUtils.toDate(request.getParameter("start")));
 		patientCode.setEnd(BaseUtils.toDate(request.getParameter("end")));
-		patientCode.setOutStatus(0);
+		patientCode.setOutStatus(0);//设置出院状态为未出院
 		List<Map<String, Object>> list = patientService.patientQuery(patientCode);
 		for (Map<String, Object> map : list) {// 此处不对从库中取出的时间做toString转化会报java.lang.IllegalArgumentException
 			String admissionTime = map.get("admissionTime").toString();

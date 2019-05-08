@@ -58,12 +58,30 @@ public class DoctorController {
 		doctorCode.setTitle(title);
 		doctorCode.setName(name);
 		doctorCode.setDepartment(department);
+		/**
+		 * 入院登记的医生查询下拉框和医生查询功能模块的医生查询复用的是这一个接口 但是入院登记的下拉框不会传入state参数，而且此处只希望查到在职医生
+		 * 所以当没有传入state参数时，将医生状态设置为在职
+		 */
 		if (state != null) {
+			//System.out.println("进入非空区");
 			if (state == -1) {
-				state = null;
+				//System.out.println("进入-1区");
+				doctorCode.setState(null);
+			}
+			if (state == 0) {
+				//System.out.println("进入0区");
+				doctorCode.setState(0);
+			}
+			if (state == 1) {
+				//System.out.println("进入1区");
+				doctorCode.setState(1);
 			}
 		}
-		doctorCode.setState(state);
+		if (state == null) {
+			doctorCode.setState(0);
+			//System.out.println("进入null区");
+		}
+		//System.out.println("医生状态最终设置为" + doctorCode.getState());
 		if (!(startTime == null || "".equals(startTime))) {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			Date start = (Date) sdf.parse(startTime);
