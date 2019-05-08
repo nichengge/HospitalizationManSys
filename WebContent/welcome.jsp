@@ -20,7 +20,7 @@ body {
 		<font size="5px">===欢迎使用住院管理系统===</font> <br> <img
 			src="./images/welcome.png" /> <br> <br> <br> <br>
 		<br> <br> <label id="nowIP"></label> <br> <font
-			size="1px">当前系统版本:2.2.0_ Beta_0508</font> <br> &copy; Copyright
+			size="1px">当前系统版本:2.2.0_0508_R</font> <br> &copy; Copyright
 		2019 QUT fsci
 	</div>
 </body>
