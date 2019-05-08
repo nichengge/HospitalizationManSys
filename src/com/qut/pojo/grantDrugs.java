@@ -1,7 +1,6 @@
 package com.qut.pojo;
 
 import java.io.Serializable;
-import java.util.Date;
 /**
  * 药品派发表封装类
  *
