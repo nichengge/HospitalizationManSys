@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50722
 File Encoding         : 65001
 
-Date: 2019-05-02 10:43:45
+Date: 2019-05-23 13:27:15
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -25,7 +25,7 @@ CREATE TABLE `bed` (
   `bedNo` int(11) DEFAULT NULL,
   `state` int(11) DEFAULT NULL,
   PRIMARY KEY (`bedId`)
-) ENGINE=InnoDB AUTO_INCREMENT=302 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=306 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of bed
@@ -45,7 +45,7 @@ INSERT INTO `bed` VALUES ('0000000267', '107', '10701', '0');
 INSERT INTO `bed` VALUES ('0000000268', '107', '10702', '0');
 INSERT INTO `bed` VALUES ('0000000269', '107', '10703', '0');
 INSERT INTO `bed` VALUES ('0000000270', '107', '10704', '0');
-INSERT INTO `bed` VALUES ('0000000271', '108', '10801', '1');
+INSERT INTO `bed` VALUES ('0000000271', '108', '10801', '0');
 INSERT INTO `bed` VALUES ('0000000272', '201', '20101', '0');
 INSERT INTO `bed` VALUES ('0000000273', '201', '20102', '0');
 INSERT INTO `bed` VALUES ('0000000274', '201', '20103', '0');
@@ -63,7 +63,7 @@ INSERT INTO `bed` VALUES ('0000000285', '302', '30202', '1');
 INSERT INTO `bed` VALUES ('0000000286', '303', '30301', '0');
 INSERT INTO `bed` VALUES ('0000000287', '304', '30401', '0');
 INSERT INTO `bed` VALUES ('0000000288', '401', '40101', '0');
-INSERT INTO `bed` VALUES ('0000000289', '402', '40201', '0');
+INSERT INTO `bed` VALUES ('0000000289', '402', '40201', '1');
 INSERT INTO `bed` VALUES ('0000000290', '402', '40202', '0');
 INSERT INTO `bed` VALUES ('0000000291', '403', '40301', '0');
 INSERT INTO `bed` VALUES ('0000000292', '501', '50101', '0');
@@ -76,6 +76,10 @@ INSERT INTO `bed` VALUES ('0000000298', '504', '50401', '0');
 INSERT INTO `bed` VALUES ('0000000299', '504', '50402', '0');
 INSERT INTO `bed` VALUES ('0000000300', '505', '50501', '0');
 INSERT INTO `bed` VALUES ('0000000301', '601', '60101', '1');
+INSERT INTO `bed` VALUES ('0000000302', '506', '50601', '0');
+INSERT INTO `bed` VALUES ('0000000303', '506', '50602', '0');
+INSERT INTO `bed` VALUES ('0000000304', '506', '50603', '0');
+INSERT INTO `bed` VALUES ('0000000305', '506', '50604', '0');
 
 -- ----------------------------
 -- Table structure for category
@@ -116,6 +120,7 @@ CREATE TABLE `cost` (
 -- Records of cost
 -- ----------------------------
 INSERT INTO `cost` VALUES ('1556176659883', '1555922984939', '100', '现金', 'service', '2019-04-25 15:17:39');
+INSERT INTO `cost` VALUES ('1557287858426', '1557287431528', '1000', '现金', 'admin', '2019-05-08 11:57:38');
 
 -- ----------------------------
 -- Table structure for doctor
@@ -145,7 +150,7 @@ INSERT INTO `doctor` VALUES ('000032', '2', '3', '石晓英', '4', '2014-10-10',
 INSERT INTO `doctor` VALUES ('000033', '2', '4', '李飞飞', '1', '2019-01-01', '1');
 INSERT INTO `doctor` VALUES ('000034', '1', '4', '巴桑纳吉', '2', '2018-10-03', '0');
 INSERT INTO `doctor` VALUES ('000035', '2', '5', '旦增卓玛', '1', '2016-06-01', '0');
-INSERT INTO `doctor` VALUES ('000036', '2', '5', '欧阳韵城', '3', '2014-06-12', '0');
+INSERT INTO `doctor` VALUES ('000036', '2', '5', '欧阳御程', '3', '2014-06-12', '0');
 INSERT INTO `doctor` VALUES ('000037', '2', '6', '赵采薇', '1', '2019-04-22', '0');
 INSERT INTO `doctor` VALUES ('000038', '1', '7', '刘玉峰', '2', '2018-05-09', '0');
 INSERT INTO `doctor` VALUES ('000039', '1', '10', '邢枭龙', '4', '2017-07-10', '0');
@@ -169,7 +174,7 @@ CREATE TABLE `drug` (
   `productionTime` date DEFAULT NULL,
   `validityTime` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of drug
@@ -183,6 +188,8 @@ INSERT INTO `drug` VALUES ('0000000006', 'Z0006', '吡贝地尔缓释片', 'LES 
 INSERT INTO `drug` VALUES ('0000000007', 'Z0007', '盐酸维拉帕米缓释片 ', '德国基诺药厂', '36.1', '0', '0', '2', '新华医药', '50', '2018-12-25', '2018-12-01', '2019-06-28');
 INSERT INTO `drug` VALUES ('0000000008', 'Z0008', '马来酸依那普利胶囊 ', '佛山手心制药有限公司', '18', '0', '0', '7', '中美史克', '100', '2018-12-25', '2018-12-01', '2019-10-17');
 INSERT INTO `drug` VALUES ('0000000009', 'Z0009', '肝复乐片', '康哲(湖南)制药有限公司', '74.44', '2', '0', '4', '扬子江制药', '200', '2018-12-25', '2018-12-01', '2019-08-31');
+INSERT INTO `drug` VALUES ('0000000010', 'Z1234', '强力枇杷露', '扬子江制药', '47.64', '30', '2022', '4', '内部采购', '300', '2019-05-23', '2019-04-03', '2022-04-27');
+INSERT INTO `drug` VALUES ('0000000011', 'Z1234', '强力枇杷露', '东北制药', '23.11', '1', '2021', '3', '外部采购', '11', '2019-05-23', '2019-03-01', '2021-01-26');
 
 -- ----------------------------
 -- Table structure for grantdrug
@@ -200,7 +207,7 @@ CREATE TABLE `grantdrug` (
   `grantUserName` varchar(30) DEFAULT NULL,
   `grantTime` datetime DEFAULT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of grantdrug
@@ -208,6 +215,9 @@ CREATE TABLE `grantdrug` (
 INSERT INTO `grantdrug` VALUES ('0000000031', 'Z0008', '马来酸依那普利胶囊', '18', '2', '王大拿', '1555922984939', 'admin', '超级管理员', '2019-04-25 13:56:48');
 INSERT INTO `grantdrug` VALUES ('0000000032', 'Z0001', '乌鸡白凤丸', '47.64', '1', '王大拿', '1555922984939', 'admin', '超级管理员', '2019-04-25 15:07:12');
 INSERT INTO `grantdrug` VALUES ('0000000033', 'Z0009', '肝复乐片', '74.44', '4', '王梓桐', '1556262004947', 'admin', '超级管理员', '2019-04-29 23:37:25');
+INSERT INTO `grantdrug` VALUES ('0000000034', 'Z0008', '马来酸依那普利胶囊', '18', '1', '王大拿', '1557287431528', 'admin', '超级管理员', '2019-05-08 11:58:27');
+INSERT INTO `grantdrug` VALUES ('0000000035', 'Z0006', '吡贝地尔缓释片', '76.5', '5', '王大拿', '1557287431528', 'admin', '超级管理员', '2019-05-08 11:58:52');
+INSERT INTO `grantdrug` VALUES ('0000000036', 'Z1234', '强力枇杷露', '47.64', '3', '丁子彧', '1556762747114', 'admin', '超级管理员', '2019-05-23 13:17:10');
 
 -- ----------------------------
 -- Table structure for log
@@ -305,7 +315,7 @@ CREATE TABLE `paracode` (
   `parameter_values` int(11) NOT NULL,
   `parameter_name` varchar(20) NOT NULL,
   PRIMARY KEY (`code_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=137 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=138 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of paracode
@@ -364,6 +374,7 @@ INSERT INTO `paracode` VALUES ('000133', '004', '503', '初级(4人)');
 INSERT INTO `paracode` VALUES ('000134', '004', '504', '高等(2人)');
 INSERT INTO `paracode` VALUES ('000135', '004', '505', 'VIP(1人)');
 INSERT INTO `paracode` VALUES ('000136', '004', '601', 'VIP(1人)');
+INSERT INTO `paracode` VALUES ('000137', '004', '506', '初级(4人)');
 
 -- ----------------------------
 -- Table structure for parameter
@@ -415,15 +426,17 @@ CREATE TABLE `patient` (
   `leaveState` int(1) DEFAULT '0',
   `leaveTime` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of patient
 -- ----------------------------
-INSERT INTO `patient` VALUES ('00000000044', '1555922984939', '王大拿', '1', '2', '1977-02-01', '1', '372323197702011234', '大拿研究院', '1', '28', '2019-04-22 16:49:44', '内蒙古自治区巴彦淖尔市', '87876654', '王小拿', '87876654', '1', '4', '108', '10801', '0', '0', '0', null);
+INSERT INTO `patient` VALUES ('00000000044', '1555922984939', '王大拿', '1', '2', '1977-02-01', '1', '372323197702011234', '大拿研究院', '1', '28', '2019-04-22 16:49:44', '内蒙古自治区巴彦淖尔市', '87876654', '王小拿', '87876654', '1', '4', '108', '10801', '0', '1', '1', '2019-05-08 11:14:37');
 INSERT INTO `patient` VALUES ('00000000045', '1555923323591', '张褴褛', '1', '4', '1998-08-01', '3', '231123199808011232', '拉萨市第一中学', '0', '32', '2019-04-22 16:55:23', '拉萨', '6765432', '张筚路', '6765432', '1', '2', '302', '30201', '0', '0', '0', null);
 INSERT INTO `patient` VALUES ('00000000046', '1556262004947', '王梓桐', '2', '6', '2011-01-04', '6', '371312201101042323', '', '0', '37', '2019-04-26 15:00:04', '山东青岛', '12345678901', '张大仙', '13312431212', '1', '1', '601', '60101', '0', '0', '0', null);
 INSERT INTO `patient` VALUES ('00000000047', '1556762747114', '丁子彧', '2', '1', '1997-02-05', '1', '372502197702051212', '中国海洋大学', '0', '27', '2019-05-02 10:05:47', '山东聊城', '', '丁凡', '13798234312', '1', '3', '103', '10301', '0', '0', '0', null);
+INSERT INTO `patient` VALUES ('00000000048', '1557287431528', '王大拿', '1', '1', '2018-01-03', '4', '372323197702011234', '', '0', '34', '2019-05-08 11:50:31', '呼伦贝厄', '', '王晓娜', '17865432121', '1', '2', '402', '40201', '0', '0', '0', null);
+INSERT INTO `patient` VALUES ('00000000049', '1558535901290', 'MD5测试', '2', '2', '2019-05-21', '2', '372312201905211234', '', '0', '31', '2019-05-22 22:38:21', '黄岛', '', 'MD4', '13123231234', '1', '2', '202', '20201', '0', '1', '1', '2019-05-23 13:01:35');
 
 -- ----------------------------
 -- Table structure for sign
@@ -444,7 +457,7 @@ CREATE TABLE `sign` (
   `bloodSugar` float DEFAULT '0',
   `vein` float DEFAULT '0',
   PRIMARY KEY (`signId`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sign
@@ -457,6 +470,15 @@ INSERT INTO `sign` VALUES ('00000000023', '1555922984939', '2019-04-29 23:53:28'
 INSERT INTO `sign` VALUES ('00000000026', '1555922984939', '2019-04-27 21:17:56', 'admin', '36', '80/120', '78', null, '超级管理员', '2019-04-27 21:20:44', null, '6.7', '0');
 INSERT INTO `sign` VALUES ('00000000027', '1556262004947', '2019-04-30 11:31:15', 'admin', '37', '90/120', '120', null, '超级管理员', '2019-04-30 11:36:08', null, '6.7', '0');
 INSERT INTO `sign` VALUES ('00000000028', '1556262004947', '2019-04-30 11:40:45', 'admin', '39', '90/125', '120', '校验测试', '超级管理员', '2019-04-30 11:41:20', null, '6.6', '0');
+INSERT INTO `sign` VALUES ('00000000029', '1555923323591', '2019-05-05 11:31:46', 'superman', '36.8', '90/128', '87', '超级权限用户测试', '超级权限用户', '2019-05-05 11:32:20', null, '7.7', '0');
+INSERT INTO `sign` VALUES ('00000000030', '1556262004947', '2019-05-07 11:44:23', 'superman', '37.8', '75/115', '77', '持续低烧', '超级权限用户', '2019-05-07 11:44:49', null, '6.7', '0');
+INSERT INTO `sign` VALUES ('00000000031', '1555922984939', '2019-05-07 11:48:32', 'superman', '36.8', '85/135', '77', '准备出院', '超级权限用户', '2019-05-07 11:49:19', null, '0', '0');
+INSERT INTO `sign` VALUES ('00000000032', '1555922984939', '2019-05-08 10:43:00', 'doctor', '39', '80/117', '140', '再次高烧', '医生', '2019-05-08 10:43:42', null, '0', '0');
+INSERT INTO `sign` VALUES ('00000000033', '1557287431528', '2019-05-08 11:51:21', 'admin', '36.8', '89/130', '110', null, '超级管理员', '2019-05-08 11:51:41', null, '7.4', '0');
+INSERT INTO `sign` VALUES ('00000000034', '1557287431528', '2019-05-08 11:59:11', 'admin', '36', '90/145', '77', null, '超级管理员', '2019-05-08 11:59:36', null, '6.2', '0');
+INSERT INTO `sign` VALUES ('00000000035', '1557287431528', '2019-05-08 11:59:38', 'admin', '37.5', '80/117', '78', null, '超级管理员', '2019-05-08 12:00:15', null, '6.2', '0');
+INSERT INTO `sign` VALUES ('00000000036', '1557287431528', '2019-05-08 12:00:16', 'admin', '0', '90/130', '0', null, '超级管理员', '2019-05-08 12:00:36', null, '0', '0');
+INSERT INTO `sign` VALUES ('00000000037', '1557287431528', '2019-05-08 12:10:27', 'admin', '36.5', '70/130', '69', '正常', '超级管理员', '2019-05-08 12:11:10', null, '6.3', '0');
 
 -- ----------------------------
 -- Table structure for stock
@@ -469,7 +491,7 @@ CREATE TABLE `stock` (
   `price` float DEFAULT NULL,
   `count` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of stock
@@ -478,10 +500,11 @@ INSERT INTO `stock` VALUES ('0000000009', 'Z0001', '乌鸡白凤丸', '47.64', '
 INSERT INTO `stock` VALUES ('0000000010', 'Z0003', '鸦胆子油软胶囊 ', '109', '278');
 INSERT INTO `stock` VALUES ('0000000011', 'Z0004', '慈丹胶囊 ', '45.9', '85');
 INSERT INTO `stock` VALUES ('0000000012', 'Z0005', '石杉碱甲片', '24.8', '198');
-INSERT INTO `stock` VALUES ('0000000013', 'Z0006', '吡贝地尔缓释片', '76.5', '50');
+INSERT INTO `stock` VALUES ('0000000013', 'Z0006', '吡贝地尔缓释片', '76.5', '45');
 INSERT INTO `stock` VALUES ('0000000014', 'Z0007', '盐酸维拉帕米缓释片 ', '36.1', '39');
-INSERT INTO `stock` VALUES ('0000000015', 'Z0008', '马来酸依那普利胶囊 ', '18', '92');
+INSERT INTO `stock` VALUES ('0000000015', 'Z0008', '马来酸依那普利胶囊 ', '18', '91');
 INSERT INTO `stock` VALUES ('0000000016', 'Z0009', '肝复乐片', '74.44', '196');
+INSERT INTO `stock` VALUES ('0000000017', 'Z1234', '强力枇杷露', '47.64', '309');
 
 -- ----------------------------
 -- Table structure for user
@@ -490,7 +513,7 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `user_id` varchar(25) NOT NULL,
   `user_name` varchar(20) NOT NULL,
-  `user_password` varchar(20) NOT NULL,
+  `user_password` varchar(32) NOT NULL,
   `user_phone` varchar(11) DEFAULT NULL,
   `user_describe` int(2) NOT NULL DEFAULT '0',
   `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
@@ -500,15 +523,16 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('231123199808011232', '张褴褛', '123456', null, '0', '2019-04-22 00:00:00');
-INSERT INTO `user` VALUES ('371312201101042323', '王梓桐', '123456', null, '0', '2019-04-26 00:00:00');
-INSERT INTO `user` VALUES ('372323197702011234', '王大拿', '123456', null, '0', '2019-04-22 16:52:01');
-INSERT INTO `user` VALUES ('372502197702051212', '丁子彧', '123456', null, '0', '2019-05-02 00:00:00');
-INSERT INTO `user` VALUES ('admin', '超级管理员', 'admin', null, '5', '2019-04-22 13:39:53');
-INSERT INTO `user` VALUES ('doctor', '医生', 'doctor', null, '2', '2019-04-22 13:38:11');
-INSERT INTO `user` VALUES ('manager', '系统管理员', 'manager', null, '4', '2019-04-22 13:39:32');
-INSERT INTO `user` VALUES ('nurse', '护士', 'nurse', null, '1', '2019-04-22 13:37:52');
-INSERT INTO `user` VALUES ('service', '服务前台', 'service', null, '3', '2019-04-22 13:39:19');
+INSERT INTO `user` VALUES ('231123199808011232', '张褴褛', 'E10ADC3949BA59ABBE56E057F20F883E', null, '0', '2019-04-22 00:00:00');
+INSERT INTO `user` VALUES ('371312201101042323', '王梓桐', 'E10ADC3949BA59ABBE56E057F20F883E', null, '0', '2019-04-26 00:00:00');
+INSERT INTO `user` VALUES ('372312201905211234', 'MD5测试患者', 'E10ADC3949BA59ABBE56E057F20F883E', '', '0', '2019-05-22 22:47:23');
+INSERT INTO `user` VALUES ('372323197702011234', '王大拿', 'E10ADC3949BA59ABBE56E057F20F883E', null, '0', '2019-04-22 16:52:01');
+INSERT INTO `user` VALUES ('372502197702051212', '丁子彧', 'E10ADC3949BA59ABBE56E057F20F883E', null, '0', '2019-05-02 00:00:00');
+INSERT INTO `user` VALUES ('admin', '超级管理员', '21232F297A57A5A743894A0E4A801FC3', null, '5', '2019-04-22 13:39:53');
+INSERT INTO `user` VALUES ('doctor', '医生', 'F9F16D97C90D8C6F2CAB37BB6D1F1992', null, '2', '2019-04-22 13:38:11');
+INSERT INTO `user` VALUES ('manager', '系统管理员', '1D0258C2440A8D19E716292B231E3190', null, '4', '2019-04-22 13:39:32');
+INSERT INTO `user` VALUES ('nurse', '护士', '0701AA317DA5A004FBF6111545678A6C', null, '1', '2019-04-22 13:37:52');
+INSERT INTO `user` VALUES ('service', '服务前台', 'AAABF0D39951F3E6C3E8A7911DF524C2', null, '3', '2019-04-22 13:39:19');
 
 -- ----------------------------
 -- Table structure for ward
@@ -523,7 +547,7 @@ CREATE TABLE `ward` (
   `state` int(11) DEFAULT NULL,
   `createTime` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=97 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ward
@@ -535,7 +559,7 @@ INSERT INTO `ward` VALUES ('0000000074', '104', '1', '4', '1', '0', '2019-04-22'
 INSERT INTO `ward` VALUES ('0000000075', '105', '1', '1', '1', '0', '2019-04-22');
 INSERT INTO `ward` VALUES ('0000000076', '106', '1', '2', '2', '0', '2019-04-22');
 INSERT INTO `ward` VALUES ('0000000077', '107', '1', '3', '4', '0', '2019-04-22');
-INSERT INTO `ward` VALUES ('0000000078', '108', '1', '4', '1', '1', '2019-04-22');
+INSERT INTO `ward` VALUES ('0000000078', '108', '1', '4', '1', '0', '2019-04-22');
 INSERT INTO `ward` VALUES ('0000000079', '201', '2', '3', '4', '0', '2019-04-22');
 INSERT INTO `ward` VALUES ('0000000080', '202', '2', '2', '2', '0', '2019-04-22');
 INSERT INTO `ward` VALUES ('0000000081', '203', '2', '1', '1', '0', '2019-04-22');
@@ -553,6 +577,7 @@ INSERT INTO `ward` VALUES ('0000000092', '503', '5', '3', '4', '0', '2019-04-22'
 INSERT INTO `ward` VALUES ('0000000093', '504', '5', '2', '2', '0', '2019-04-22');
 INSERT INTO `ward` VALUES ('0000000094', '505', '5', '1', '1', '0', '2019-04-22');
 INSERT INTO `ward` VALUES ('0000000095', '601', '6', '1', '1', '1', '2019-04-26');
+INSERT INTO `ward` VALUES ('0000000096', '506', '5', '3', '4', '0', '2019-05-23');
 
 -- ----------------------------
 -- Table structure for wardupdate
@@ -564,7 +589,7 @@ CREATE TABLE `wardupdate` (
   `roomType` int(11) DEFAULT NULL,
   `updateTime` date DEFAULT NULL COMMENT '住院日期,与patient表的admissionTime字段保持一致',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8 COMMENT='床位费用计算表';
+) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8 COMMENT='床位费用计算表';
 
 -- ----------------------------
 -- Records of wardupdate
@@ -579,6 +604,8 @@ INSERT INTO `wardupdate` VALUES ('0000000053', '1555922984939', '1', '2019-04-25
 INSERT INTO `wardupdate` VALUES ('0000000054', '1555922984939', '4', '2019-04-25');
 INSERT INTO `wardupdate` VALUES ('0000000055', '1556262004947', '1', '2019-04-26');
 INSERT INTO `wardupdate` VALUES ('0000000056', '1556762747114', '3', '2019-05-02');
+INSERT INTO `wardupdate` VALUES ('0000000057', '1557287431528', '2', '2019-05-08');
+INSERT INTO `wardupdate` VALUES ('0000000058', '1558535901290', '2', '2019-05-22');
 
 -- ----------------------------
 -- Table structure for withdrawal
@@ -595,13 +622,14 @@ CREATE TABLE `withdrawal` (
   `entiyTime` date DEFAULT NULL,
   `reason` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of withdrawal
 -- ----------------------------
 INSERT INTO `withdrawal` VALUES ('0000000015', '1493657709971', '赵薇', '1', '王飞', 'admin', 'Z0001', '2018-12-25', '过期');
 INSERT INTO `withdrawal` VALUES ('0000000016', '1555922984939', '王大拿', '1', '超级管理员', 'admin', 'Z0001', '2019-04-25', '测试');
+INSERT INTO `withdrawal` VALUES ('0000000017', '1556762747114', '丁子彧', '1', '超级管理员', 'admin', 'Z1234', '2019-05-23', '多发');
 
 -- ----------------------------
 -- Procedure structure for AutoDeleteLogs

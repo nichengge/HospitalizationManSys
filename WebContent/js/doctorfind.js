@@ -223,10 +223,13 @@ function doctorDelete(obj) {
 				alert("成功离职！");
 			}
 			if (result.state == 1) {
-				alert("已离职！");
+				alert("该医生已经离职！");
 			}
 			if (result.state == 3) {
-				alert("该医生不存在！");
+				alert("未知异常！");
+			}
+			if (result.state == 2) {
+				alert("该医生名下有未出院患者,无法离职！");
 			}
 			window.location.reload();
 		}

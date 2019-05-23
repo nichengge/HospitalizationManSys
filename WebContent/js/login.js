@@ -19,13 +19,15 @@ function Login() {
 		$('#message').html("验证码为空");
 		return false;
 	}
+	// 对用户输入的原密码进行MD5加密并转换为32位大写字母密文
+	var md5pwd = (hex_md5(password)).toUpperCase();
 	// 登陆提交请求
 	$.ajax({
 		url : 'account/login.do',
 		type : 'POST',
 		data : {
 			'username' : name,
-			'password' : password,
+			'password' : md5pwd,
 			'Verification' : Verification
 		},
 		dataType : 'JSON',

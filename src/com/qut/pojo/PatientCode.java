@@ -20,6 +20,15 @@ public class PatientCode implements Serializable {
 	private Date outEnd;
 	private Integer outStatus;
 	private Integer jsStatus;
+	private Integer Docid;
+	
+	public Integer getDocid() {
+		return Docid;
+	}
+
+	public void setDocid(Integer Docid) {
+		this.Docid = Docid;
+	}
 
 	public PatientCode() {
 

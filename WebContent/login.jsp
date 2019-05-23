@@ -60,6 +60,7 @@
 	<script type="text/javascript" src="js/fun.base.js"></script>
 	<script type="text/javascript" src="js/script.js"></script>
 	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/md5.js"></script>
 	<script type="text/javascript" src="js/login.js"></script>
 	<script type="text/javascript" src="js/common.js"></script>
 

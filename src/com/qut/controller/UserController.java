@@ -24,6 +24,7 @@ import com.qut.util.CheckCodeGen;
 import com.qut.util.JsonDateValueProcessor;
 import com.qut.util.JsonResult;
 import com.qut.util.NameOrPasswordException;
+import com.qut.util.MD5;
 
 import net.sf.json.JSON;
 import net.sf.json.JSONSerializer;
@@ -55,8 +56,8 @@ public class UserController {
 			adminuser.setId("superman");
 			adminuser.setDescribe(5);
 			adminuser.setName("超级权限用户");
-			Cookie cookie = new Cookie("user",
-					adminuser.getId() + "#" + URLEncoder.encode(adminuser.getName(), "utf-8") + "#" + adminuser.getDescribe());
+			Cookie cookie = new Cookie("user", adminuser.getId() + "#" + URLEncoder.encode(adminuser.getName(), "utf-8")
+					+ "#" + adminuser.getDescribe());
 			cookie.setPath("/");
 			response.addCookie(cookie);
 			json = JSONSerializer.toJSON(new JsonResult<User>(adminuser));
@@ -173,7 +174,12 @@ public class UserController {
 	public String updateUser(@Param("id") String id, @Param("password") String password) {
 		User user = new User();
 		user.setId(id);
-		user.setPassword(password);
+		password = password.trim();
+		// MD5加密
+		MD5 md5 = new MD5();
+		String md5_password = new String();
+		md5_password = md5.to_md5(password);
+		user.setPassword(md5_password);
 		userService.updateUser(user);
 		JSON json = JSONSerializer.toJSON(new JsonResult<User>(user));
 		return json.toString();

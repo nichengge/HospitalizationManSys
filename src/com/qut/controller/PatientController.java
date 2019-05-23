@@ -21,7 +21,7 @@ import com.qut.service.WardService;
 import com.qut.service.UserService;
 import com.qut.util.BaseUtils;
 import com.qut.util.JsonResult;
-
+import com.qut.util.MD5;
 import net.sf.json.JSON;
 import net.sf.json.JSONSerializer;
 
@@ -88,7 +88,13 @@ public class PatientController {
 		User user = new User();
 		user.setId(request.getParameter("cerificateNo"));// 用户ID是患者入院的身份证号
 		user.setName(request.getParameter("name"));// 用户姓名是患者的入院姓名
-		user.setPassword("123456");// 患者初始密码123456
+		String defaultpassword = "123456";
+		defaultpassword = defaultpassword.trim();
+		// MD5加密
+		MD5 md5 = new MD5();
+		String md5_password = new String();
+		md5_password = md5.to_md5(defaultpassword);
+		user.setPassword(md5_password);// 患者初始密码123456
 		user.setDescribe(0);// 账户类型是0--患者
 		User checkuser = userService.findUserById(request.getParameter("cerificateNo"));
 		if (checkuser == null) {// 患者用户不存在，则注册为新用户；用户存在,不执行动作
@@ -108,12 +114,14 @@ public class PatientController {
 		String name = BaseUtils.toString(request.getParameter("name"));
 		patientCode.setPatientId(patientId);
 		patientCode.setDepartmentNo(BaseUtils.toInteger(request.getParameter("departmentNo")));
+		//patientCode.setDocid(BaseUtils.toInteger(request.getParameter("Docid")));
 		patientCode.setName(name);
 		patientCode.setWardNo(BaseUtils.toInteger(request.getParameter("wardNo")));
 		patientCode.setBedNo(BaseUtils.toInteger(request.getParameter("bedNo")));
 		patientCode.setStart(BaseUtils.toDate(request.getParameter("start")));
 		patientCode.setEnd(BaseUtils.toDate(request.getParameter("end")));
-		patientCode.setOutStatus(0);//设置出院状态为未出院
+		patientCode.setOutStatus(0);// 设置出院状态为未出院
+		//System.out.println("当前患者码为:" + patientCode);
 		List<Map<String, Object>> list = patientService.patientQuery(patientCode);
 		for (Map<String, Object> map : list) {// 此处不对从库中取出的时间做toString转化会报java.lang.IllegalArgumentException
 			String admissionTime = map.get("admissionTime").toString();

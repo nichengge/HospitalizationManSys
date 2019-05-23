@@ -66,7 +66,7 @@
 <script type="text/javascript" src="js/core.js"></script>
 <script type="text/javascript" src="js/jquery.dialog.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
-<script type="text/javascript" src="js/user.js"></script>
+<script type="text/javascript" src="js/md5.js"></script>
 <script type="text/javascript" src="js/modifyPwd.js"></script>
 <script type="text/javascript" src="js/cookie_util.js"></script>
 

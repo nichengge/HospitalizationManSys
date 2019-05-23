@@ -126,7 +126,8 @@ function showList(list, start, end) {
 					+ user.createtime
 					+ "</td>"
 					+ "<td class='name'><a href='javascript:void(0)' onclick='userDelete(this);'>删除</a>&nbsp;&nbsp;&nbsp;&nbsp;"
-					+ "<a href='javascript:void(0)' onclick='userUpdate(this)'>修改</a></td>"
+					+ "<a href='javascript:void(0)' onclick='userUpdate(this)'>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;"
+					+ "<a href='javascript:void(0)' onclick='userUpdatePwd(this)'>重置密码</a></td>"
 					+ "</tr>");
 			$tbody.append($tr);
 		}
@@ -167,6 +168,31 @@ function userUpdate(obj) {
 	var quanxian = $(obj).parent().parent().children().eq(3).find("span")
 			.text();
 	showUser(userId, username, userPhone, quanxian);
+}
+//修改用户密码
+function userUpdatePwd(obj) {
+	// 得到所选用户的Id
+	var userId = obj.parentNode.parentNode.childNodes[1].innerText;
+	var defaultpwd = "123456";
+	// 提交请求
+	$.ajax({
+		url : "account/updateUser.do",
+		data : {
+			"id" : userId,
+			"password" : defaultpwd
+		},
+		type : "post",
+		dataType : "JSON",
+		async: false,
+		success : function(result) {
+			if (result.state == 0) {
+				alert("密码重置为:123456");
+			}else{
+				alert("未知异常!");
+			}
+		}
+	});
+	
 }
 function Reset() {
 	window.location.reload(true);

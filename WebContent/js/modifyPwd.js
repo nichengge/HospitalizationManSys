@@ -41,7 +41,10 @@ function checkpassword() {
 		success : function(result) {
 			if (result.state == 0) {
 				var user = result.data;
-				if (user.password == pwd.val()) {
+				//对用户输入的原密码进行MD5加密
+				var md5pwd = (hex_md5(pwd.val())).toUpperCase();
+				//alert(md5pwd);
+				if (user.password == md5pwd) {
 					check = true;
 				}
 			}
@@ -112,11 +115,12 @@ function save() {
 			},
 			type : "post",
 			dataType : "JSON",
+			async: false,
 			success : function(result) {
 				if (result.state == 0) {
-					alert("保存成功！");
-					$('.showModify').Dialog('close');
-					window.location.href = "welcome.jsp";// 修改成功，重新回到欢迎页
+					alert("修改成功！");
+				}else{
+					alert("未知异常!");
 				}
 			}
 		});

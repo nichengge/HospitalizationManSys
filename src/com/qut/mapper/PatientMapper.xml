@@ -70,6 +70,9 @@
 		if(#{departmentNo} is
 		null,0=0,department=#{departmentNo})
 		and
+		if(#{Docid} is
+		null,0=0,a.doctorId=#{Docid})
+		and
 		if(#{start} is null,0=0,admissionTime &gt;= #{start})
 		and
 		if(#{end} is

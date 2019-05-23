@@ -63,6 +63,7 @@
 </body>
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="js/md5.js"></script>
 <script type="text/javascript" src="js/userzc.js"></script>
 <script type="text/javascript">
 	$(".select-title").on("click", function() {

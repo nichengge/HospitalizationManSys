@@ -121,14 +121,15 @@ function register() {
 	var name = $("#name").val();
 	var password = $("#password").val();
 	var phone = $("#phone").val();
-
+	// 对用户输入的原密码进行MD5加密并转换为32位大写字母密文
+	var md5pwd = (hex_md5(password)).toUpperCase();
 	$.ajax({
 		url : 'account/register.do',
 		type : 'post',
 		data : {
 			"id" : id,
 			"name" : name,
-			"password" : password,
+			"password" : md5pwd,
 			"phone" : phone,
 			"describe" : ok
 		},
