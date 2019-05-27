@@ -11,8 +11,8 @@ $(function() {
 	}
 	// 患者
 	if (Jurisdiction == 0) {
-		$("#yaopinguanli").css("display", "");
-		$("#kccx").css("display", "");
+		//$("#yaopinguanli").css("display", "");
+		//$("#kccx").css("display", "");
 		$("#jiesuanzhongxin").css("display", "");
 		$("#fycx").css("display", "");
 		$("#jfjl").css("display", "");
@@ -71,7 +71,7 @@ $(function() {
 		$("#rydj").css("display", "");
 		$("#zycx").css("display", "");
 		$("#yaopinguanli").css("display", "");
-		$("#tycl").css("display", "");
+		//$("#tycl").css("display", "");
 		$("#kccx").css("display", "");
 		$("#jiesuanzhongxin").css("display", "");
 		$("#fyyj").css("display", "");
