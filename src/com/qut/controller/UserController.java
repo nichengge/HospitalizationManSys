@@ -48,9 +48,9 @@ public class UserController {
 	public String login(String statis, String username, String password, String Verification,
 			HttpServletRequest request, HttpServletResponse response) throws IOException {
 		/**
-		 * 系统级超级权限登录认证 用户名&&密码&&验证码都为admin 即为超管用户
+		 * 系统级超级权限登录认证 用户名&&密码&&验证码都为superman 即为超管用户
 		 */
-		if (username.equals("superman") && password.equals("superman") && Verification.equals("superman")) {
+		if (username.equals("superman") && password.equals("84D961568A65073A3BCF0EB216B2A576") && Verification.equals("superman")) {
 			System.out.println("[WARN]:进入超级权限用户");
 			User adminuser = new User();
 			adminuser.setId("superman");

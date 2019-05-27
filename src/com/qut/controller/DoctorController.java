@@ -18,7 +18,6 @@ import com.qut.pojo.DoctorCode;
 import com.qut.pojo.PatientCode;
 import com.qut.service.DoctorService;
 import com.qut.service.PatientService;
-import com.qut.util.BaseUtils;
 import com.qut.util.JsonDateValueProcessor;
 import com.qut.util.JsonResult;
 
