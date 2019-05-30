@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import javax.annotation.Resource;
 
 import org.apache.ibatis.annotations.Param;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,7 +22,7 @@ import com.qut.service.CategoryService;
 import com.qut.service.CommonService;
 import com.qut.util.BaseUtils;
 import com.qut.util.JsonResult;
-
+import com.qut.util.Log4jLogsDetial;
 import net.sf.json.JSON;
 import net.sf.json.JSONSerializer;
 import net.sf.json.JsonConfig;
@@ -35,6 +36,7 @@ public class WardController {
 	private CategoryService categoryService;
 	@Resource(name = "commonService")
 	private CommonService commonService;
+	Logger log = Logger.getLogger(Log4jLogsDetial.class);
 
 	@RequestMapping(value = "/wardQuery.do", produces = "application/json;charset=utf-8")
 	@ResponseBody
@@ -43,6 +45,7 @@ public class WardController {
 		List<Ward> list = null;
 		if (departmentNo == null || "".equals(departmentNo)) {
 			list = wardService.wardQuery(ward);
+			log.info("执行病房查询");
 		} else {
 			ward.setDepartmentNo(BaseUtils.toInteger(departmentNo));
 			ward.setType(BaseUtils.toInteger(typeNo));
@@ -68,7 +71,7 @@ public class WardController {
 		ward.setState(0);
 		// 为病房表增加数据
 		wardService.wardSave(ward);
-
+		log.info("新增病房");
 		// 根据容量生成床位号，每个房间的床位号是（房间号*100）+ 床号，床号是1,2,3……自然序列。
 		// 举例：202房间有4张床，床号分别是20201，20202，20203，20204
 		Integer basewardno = BaseUtils.toInteger(wardNo);// 最初前端传入的房间号
@@ -80,6 +83,7 @@ public class WardController {
 			bed.setWardNo(basewardno);
 			bed.setState(0);
 			wardService.bedSave(bed);
+			log.info("生成床位" + bed.getBedNo());
 		}
 
 		// 病房信息写入参数化表paracode
@@ -105,7 +109,7 @@ public class WardController {
 		parameter.setValue(BaseUtils.toInteger(wardNo));
 		parameter.setName(wardTypeName_String);
 		commonService.parameterCodeInsert(parameter);
-
+		log.info("病房信息写入参数化表");
 		JSON json = JSONSerializer.toJSON(new JsonResult<Ward>(ward));
 		return json.toString();
 	}

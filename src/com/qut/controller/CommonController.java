@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import org.apache.ibatis.annotations.Param;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,7 +21,7 @@ import com.qut.service.DoctorService;
 import com.qut.service.PatientService;
 import com.qut.service.WardService;
 import com.qut.util.JsonResult;
-
+import com.qut.util.Log4jLogsDetial;
 import net.sf.json.JSON;
 import net.sf.json.JSONSerializer;
 
@@ -35,11 +36,13 @@ public class CommonController {
 	private PatientService patientService;
 	@Resource(name = "wardService")
 	private WardService wardService;
+	Logger log = Logger.getLogger(Log4jLogsDetial.class);
 
 	@RequestMapping(value = "/list.do", produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public String titleQuery(@Param("name") String name) {
 		List<Common> list = commonService.titleQuery(name);
+		log.info("职称查询");
 		JSON json = JSONSerializer.toJSON(new JsonResult<List<Common>>(list));
 		return json.toString();
 	}
@@ -48,6 +51,7 @@ public class CommonController {
 	@ResponseBody
 	public String parameterQuery() {
 		List<Parameter> list = commonService.parameterQuery();
+		log.info("一级参数查询");
 		JSON json = JSONSerializer.toJSON(new JsonResult<List<Parameter>>(list));
 		return json.toString();
 	}
@@ -56,6 +60,7 @@ public class CommonController {
 	@ResponseBody
 	public String parameterCodeQuery(@Param("code") String code) {
 		List<Parameter> list = commonService.parameterCodeQuery(code);
+		log.info("二级参数查询");
 		JSON json = JSONSerializer.toJSON(new JsonResult<List<Parameter>>(list));
 		return json.toString();
 
@@ -94,9 +99,11 @@ public class CommonController {
 				parameter.setValue(value);
 				if (parameter.getId() == null) {
 					commonService.parameterCodeInsert(parameter);
+					log.info("增加参数" + parameter.getName());
 				}
 				if (parameter.getId() != null) {
 					commonService.parameterCodeUpdate(parameter);
+					log.info("更新参数" + parameter.getName());
 				}
 				json = JSONSerializer.toJSON(new JsonResult<Parameter>(0, "添加成功", null));
 			} else {
@@ -127,18 +134,18 @@ public class CommonController {
 			doctorcode.setDepartment(value);
 			doctorcode.setState(0);// 在职的医生
 			List<Doctor> list1 = doctorService.doctorQuery(doctorcode);
-
+			log.info("查询医生");
 			// 查询科室下的患者
 			PatientCode patientcode = new PatientCode();
 			patientcode.setDepartmentNo(value);
 			patientcode.setOutStatus(0);// 未出院患者
 			List<Map<String, Object>> list2 = patientService.patientQuery(patientcode);
-
+			log.info("查询科室" + patientcode.getDepartmentNo() + "患者");
 			// 查询科室下的病房
 			Ward ward = new Ward();
 			ward.setDepartmentNo(value);
 			List<Ward> list3 = wardService.wardQuery(ward);
-
+			log.info("查询科室:" + ward.getDepartmentNo() + "病房");
 			// System.out.println(list1);
 			// System.out.println(list2);
 			// System.out.println(list3);
@@ -146,9 +153,11 @@ public class CommonController {
 			if (list1.size() == 0 && list2.size() == 0 && list3.size() == 0) {
 				// System.out.println("进入删除科室区");
 				commonService.parameterCodeDelete(id);// 删除参数
+				log.info("删除科室成功");
 				json = JSONSerializer.toJSON(new JsonResult<Parameter>(0, "删除成功", null));
 			} else {
 				// System.out.println("进入删除科室异常区");
+				log.info("删除科室失败");
 				json = JSONSerializer.toJSON(new JsonResult<Parameter>(1, "当前科室正在使用", null));
 			}
 		} else if (code.equals("002")) {
@@ -162,9 +171,11 @@ public class CommonController {
 			if (list1.size() == 0) {
 				// System.out.println("进入删除职称区");
 				commonService.parameterCodeDelete(id);// 删除参数
+				log.info("删除职称成功");
 				json = JSONSerializer.toJSON(new JsonResult<Parameter>(0, "删除成功", null));
 			} else {
 				// System.out.println("进入删除职称异常区");
+				log.info("删除职称异常");
 				json = JSONSerializer.toJSON(new JsonResult<Parameter>(2, "当前职称正在使用", null));
 			}
 		} else if (code.equals("003")) {
@@ -176,9 +187,11 @@ public class CommonController {
 				// System.out.println("进入删除病房类型区");
 				// 删除参数表,数据库内的触发器会同步删除category表中的相关行
 				commonService.parameterCodeDelete(id);
+				log.info("删除病房类型成功");
 				json = JSONSerializer.toJSON(new JsonResult<Parameter>(0, "删除成功", null));
 			} else {
 				// System.out.println("进入删除病房类型异常区");
+				log.info("删除病房类型异常");
 				json = JSONSerializer.toJSON(new JsonResult<Parameter>(3, "当前病房类型正在使用", null));
 			}
 		} else if (code.equals("004")) {
@@ -192,9 +205,11 @@ public class CommonController {
 				commonService.parameterCodeDelete(id);
 				// 删除病房
 				wardService.wardDelete(value);
+				log.info("删除病房成功");
 				json = JSONSerializer.toJSON(new JsonResult<Parameter>(0, "删除成功", null));
 			} else {
 				// System.out.println("进入删除病房异常区");
+				log.info("删除病房异常");
 				json = JSONSerializer.toJSON(new JsonResult<Parameter>(4, "当前病房正在使用", null));
 			}
 		} else if (code.equals("005")) {
@@ -217,6 +232,7 @@ public class CommonController {
 	@ResponseBody
 	public String wardTypeQuery() {
 		List<Parameter> list = commonService.wardTypeQuery();
+		log.info("查询病房类型列表");
 		JSON json = JSONSerializer.toJSON(new JsonResult<List<Parameter>>(list));
 		return json.toString();
 	}
@@ -230,6 +246,7 @@ public class CommonController {
 	@ResponseBody
 	public String nationQuery() {
 		List<Parameter> list = commonService.nationQuery();
+		log.info("查询民族列表");
 		JSON json = JSONSerializer.toJSON(new JsonResult<List<Parameter>>(list));
 		return json.toString();
 	}

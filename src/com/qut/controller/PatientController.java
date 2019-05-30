@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,6 +24,7 @@ import com.qut.service.UserService;
 import com.qut.util.BaseUtils;
 import com.qut.util.JsonResult;
 import com.qut.util.MD5;
+import com.qut.util.Log4jLogsDetial;
 import net.sf.json.JSON;
 import net.sf.json.JSONSerializer;
 
@@ -36,6 +39,7 @@ public class PatientController {
 	private WardService wardService;
 	@Resource(name = "userService")
 	private UserService userService;
+	Logger log = Logger.getLogger(Log4jLogsDetial.class);
 
 	@RequestMapping(value = "/patientAdd.do", produces = "application/json;charset=utf-8")
 	@ResponseBody
@@ -62,16 +66,17 @@ public class PatientController {
 		patient.setState(0);// 区别是否出院
 		// 保存病人信息
 		patientService.patientAdd(patient);
+		log.info("患者" + request.getParameter("name") + "入院");
 		// 记录床位信息
 		wardService.logWard(patient);
-
+		log.info("记录到病房变更");
 		// 更改床位的状态
 		Bed bed = new Bed();
 		bed.setWardNo(patient.getRoomNo());
 		bed.setBedNo(patient.getBedNo());
 		bed.setState(1);
 		bedService.bedUpdate(bed);
-
+		log.info("更新床位状态");
 		// 判断房间是否满，如果满就改变状态
 		Ward ward = new Ward();
 		ward.setWardNo(patient.getRoomNo());
@@ -82,6 +87,7 @@ public class PatientController {
 			ward.setWardNo(patient.getRoomNo());
 			ward.setState(1);
 			wardService.wardUpdate(ward);
+			log.info("更新病房状态");
 		}
 
 		// 将患者的基本信息插入到user表，如果患者以前住过院，用户表里会存有患者身份证，则不再插入
@@ -99,6 +105,7 @@ public class PatientController {
 		User checkuser = userService.findUserById(request.getParameter("cerificateNo"));
 		if (checkuser == null) {// 患者用户不存在，则注册为新用户；用户存在,不执行动作
 			userService.register(user);
+			log.info("患者" + patient.getName() + "开户：" + patient.getCerificateNo());
 		} else {
 		}
 
@@ -114,15 +121,16 @@ public class PatientController {
 		String name = BaseUtils.toString(request.getParameter("name"));
 		patientCode.setPatientId(patientId);
 		patientCode.setDepartmentNo(BaseUtils.toInteger(request.getParameter("departmentNo")));
-		//patientCode.setDocid(BaseUtils.toInteger(request.getParameter("Docid")));
+		// patientCode.setDocid(BaseUtils.toInteger(request.getParameter("Docid")));
 		patientCode.setName(name);
 		patientCode.setWardNo(BaseUtils.toInteger(request.getParameter("wardNo")));
 		patientCode.setBedNo(BaseUtils.toInteger(request.getParameter("bedNo")));
 		patientCode.setStart(BaseUtils.toDate(request.getParameter("start")));
 		patientCode.setEnd(BaseUtils.toDate(request.getParameter("end")));
 		patientCode.setOutStatus(0);// 设置出院状态为未出院
-		//System.out.println("当前患者码为:" + patientCode);
+		// System.out.println("当前患者码为:" + patientCode);
 		List<Map<String, Object>> list = patientService.patientQuery(patientCode);
+		log.info("患者查询");
 		for (Map<String, Object> map : list) {// 此处不对从库中取出的时间做toString转化会报java.lang.IllegalArgumentException
 			String admissionTime = map.get("admissionTime").toString();
 			map.put("admissionTime", admissionTime);
@@ -138,6 +146,7 @@ public class PatientController {
 	public String patientQueryBycerificateNo(HttpServletRequest request) throws ParseException {
 		String patientcerificateNo = BaseUtils.toString(request.getParameter("cerificateNo"));
 		List<Map<String, Object>> list = patientService.patientQueryBycerificateNo(patientcerificateNo);
+		log.info("身份证" + patientcerificateNo + "患者查询信息");
 		for (Map<String, Object> map : list) {// 此处不对从库中取出的时间做toString转化会报java.lang.IllegalArgumentException
 			String admissionTime = map.get("admissionTime").toString();
 			map.put("admissionTime", admissionTime);
@@ -177,24 +186,24 @@ public class PatientController {
 
 		// 更新病人信息到病人信息表(patient)
 		patientService.patientUpdate(patient);
-
+		log.info("患者" + patient.getName() + "转病房:更新患者信息");
 		// 记录改变床位记录到病房变更表(wardupdate)
 		wardService.logWard(patient);
-
+		log.info("患者" + patient.getName() + "转病房:记录到病房转移");
 		// 改变原床位的状态为可住到床位表(bed)
 		Bed old_bed = new Bed();
 		old_bed.setWardNo(old_ward_Num);
 		old_bed.setBedNo(old_bed_Num);
 		old_bed.setState(0);
 		bedService.bedUpdate(old_bed);
-
+		log.info("患者" + patient.getName() + "转病房:更新旧床位状态");
 		// 改变新床位的状态为已住
 		Bed new_bed = new Bed();
 		new_bed.setWardNo(new_ward_No);
 		new_bed.setBedNo(new_bed_No);
 		new_bed.setState(1);
 		bedService.bedUpdate(new_bed);
-
+		log.info("患者" + patient.getName() + "转病房:更新新床位状态");
 		/**
 		 * 改变原病房状态，如果之前为已满，则改为未满
 		 */
@@ -203,6 +212,7 @@ public class PatientController {
 			ward1.setWardNo(old_ward_Num);
 			ward1.setState(0);
 			wardService.wardUpdate(ward1);
+			log.info("患者" + patient.getName() + "转病房:更新旧病房状态");
 		}
 
 		/**
@@ -216,6 +226,7 @@ public class PatientController {
 			// 改变病房的状态
 			ward2.setState(1);
 			wardService.wardUpdate(ward2);
+			log.info("患者" + patient.getName() + "转病房:更新新病房状态");
 		}
 
 		JSON json = JSONSerializer.toJSON(new JsonResult<Patient>(patient));
@@ -227,19 +238,20 @@ public class PatientController {
 	public String patientLeave(String patientId, Integer bedNo, Integer roomNo) {
 		// 标记patient表中的leaveState状态为1，标记为出院
 		patientService.patientLeave(patientId);
-
+		log.info("患者" + patientId + "出院");
 		// 改变原床位的状态为可住
 		Bed bed = new Bed();
 		bed.setWardNo(roomNo);
 		bed.setBedNo(bedNo);
 		bed.setState(0);
 		bedService.bedUpdate(bed);// 将bed表中的roomNum&&bedNo行的State标记为0，床位设置为未使用
-
+		log.info("患者" + patientId + "出院:更新床位状态");
 		// 判断原病房是否已满
 		Ward ward = wardService.wardQueryById(roomNo);
 		if (ward.getState() == 1) {// 如果之前已经住满了，则把新状态置为未住满，state=0
 			ward.setState(0);
 			wardService.wardUpdate(ward);
+			log.info("患者" + patientId + "出院:更新病房状态");
 		}
 
 		JSON json = JSONSerializer.toJSON(new JsonResult<Patient>(new Patient()));
@@ -250,6 +262,7 @@ public class PatientController {
 	@ResponseBody
 	public String jiesuan(String patientId) {
 		patientService.jiesuan(patientId);
+		log.info("患者" + patientId + "结算");
 		JSON json = JSONSerializer.toJSON(new JsonResult<Patient>(new Patient()));
 		return json.toString();
 	}
@@ -267,6 +280,7 @@ public class PatientController {
 		patientCode.setOutEnd(BaseUtils.toDate(outEnd));
 		patientCode.setOutStatus(1);
 		List<Map<String, Object>> list = patientService.patientQuery(patientCode);
+		log.info("患者查询");
 		for (Map<String, Object> map : list) {
 			String leaveTime = map.get("leaveTime").toString();
 			map.put("leaveTime", leaveTime);

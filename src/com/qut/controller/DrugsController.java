@@ -7,6 +7,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.ibatis.annotations.Param;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,7 +23,7 @@ import com.qut.service.grantDrugsService;
 import com.qut.util.BaseUtils;
 import com.qut.util.JsonDateValueProcessor;
 import com.qut.util.JsonResult;
-
+import com.qut.util.Log4jLogsDetial;
 import net.sf.json.JSON;
 import net.sf.json.JSONSerializer;
 import net.sf.json.JsonConfig;
@@ -34,6 +35,7 @@ public class DrugsController {
 	private DrugsService drugsService;
 	@Resource(name = "grantDrugsService")
 	private grantDrugsService grantdrugsService;
+	Logger log = Logger.getLogger(Log4jLogsDetial.class);
 
 	@RequestMapping(value = "/drugsSave.do", produces = "application/json;charset=utf-8")
 	@ResponseBody
@@ -79,6 +81,7 @@ public class DrugsController {
 		} else if (state == 0) {
 			// 执行插入
 			drugsService.drugsStockSave(drugs);
+			log.info("药品" + drugs.getName() + "入库");
 		}
 		JSON json = JSONSerializer.toJSON(new JsonResult<Drugs>(drugs));
 		return json.toString();
@@ -101,6 +104,7 @@ public class DrugsController {
 		drugsCode.setBzStart(BaseUtils.toDate(request.getParameter("bzStartTime")));
 		drugsCode.setBzEnd(BaseUtils.toDate(request.getParameter("bzEndTime")));
 		List<Drugs> list = drugsService.drugsFind(drugsCode);
+		log.info("药品查询");
 		JsonConfig jc = new JsonConfig();
 		jc.registerJsonValueProcessor(Date.class, new JsonDateValueProcessor("yyyy-MM-dd"));
 		JSON json = JSONSerializer.toJSON(new JsonResult<List<Drugs>>(list), jc);
@@ -116,6 +120,7 @@ public class DrugsController {
 		drugsCode.setId(drugId);
 		drugsCode.setName(name);
 		List<Stock> list = drugsService.stockQuery(drugsCode);
+		log.info("库存查询");
 		JSON json = JSONSerializer.toJSON(new JsonResult<List<Stock>>(list));
 		return json.toString();
 	}
@@ -134,8 +139,11 @@ public class DrugsController {
 		grant.setGrantUserName(BaseUtils.getUser(request).getName());
 		// 存入发放表grantDrug
 		drugsService.grantAdd(grant);
+		log.info("医生" + grant.getGrantUserName() + "为患者" + grant.getPatientName() + "发放了" + grant.getDrugName() + ",数量为"
+				+ grant.getDrugCount());
 		// 减少库存的量
 		drugsService.stockUpdate(grant);
+		log.info("更新库存");
 		JSON json = JSONSerializer.toJSON(new JsonResult<Grant>(grant));
 		return json.toString();
 	}
@@ -144,6 +152,7 @@ public class DrugsController {
 	@ResponseBody
 	public String grantQuery(@Param("patientId") String patientId) {
 		List<Stock> list = drugsService.grantQuery(patientId);
+		log.info("患者" + patientId + "查询了用药历史");
 		JSON json = JSONSerializer.toJSON(new JsonResult<List<Stock>>(list));
 		return json.toString();
 	}

@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.apache.ibatis.annotations.Param;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,7 +21,7 @@ import com.qut.service.DoctorService;
 import com.qut.service.PatientService;
 import com.qut.util.JsonDateValueProcessor;
 import com.qut.util.JsonResult;
-
+import com.qut.util.Log4jLogsDetial;
 import net.sf.json.JSON;
 import net.sf.json.JSONSerializer;
 import net.sf.json.JsonConfig;
@@ -33,6 +34,7 @@ public class DoctorController {
 	@Resource(name = "patientService")
 	private PatientService patientService;
 	private JSON json;
+	Logger log = Logger.getLogger(Log4jLogsDetial.class);
 
 	@RequestMapping(value = "/save.do", produces = "application/json;charset=utf-8")
 	@ResponseBody
@@ -50,6 +52,7 @@ public class DoctorController {
 		doctor.setTitle(title);
 		doctor.setDepartment(department);
 		doctorService.doctorSave(doctor);
+		log.info("新增医生" + doctor.getName());
 		json = JSONSerializer.toJSON(new JsonResult<Doctor>(doctor));
 		return json.toString();
 	}
@@ -72,14 +75,17 @@ public class DoctorController {
 			if (state == -1) {
 				// System.out.println("进入-1区");
 				doctorCode.setState(null);
+				log.info("设置医生状态为缺省");
 			}
 			if (state == 0) {
 				// System.out.println("进入0区");
 				doctorCode.setState(0);
+				log.info("设置医生状态为在职");
 			}
 			if (state == 1) {
 				// System.out.println("进入1区");
 				doctorCode.setState(1);
+				log.info("设置医生状态为离职");
 			}
 		}
 		if (state == null) {
@@ -98,6 +104,7 @@ public class DoctorController {
 			doctorCode.setEndTime(end);
 		}
 		List<Doctor> list = doctorService.doctorQuery(doctorCode);
+		log.info("查询在职医生");
 		JsonConfig jc = new JsonConfig();
 		jc.registerJsonValueProcessor(Date.class, new JsonDateValueProcessor("yyyy-MM-dd"));
 		json = JSONSerializer.toJSON(new JsonResult<List<Doctor>>(list), jc);
@@ -118,10 +125,12 @@ public class DoctorController {
 			patientCode.setDocid(id);
 			patientCode.setOutStatus(0);
 			List<Map<String, Object>> list = patientService.patientQuery(patientCode);
-			//System.out.println("当前医生名下未出院患者：" + list);
+			// System.out.println("当前医生名下未出院患者：" + list);
 			Doctor doctor = doctorService.doctorById(id);
+			log.info("查询医生" + doctor.getId());
 			if (doctor.getState() == 0 && list.size() == 0) {// 未离职且无患者
 				doctorService.doctorDelete(id);
+				log.info("医生" + doctor.getName() + "离职");
 				json = JSONSerializer.toJSON(new JsonResult<Doctor>(new Doctor()));
 			} else if (list.size() != 0) {// 有患者
 				json = JSONSerializer.toJSON(new JsonResult<Doctor>(2, null, new Doctor()));
@@ -143,6 +152,7 @@ public class DoctorController {
 		doctor.setTitle(zhicheng);
 		doctor.setGender(gender);
 		doctorService.updateDoctorMessage(doctor);
+		log.info("更新医生" + doctor.getName() + "信息");
 		json = JSONSerializer.toJSON(new JsonResult<Doctor>(doctor));
 		return json.toString();
 	}

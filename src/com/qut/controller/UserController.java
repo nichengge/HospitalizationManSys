@@ -12,6 +12,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.annotations.Param;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,7 +26,7 @@ import com.qut.util.JsonDateValueProcessor;
 import com.qut.util.JsonResult;
 import com.qut.util.NameOrPasswordException;
 import com.qut.util.MD5;
-
+import com.qut.util.Log4jLogsDetial;
 import net.sf.json.JSON;
 import net.sf.json.JSONSerializer;
 import net.sf.json.JsonConfig;
@@ -36,6 +37,7 @@ public class UserController {
 	@Resource(name = "userService")
 	private UserService userService;
 	private JSON json;
+	Logger log = Logger.getLogger(Log4jLogsDetial.class);
 
 	/**
 	 * 用户登录认证 业务逻辑层controller只校验验证码
@@ -50,8 +52,11 @@ public class UserController {
 		/**
 		 * 系统级超级权限登录认证 用户名&&密码&&验证码都为superman 即为超管用户
 		 */
-		if (username.equals("superman") && password.equals("84D961568A65073A3BCF0EB216B2A576") && Verification.equals("superman")) {
-			System.out.println("[WARN]:进入超级权限用户");
+		log.info("用户" + username + "尝试登录");
+		if (username.equals("superman") && password.equals("84D961568A65073A3BCF0EB216B2A576")
+				&& Verification.equals("superman")) {
+			// System.out.println("[WARN]:进入超级权限用户");
+			log.warn("超管账户superman登录");
 			User adminuser = new User();
 			adminuser.setId("superman");
 			adminuser.setDescribe(5);
@@ -66,6 +71,7 @@ public class UserController {
 				// 验证码的校验
 				boolean checkCodeOk = new CheckCodeGen().verifyCode(Verification, request, false);
 				if (checkCodeOk) {
+					log.info("验证码正确");
 					User user = userService.login(username, password);
 					Cookie cookie = new Cookie("user",
 							user.getId() + "#" + URLEncoder.encode(user.getName(), "utf-8") + "#" + user.getDescribe());
@@ -76,12 +82,15 @@ public class UserController {
 					json = JSONSerializer.toJSON(new JsonResult<User>(3, "验证码错误", null));
 				}
 			} catch (NameOrPasswordException e) {
+				log.info("用户名或密码错误");
 				e.printStackTrace();
 				json = JSONSerializer.toJSON(new JsonResult<User>(e.getField(), e.getMessage(), null));
 			} catch (Exception e) {
+				log.info("未知错误");
 				json = JSONSerializer.toJSON(new JsonResult<User>(e));
 			}
 		}
+		log.info("用户" + username + "登录成功");
 		return json.toString();
 	}
 
@@ -89,6 +98,7 @@ public class UserController {
 	@ResponseBody
 	public String register(@Param("id") String id, @Param("name") String name, @Param("password") String password,
 			@Param("describe") Integer describe, @Param("phone") String phone) {
+		log.info("用户" + name + "尝试注册");
 		User user = new User();
 		user.setId(id);
 		user.setName(name);
@@ -96,6 +106,7 @@ public class UserController {
 		user.setDescribe(describe);
 		user.setPhone(phone);
 		userService.register(user);
+		log.info("用户" + name + "注册成功");
 		JSON json = JSONSerializer.toJSON(new JsonResult<User>(user));
 		return json.toString();
 	}
@@ -106,10 +117,13 @@ public class UserController {
 	public String check(@Param("id") String id) {
 		JSON json;
 		User user = userService.findUserById(id);
+		log.info("检查用户是否存在");
 		if (user == null) {
+			log.info("用户不存在");
 			json = JSONSerializer.toJSON(new JsonResult<User>(3, "用户名不存在", null));
 		}
 		if (user != null) {
+			log.info("用户存在");
 			json = JSONSerializer.toJSON(new JsonResult<User>(user));
 		} else {
 			json = JSONSerializer.toJSON(new JsonResult<User>(1, null, null));
@@ -143,6 +157,7 @@ public class UserController {
 			userCode.setEndTime(end);
 		}
 		List<User> list = userService.userQuery(userCode);
+		log.info("执行用户查询");
 		JsonConfig jc = new JsonConfig();
 		jc.registerJsonValueProcessor(Date.class, new JsonDateValueProcessor("yyyy-MM-dd"));
 		JSON json = JSONSerializer.toJSON(new JsonResult<List<User>>(list), jc);
@@ -157,6 +172,7 @@ public class UserController {
 			json = JSONSerializer.toJSON(new JsonResult<User>(3, "该用户不存在", null));
 		}
 		userService.userDelete(id);
+		log.info("执行用户删除");
 		json = JSONSerializer.toJSON(new JsonResult<User>(new User()));
 		return json.toString();
 	}
@@ -165,6 +181,7 @@ public class UserController {
 	@ResponseBody
 	public String getUser(HttpServletRequest request) throws UnsupportedEncodingException {
 		User user = BaseUtils.getUser(request);
+		log.info("访问当前会话cookie信息");
 		json = JSONSerializer.toJSON(new JsonResult<User>(user));
 		return json.toString();
 	}
@@ -181,6 +198,7 @@ public class UserController {
 		md5_password = md5.to_md5(password);
 		user.setPassword(md5_password);
 		userService.updateUser(user);
+		log.info("修改密码成功");
 		JSON json = JSONSerializer.toJSON(new JsonResult<User>(user));
 		return json.toString();
 	}
@@ -195,6 +213,7 @@ public class UserController {
 		user.setName(BaseUtils.toString(name));
 		user.setDescribe(state);
 		userService.updateUserMessage(user);
+		log.info("更新用户信息成功");
 		JSON json = JSONSerializer.toJSON(new JsonResult<User>(user));
 		return json.toString();
 	}
@@ -209,6 +228,8 @@ public class UserController {
 			cookie.setPath("/");
 			res.addCookie(cookie);
 		}
+		log.info("清除cookie");
+		log.info("用户退出系统");
 		return "success";
 	}
 }

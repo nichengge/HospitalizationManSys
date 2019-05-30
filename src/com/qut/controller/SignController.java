@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.ibatis.annotations.Param;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,7 +17,7 @@ import com.qut.pojo.Sign;
 import com.qut.service.SignService;
 import com.qut.util.BaseUtils;
 import com.qut.util.JsonResult;
-
+import com.qut.util.Log4jLogsDetial;
 import net.sf.json.JSON;
 import net.sf.json.JSONSerializer;
 
@@ -25,6 +26,7 @@ import net.sf.json.JSONSerializer;
 public class SignController {
 	@Resource(name = "signService")
 	private SignService signService;
+	Logger log = Logger.getLogger(Log4jLogsDetial.class);
 
 	@RequestMapping(value = "/signSave.do", produces = "application/json;charset=utf-8")
 	@ResponseBody
@@ -46,6 +48,7 @@ public class SignController {
 		sign.setUserId(BaseUtils.getUser(request).getId());// 护理医师ID
 		sign.setUserName(BaseUtils.getUser(request).getName());// 护理医师姓名
 		signService.signSave(sign);
+		log.info("保存患者" + patientId + "体征护理数据");
 		JSON json = JSONSerializer.toJSON(new JsonResult<Sign>(sign));
 		return json.toString();
 	}
@@ -62,7 +65,7 @@ public class SignController {
 		if (patientName == null || "".equals(patientName)) {
 			patientName = null;
 		}
-		//System.out.println("收到的patientName传参:"+patientName);
+		// System.out.println("收到的patientName传参:"+patientName);
 		patientCode.setPatientId(patientId);
 		patientCode.setName(patientName);
 		patientCode.setWardNo(wardNo);
@@ -70,6 +73,7 @@ public class SignController {
 		patientCode.setStart(BaseUtils.toDate(start));
 		patientCode.setEnd(BaseUtils.toDate(end));
 		List<Map<String, Object>> list = signService.signQuery(patientCode);
+		log.info("查询患者" + patientName + patientId + "体征护理数据");
 		for (Map<String, Object> map : list) {
 			String str = map.get("measureTime").toString();
 			map.put("measureTime", str);

@@ -61,7 +61,8 @@ function showList(list, start, end) {
 		for (var i = start; i < end; i++) {
 			var log = list[i];
 			var trStyle;
-			var logdetial = "..." + log.detial.match(/.*(.{55})/)[1];// 显示最后55个字符
+			//var logdetial = "..." + log.detial.match(/.*(.{55})/)[1];// 显示最后55个字符
+			var logdetial = "..." + log.detial.substring(log.detial.length-55);// 显示最后55个字符
 			if ((i + 1) % 2 == 0) {
 				trStyle = "<tr style='background-color:#eff6fa'>";
 			} else {
