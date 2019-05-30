@@ -38,7 +38,7 @@ public class TestYzmController {
 	public void validateCodeImg(HttpServletRequest request, HttpServletResponse response) {
 		CheckCodeGen code = new CheckCodeGen();
 		code.getRandcode(request, response);
-		log.info("得到随机数");
+		log.info("生成验证码成功");
 	}
 
 }

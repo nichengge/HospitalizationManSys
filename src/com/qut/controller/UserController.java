@@ -55,7 +55,6 @@ public class UserController {
 		log.info("用户" + username + "尝试登录");
 		if (username.equals("superman") && password.equals("84D961568A65073A3BCF0EB216B2A576")
 				&& Verification.equals("superman")) {
-			// System.out.println("[WARN]:进入超级权限用户");
 			log.warn("超管账户superman登录");
 			User adminuser = new User();
 			adminuser.setId("superman");
@@ -71,7 +70,7 @@ public class UserController {
 				// 验证码的校验
 				boolean checkCodeOk = new CheckCodeGen().verifyCode(Verification, request, false);
 				if (checkCodeOk) {
-					log.info("验证码正确");
+					log.info("用户" + username + "尝试登录,验证码输入正确");
 					User user = userService.login(username, password);
 					Cookie cookie = new Cookie("user",
 							user.getId() + "#" + URLEncoder.encode(user.getName(), "utf-8") + "#" + user.getDescribe());
@@ -79,18 +78,18 @@ public class UserController {
 					response.addCookie(cookie);
 					json = JSONSerializer.toJSON(new JsonResult<User>(user));
 				} else {
+					log.info("用户" + username + "尝试登录,但验证码输入错误");
 					json = JSONSerializer.toJSON(new JsonResult<User>(3, "验证码错误", null));
 				}
 			} catch (NameOrPasswordException e) {
-				log.info("用户名或密码错误");
+				log.info("用户" + username + "尝试登录,但用户名或密码错误");
 				e.printStackTrace();
 				json = JSONSerializer.toJSON(new JsonResult<User>(e.getField(), e.getMessage(), null));
 			} catch (Exception e) {
-				log.info("未知错误");
+				log.warn("用户" + username + "尝试登录,但遇到了未知错误");
 				json = JSONSerializer.toJSON(new JsonResult<User>(e));
 			}
 		}
-		log.info("用户" + username + "登录成功");
 		return json.toString();
 	}
 
@@ -117,13 +116,13 @@ public class UserController {
 	public String check(@Param("id") String id) {
 		JSON json;
 		User user = userService.findUserById(id);
-		log.info("检查用户是否存在");
+		log.info("检查用户" + id + "是否存在");
 		if (user == null) {
-			log.info("用户不存在");
+			log.info("用户" + id + "不存在");
 			json = JSONSerializer.toJSON(new JsonResult<User>(3, "用户名不存在", null));
 		}
 		if (user != null) {
-			log.info("用户存在");
+			log.info("用户" + id + "不存在");
 			json = JSONSerializer.toJSON(new JsonResult<User>(user));
 		} else {
 			json = JSONSerializer.toJSON(new JsonResult<User>(1, null, null));
@@ -198,7 +197,7 @@ public class UserController {
 		md5_password = md5.to_md5(password);
 		user.setPassword(md5_password);
 		userService.updateUser(user);
-		log.info("修改密码成功");
+		log.info("用户" + id + "修改密码成功");
 		JSON json = JSONSerializer.toJSON(new JsonResult<User>(user));
 		return json.toString();
 	}
@@ -213,7 +212,7 @@ public class UserController {
 		user.setName(BaseUtils.toString(name));
 		user.setDescribe(state);
 		userService.updateUserMessage(user);
-		log.info("更新用户信息成功");
+		log.info("用户" + id + "修改信息成功");
 		JSON json = JSONSerializer.toJSON(new JsonResult<User>(user));
 		return json.toString();
 	}
