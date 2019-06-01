@@ -46,7 +46,7 @@
 						<span>--请选择--</span><i class="icon"></i>
 					</div>
 					<ul class="select-list" style="height: 100px; overflow: auto;">
-						<li value="0">患者</li>
+						<!-- <li value="0">患者</li> -->
 						<li value="1">护士</li>
 						<li value="2">医生</li>
 						<li value="3">服务前台</li>
