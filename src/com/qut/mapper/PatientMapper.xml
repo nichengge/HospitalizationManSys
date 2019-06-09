@@ -73,7 +73,8 @@
 		if(#{Docid} is
 		null,0=0,a.doctorId=#{Docid})
 		and
-		if(#{start} is null,0=0,admissionTime &gt;= #{start})
+		if(#{start} is
+		null,0=0,admissionTime &gt;= #{start})
 		and
 		if(#{end} is
 		null,0=0,admissionTime &lt;= #{end})
@@ -88,17 +89,21 @@
 		if(#{outEnd} is null,0=0, leaveTime &lt;= #{outEnd})
 		and
 		if(#{outStatus} is null,0=0,leaveState = #{outStatus})
-		order by
+		and
+		if(#{cerificateNo} is null,0=0,certificateNo = #{cerificateNo})
+		order
+		by
 		id,admissionTime
 	</select>
 
-	<select id="patientQueryBycerificateNo"
-		parameterType="com.qut.pojo.PatientCode" resultType="map">
+	<select id="patientQueryBycerificateNo" parameterType="String"
+		resultType="map">
 		select
 		a.id as
 		"id",
 		a.patientId as "patientId",
-		a.patientName as "name",
+		a.patientName
+		as "name",
 		a.gender as
 		"gender",
 		a.nation as "nation",
@@ -109,20 +114,26 @@
 		a.certificateNo as
 		"cerificateNo",
 		a.workUnit as "workUnit",
-		a.doctorId as "doctorId",
+		a.doctorId
+		as "doctorId",
 		b.`name` as "doctorName",
-		a.admissionTime as "admissionTime",
+		a.admissionTime as
+		"admissionTime",
 		a.homeAddress as "homeAddress",
-		a.homePhone as "homePhone",
+		a.homePhone as
+		"homePhone",
 		a.contacts
 		as "contacts",
-		a.contactsPhone as "contactsPhone",
+		a.contactsPhone as
+		"contactsPhone",
 		a.admissionStatus as
 		"admissionStatus",
-		a.roomType as "roomType",
+		a.roomType as
+		"roomType",
 		c.`name` as "roomTypeName",
 		a.roomNo as "roomNo",
-		a.bedNo as "bedNo",
+		a.bedNo as
+		"bedNo",
 		a.state as "state",
 		a.settlementState as "settlementState",
 		a.leaveTime as "leaveTime"
@@ -131,7 +142,8 @@
 		a.doctorId = b.doctorId
 		LEFT JOIN
 		category c ON a.roomType = c.type
-		LEFT JOIN (
+		LEFT
+		JOIN (
 		SELECT e.parameter_values
 		"value",e.parameter_name "name"
 		from

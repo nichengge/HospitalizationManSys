@@ -124,8 +124,8 @@ public class CommonController {
 		/**
 		 * 如果传入的code码是001，表明是要修改/删除科室，此时要保证②③④成立才能执行
 		 * 如果传入的code码是002，表明要修改/删除头衔，此时要保证①成立才能执行
-		 * 如果传入的code码是003，表明要修改/删除病房类型，此时要保证⑤成立才能执行 如果传入的code码是004,
-		 * 表明要修改/删除病房，此时要保证⑥成立才能执行 如果传入其他code码，请求异常
+		 * 如果传入的code码是003，表明要修改/删除病房类型，此时要保证⑤成立才能执行
+		 * 如果传入的code码是004,表明要修改/删除病房，此时要保证⑥成立才能执行 如果传入其他code码，请求异常
 		 */
 		JSON json = null;
 		if (code.equals("001")) {
@@ -200,7 +200,6 @@ public class CommonController {
 			patientCode.setOutStatus(0);// 未出院
 			List<Map<String, Object>> list1 = patientService.patientQuery(patientCode);
 			if (list1.size() == 0) {
-				// System.out.println("进入删除病房区");
 				// 删除参数
 				commonService.parameterCodeDelete(id);
 				// 删除病房

@@ -40,6 +40,15 @@
 							<input type="text" name="name" id="name" />
 						</p></td>
 					<td><p class="short-input ue-clear">
+							<label><font color="red">*</font>身份证号：</label>
+						</p></td>
+					<td><p class="short-input ue-clear">
+							<input type="text" name="cerificateNo" id="cerificateNo" /> <span
+								id="patientError"></span>
+						<p class="short-input ue-clear"></td>
+				</tr>
+				<tr>
+					<td><p class="short-input ue-clear">
 							<label>性&nbsp;&nbsp;&nbsp;&nbsp;别：</label>
 						</p></td>
 					<td><div class="short-input select ue-clear">
@@ -53,8 +62,6 @@
 								</ul>
 							</div>
 						</div></td>
-				</tr>
-				<tr>
 					<td><p class="short-input ue-clear">
 							<label>民 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;族：</label>
 						</p></td>
@@ -68,6 +75,14 @@
 								</ul>
 							</div>
 						</div></td>
+				</tr>
+				<tr>
+					<td><p class="short-input ue-clear">
+							<label>工作单位：</label>
+						</p></td>
+					<td><p class="short-input ue-clear">
+							<input type="text" name="workUnit" id="workUnit" />
+						<p class="short-input ue-clear"></td>
 					<td><p class="short-input ue-clear">
 							<label><font color="red">*</font>生
 								&nbsp;&nbsp;&nbsp;&nbsp;日：</label>
@@ -76,20 +91,6 @@
 							<input type="date" id="birth" name="birth"
 								onblur="checkpatientTime()" />
 						</p></td>
-				</tr>
-				<tr>
-					<td><p class="short-input ue-clear">
-							<label><font color="red">*</font>身份证号：</label>
-						</p></td>
-					<td><p class="short-input ue-clear">
-							<input type="text" name="cerificateNo" id="cerificateNo" />
-						<p class="short-input ue-clear"></td>
-					<td><p class="short-input ue-clear">
-							<label>工作单位：</label>
-						</p></td>
-					<td><p class="short-input ue-clear">
-							<input type="text" name="workUnit" id="workUnit" />
-						<p class="short-input ue-clear"></td>
 				</tr>
 				<tr>
 					<td><p class="short-input ue-clear">

@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -162,6 +163,29 @@ public class PatientController {
 		}
 		JSON json = JSONSerializer.toJSON(new JsonResult<List<Map<String, Object>>>(list));
 		// System.out.println("返回的json是："+json.toString());
+		return json.toString();
+	}
+
+	/**
+	 * 检查新住院的这个患者是否有未出院的记录
+	 */
+	@RequestMapping(value = "/patientcheck.do", produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public String patientcheck(@Param("cerificateNo") String cerificateNo) throws ParseException {
+		JSON json = null;
+		PatientCode patientCode = new PatientCode();
+		String patientCerificateNo = BaseUtils.toString(cerificateNo);
+		patientCode.setCerificateNo(patientCerificateNo);
+		patientCode.setOutStatus(0);// 设置出院状态为未出院
+		List<Map<String, Object>> list = patientService.patientQuery(patientCode);
+		log.info("执行患者检查");
+		if (list.size() == 0) {
+			json = JSONSerializer.toJSON(new JsonResult<User>(1, "可以住院", null));
+			log.info("患者" + cerificateNo + "可以住院");
+		} else if (list.size() > 0) {
+			json = JSONSerializer.toJSON(new JsonResult<User>(2, "当前患者还未出院", null));
+			log.info("患者" + cerificateNo + "未出院");
+		}
 		return json.toString();
 	}
 

@@ -21,7 +21,8 @@ public class PatientCode implements Serializable {
 	private Integer outStatus;
 	private Integer jsStatus;
 	private Integer Docid;
-	
+	private String cerificateNo;
+
 	public Integer getDocid() {
 		return Docid;
 	}
@@ -122,10 +123,19 @@ public class PatientCode implements Serializable {
 		this.jsStatus = jsStatus;
 	}
 
+	public String getCerificateNo() {
+		return cerificateNo;
+	}
+
+	public void setCerificateNo(String cerificateNo) {
+		this.cerificateNo = cerificateNo;
+	}
+
 	@Override
 	public String toString() {
 		return "PatientCode [patientId=" + patientId + ", bedNo=" + bedNo + ", departmentNo=" + departmentNo
 				+ ", wardNo=" + wardNo + ", start=" + start + ", end=" + end + ", name=" + name + ", outStart="
-				+ outStart + ", outEnd=" + outEnd + ", outStatus=" + outStatus + ", jsStatus=" + jsStatus + "]";
+				+ outStart + ", outEnd=" + outEnd + ", outStatus=" + outStatus + ", jsStatus=" + jsStatus
+				+ ", cerificateNo=" + cerificateNo + "]";
 	}
 }

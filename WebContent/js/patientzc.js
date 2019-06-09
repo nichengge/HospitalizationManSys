@@ -7,7 +7,9 @@ $(function() {
 	$("#ward").click(cleanBed);
 	$("#register").click(register);
 	$("#reset").click(reset);
-
+	$('#cerificateNo').on('blur', checkCerificateNo).on('focus', function() {
+		$('#patientError').empty();
+	});
 	// 民族列表
 	$.ajax({
 		url : 'common/nationList.do',
@@ -193,6 +195,30 @@ function cleans() {
 function cleanBed() {
 	$("#bed").find("span").text("请选择");
 	$("#bedNo").val(0);
+}
+
+function checkCerificateNo() {
+	var cerificateNo = $('#cerificateNo').val();
+	// 检查当前患者是否存在未出院的记录
+	if (cerificateNo == null || cerificateNo == "") {
+		return false;
+	}
+	$.ajax({
+		url : 'patient/patientcheck.do',
+		type : 'post',
+		data : {
+			"cerificateNo" : cerificateNo
+		},
+		dataType : 'JSON',
+		success : function(result) {
+			if (result.state == 2) {
+				$("#patientError").css("color", "red");
+				$("#patientError").empty().append("*该患者已经住院");
+				return false;
+			}
+		}
+	});
+	return true;
 }
 
 function register() {
