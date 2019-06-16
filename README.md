@@ -1,4 +1,4 @@
-# 开发环境：JDK 1.8 + Eclipse 2018-9 + MySQL 5.7 + Tomcat 8.0.53  
+# 开发环境：JDK 1.8 + MySQL 5.7 + Tomcat 8.0.53  
 ## 数据库名：proj_hospitalizationmansys_ssm  
 ## 数据库用户名/密码：root/admin  
 # 项目&数据库编码集：UTF-8  
